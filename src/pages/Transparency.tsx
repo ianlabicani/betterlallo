@@ -7,8 +7,13 @@ import {
   Landmark,
 } from 'lucide-react';
 import SEO from '../components/SEO';
+import FinancialTransparency from '../components/civic/FinancialTransparency';
 import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
-import { transparencySections } from '../data/civicRecords';
+import {
+  fdpDocumentRecords,
+  financialSnapshots,
+  transparencySections,
+} from '../data/civicRecords';
 
 const icons = {
   financial: CircleDollarSign,
@@ -131,6 +136,13 @@ export default function Transparency() {
           </p>
         </section>
 
+        {selected.slug === 'financial' && (
+          <FinancialTransparency
+            snapshots={financialSnapshots}
+            fdpRecords={fdpDocumentRecords}
+          />
+        )}
+
         <section
           className="mt-8"
           aria-labelledby="transparency-records-heading"
@@ -139,7 +151,9 @@ export default function Transparency() {
             id="transparency-records-heading"
             className="mb-4 text-xl font-semibold text-gray-900"
           >
-            Records register
+            {selected.slug === 'financial'
+              ? 'Related approved-budget source'
+              : 'Records register'}
           </h2>
           {selected.records?.length ? (
             <div className="space-y-4">

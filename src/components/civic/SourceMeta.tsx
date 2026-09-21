@@ -68,6 +68,16 @@ export function SourceMeta({ source }: { source: SourceRecord }) {
             </dd>
           </div>
         )}
+        {source.extractionDate && (
+          <div>
+            <dt className="inline font-semibold text-gray-700">Extracted:</dt>{' '}
+            <dd className="inline">
+              <time dateTime={source.extractionDate}>
+                {source.extractionDate}
+              </time>
+            </dd>
+          </div>
+        )}
       </dl>
       <p className="mt-2">
         Last reviewed{' '}
