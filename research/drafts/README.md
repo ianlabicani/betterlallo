@@ -28,3 +28,32 @@ Use this shape for imports from PSA OpenSTAT, DBM documents, PhilGEPS notices, a
   "notes": "What still needs human review before publication."
 }
 ```
+
+Financial-report drafts must also include `extractionDate`, `rowIdentity`,
+and numeric `metrics`. The validator checks the Lal-lo row identity and the
+SRE reconciliation rules before an approved snapshot is copied into the app:
+
+```json
+{
+  "sourceType": "financial-report",
+  "extractionDate": "2026-03-03",
+  "rowIdentity": {
+    "sheet": "By LGU SRE 2025",
+    "lguName": "Lal-Lo",
+    "lguType": "Municipality",
+    "excelRow": 454
+  },
+  "metrics": {
+    "currentOperatingIncome": 458151828.33,
+    "localSources": 59668346.33,
+    "externalSources": 398483482,
+    "currentOperatingExpenditures": 341155013.58,
+    "netOperatingIncome": 116996814.75,
+    "cashBalanceEnd": 176521490.35,
+    "generalPublicServices": 221634390.4,
+    "socialServices": 51643451.4,
+    "economicServices": 62589324.89,
+    "debtServiceInterest": 5287846.89
+  }
+}
+```

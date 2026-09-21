@@ -1,0 +1,44 @@
+{
+  "id": "blgf-sre-lallo-fy2025",
+  "claim": "The BLGF FY2025 annual Statement of Receipts and Expenditures contains a Lal-Lo municipality row with verified annual financial metrics.",
+  "sourceUrl": "https://blgf.gov.ph/wp-content/uploads/2026/05/By-LGU-SRE-2025.xlsx",
+  "authority": "national",
+  "jurisdiction": "Lal-Lo municipality, Cagayan",
+  "sourceType": "financial-report",
+  "extractionDate": "2026-03-03",
+  "dataPeriod": "FY 2025 annual SRE",
+  "reviewStatus": "approved",
+  "rowIdentity": {
+    "sheet": "By LGU SRE 2025",
+    "region": "Region II",
+    "province": "Cagayan",
+    "lguName": "Lal-Lo",
+    "lguType": "Municipality",
+    "excelRow": 454
+  },
+  "metricMap": {
+    "localSources": "Q",
+    "externalSources": "V",
+    "currentOperatingIncome": "W",
+    "generalPublicServices": "X",
+    "socialServices": "AD",
+    "economicServices": "AE",
+    "debtServiceInterest": "AF",
+    "currentOperatingExpenditures": "AG",
+    "netOperatingIncome": "AH",
+    "cashBalanceEnd": "BF"
+  },
+  "metrics": {
+    "currentOperatingIncome": 458151828.33,
+    "localSources": 59668346.33,
+    "externalSources": 398483482,
+    "currentOperatingExpenditures": 341155013.58,
+    "netOperatingIncome": 116996814.75,
+    "cashBalanceEnd": 176521490.35,
+    "generalPublicServices": 221634390.4,
+    "socialServices": 51643451.4,
+    "economicServices": 62589324.89,
+    "debtServiceInterest": 5287846.89
+  },
+  "notes": "Raw numeric cells are stored as Philippine pesos. The workbook displays these values in PHP millions. The values reconcile across income, expenditure, and net operating income subtotals."
+}
