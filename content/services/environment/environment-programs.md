@@ -15,4 +15,4 @@ Possible concerns include illegal dumping, open burning, quarrying, logging, wat
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo environmental office contacts and current program schedules are pending verification. Confirm the proper channel before filing a report.
+**Status:** Lal-lo environmental office contacts and current program schedules are awaiting a municipal publication. Confirm the proper channel before filing a report.

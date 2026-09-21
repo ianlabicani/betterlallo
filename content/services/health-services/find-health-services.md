@@ -14,9 +14,9 @@ Bring identification and health records if available, but confirm document requi
 
 ## Official reference
 
-- [Department of Health](https://doh.gov.ph/) — national health information and programs.
-- [PhilHealth](https://www.philhealth.gov.ph/) — membership and benefit information.
+- [DOH National TB Program facility directory — Lal-lo RHU](https://ntp.doh.gov.ph/view-facility/?id=6633) — public Lal-lo RHU iDOTS facility, (+63) 926-477-3278, and rhulallo@yahoo.com.
+- [PhilHealth CY 2026 accredited Animal Bite Provider list](https://www.philhealth.gov.ph/partners/providers/facilities/accredited/ABPP_053126.pdf) — current facility-list evidence for the RHU address and provider contact.
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo health-facility names, schedules, fees, and current contact details are pending verification. Confirm with the Municipal Health Office or barangay health station.
+**Status:** The Lal-lo RHU and a published contact are verified from the sources above. Schedules, complete service list, fees, and documentary requirements remain unpublished in those sources; confirm before travelling.

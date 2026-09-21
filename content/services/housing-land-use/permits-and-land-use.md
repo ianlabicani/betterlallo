@@ -19,4 +19,4 @@ Ask the municipal planning, engineering, or building-permit office for the curre
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo zoning maps, application forms, fees, office contacts, and processing times are pending verification.
+**Status:** Lal-lo zoning maps, application forms, fees, office contacts, and processing times are awaiting a current municipal planning or building-office source.

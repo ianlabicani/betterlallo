@@ -20,4 +20,4 @@ Ask the receiving office for a reference number or acknowledgement and whether t
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo reporting forms, office contacts, and service standards are pending verification. Confirm the current receiving channel with your barangay or municipal office.
+**Status:** Lal-lo reporting forms, municipal office contacts, and service standards are awaiting a direct municipal source. Confirm the current receiving channel with your barangay or municipal office.

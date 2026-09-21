@@ -15,4 +15,4 @@ Ask for the current eligibility rules, deadline, application form, proof require
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo-specific scholarship, daycare, and education-assistance schedules are pending verification. Confirm with the named office or school before preparing documents.
+**Status:** Lal-lo-specific scholarship, daycare, and education-assistance schedules are awaiting a Lal-lo-specific official publication. Confirm with the named office or school before preparing documents.

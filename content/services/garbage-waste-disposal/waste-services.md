@@ -13,4 +13,4 @@ Republic Act No. 9003 is the national framework for ecological solid waste manag
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo collection routes, schedules, fees, and reporting contacts are pending verification. Confirm locally because schedules can change.
+**Status:** Lal-lo collection routes, schedules, fees, and reporting contacts are awaiting a municipal schedule or service notice. Confirm locally because schedules can change.

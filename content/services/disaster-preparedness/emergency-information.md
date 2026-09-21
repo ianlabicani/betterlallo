@@ -6,7 +6,7 @@ For immediate danger, contact the appropriate emergency responder first. Do not 
 
 The [Cagayan Provincial Disaster Risk Reduction and Management Office (PDRRMO)](https://pdrrmo.cagayan.gov.ph/) publishes provincial disaster information. Its [We Care Lal-lo program page](https://pdrrmo.cagayan.gov.ph/we-care-lal-lo-program-municipality-of-lal-lo/) identifies the Lal-lo disaster-response program and lists **0927-181-9424** as a hotline. The PDRRMO page describes the number as available for text or call; confirm current availability when possible.
 
-The PDRRMO also lists **pdrrmo@cagayan.gov.ph** and its provincial directories on the official website. The [Cagayan MDRRM directory](https://pdrrmo.cagayan.gov.ph/cagayan-mdrrmos/) should be checked for the latest local responder details.
+The [PDRRMO contact page](https://pdrrmo.cagayan.gov.ph/elementor-1303/) lists **pdrrmo@cagayan.gov.ph** and **0975-434-8083**. The [Cagayan MDRRM directory](https://pdrrmo.cagayan.gov.ph/cagayan-mdrrmos/) should be checked for the latest local responder details.
 
 ## Prepare before an emergency
 

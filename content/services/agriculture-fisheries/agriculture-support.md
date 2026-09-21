@@ -11,11 +11,18 @@ Residents, farmers, and fisherfolk can use this guide to identify the right offi
 
 Possible support may include seeds or planting materials, livestock or veterinary services, fisheries assistance, farm tools, training, and referrals to provincial or national programs. This portal does not treat a general program description as proof that a specific allocation is currently available.
 
+## Verified source-backed service
+
+The Provincial Government of Cagayan Citizens Charter documents **tilapia fingerling availment** through the Provincial Fishery Station in Lal-lo, Catayauan. Eligible applicants include fishpond operators, fisherfolk or farmer associations, LGUs, NGAs, and recognized NGOs. The documented request requires two copies of a Fingerling Purchase Order Form and a request letter to the Governor through the Office of the Provincial Agriculturist. The request service is listed at 32 minutes; up to 1,000 fingerlings are free and quantities above that are priced by prescribed size.
+
+This is a provincial service operating in Lal-lo, not a municipal permit or municipal fee schedule. Confirm current program availability before travelling.
+
 ## Official reference
 
-- [Department of Agriculture Regional Field Office 02](https://cagayan.da.gov.ph/) — regional agriculture announcements and contact information.
+- [Provincial Government of Cagayan Citizens Charter, 2nd edition](https://www.cagayan.gov.ph/wp-content/uploads/2024/04/Provincial-Government-of-Cagayan_CC-2nd-Edition_20240430.pdf) — Lal-lo fishery station service standard.
+- [DA/PCAF agriculture and fisheries committee directory](https://pcaf.da.gov.ph/index.php/afc-directory/) — Lal-lo agriculture-office contact.
 - [BetterLal-lo data sources](../../government/overview/data-sources) — how local information is checked before publication.
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Local office contact, current programs, and requirements are pending verification. Confirm before travelling or submitting documents.
+**Status:** The provincial fishery service and its published requirements are verified as a dated 2024 snapshot. Current availability and other municipal agriculture programs are not yet published in a direct source.

@@ -22,4 +22,4 @@ Do not pay through an unofficial intermediary. Request an official assessment or
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo BPLO contact details, fees, schedules, and online links are pending verification. Confirm directly with the Municipality of Lal-lo before applying.
+**Status:** Lal-lo BPLO contact details, fees, schedules, and online links are awaiting a current municipal charter or permit notice. Confirm directly with the Municipality of Lal-lo before applying.

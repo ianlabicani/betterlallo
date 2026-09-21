@@ -15,4 +15,4 @@ For national program information, use the [Department of Social Welfare and Deve
 
 **Last reviewed:** 2026-09-21
 
-**Status:** Lal-lo MSWDO schedules, program availability, fees, and exact documentary requirements are pending verification. Confirm before travelling.
+**Status:** Lal-lo MSWDO schedules, program availability, fees, and exact documentary requirements are awaiting a municipal or directly applicable field-office source. Confirm before travelling.
