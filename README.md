@@ -33,6 +33,7 @@ Useful checks:
 ```bash
 npm run lint
 npm run build
+npm run source-drafts
 ```
 
 Use `npm run dev:yaml` when you need to regenerate the YAML-derived content output before starting Vite.
@@ -48,12 +49,17 @@ Use `npm run dev:yaml` when you need to regenerate the YAML-derived content outp
 - `src/components/civic/` — structured civic records, sources, weather, and map UI
 - `src/i18n/locales/` — English and Filipino interface translations
 - `env.example` — public configuration values for a local or deployed environment
+- `research/source-ledger.md` — non-published official-source inventory and scope notes
+- `research/drafts/` — human-review-only import candidates; they are never loaded by the app
+- `research/remaining-pending.md` — evidence gaps that still need a direct official source
 
 ## Verification policy
 
-Prefer current sources from Lal-lo and Cagayan government offices, PSA, COA, DBM, and other official government publishers. Do not invent contacts, fees, schedules, requirements, or project information. If a local detail has not been verified, leave it out or label it as pending verification.
+Prefer current sources from Lal-lo and Cagayan government offices, PSA, COA, DBM, and other official government publishers. Do not invent contacts, fees, schedules, requirements, or project information. If a local detail lacks direct evidence, leave it out or explain the source gap and the evidence needed next.
 
 The portal currently links to the Provincial Government of Cagayan, PSA’s Lal-lo PSGC profile, and Cagayan PDRRMO sources. Add a source URL and review date when publishing new factual content.
+
+Run `npm run source-drafts` after adding an import candidate. The check validates source scope and review fields but does not publish or modify app data.
 
 Map and weather coordinates are public configuration values for the Lal-lo Municipal Hall OpenStreetMap feature. Open-Meteo is fetched client-side without an API key. The BetterLGU directory contribution remains separate and no registration pull request is opened by this repository.
 

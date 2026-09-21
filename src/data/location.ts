@@ -13,6 +13,11 @@ export const lalloLocationSource: SourceRecord = {
   url: 'https://www.openstreetmap.org/way/315700644',
   lastVerified: REVIEW_DATE,
   status: 'verified',
+  authority: 'municipal',
+  jurisdiction: 'Lal-lo, Cagayan',
+  sourceType: 'directory',
+  verificationNote:
+    'The public map feature is used only for municipality-level orientation; verify the destination before travel.',
 };
 
 const latitudeValue = import.meta.env.VITE_LALLO_LATITUDE;

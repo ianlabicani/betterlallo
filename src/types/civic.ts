@@ -1,10 +1,32 @@
 export type VerificationStatus = 'verified' | 'pending' | 'unverified';
 
+export type SourceAuthority =
+  'municipal' | 'provincial' | 'regional' | 'national';
+
+export type SourceType =
+  | 'open-data'
+  | 'budget'
+  | 'audit'
+  | 'procurement'
+  | 'directory'
+  | 'facility-registry'
+  | 'citizens-charter'
+  | 'project-report'
+  | 'history'
+  | 'program-report'
+  | 'legal-framework';
+
 export interface SourceRecord {
   label: string;
   url: string;
   lastVerified: string;
   status: VerificationStatus;
+  authority: SourceAuthority;
+  jurisdiction: string;
+  sourceType: SourceType;
+  publicationDate?: string;
+  dataPeriod?: string;
+  verificationNote?: string;
 }
 
 export interface Requirement {
@@ -34,6 +56,7 @@ export interface ServiceRecord {
   onlinePortal?: string;
   pendingFields?: string[];
   source: SourceRecord;
+  relatedSources?: SourceRecord[];
   status: VerificationStatus;
 }
 
@@ -71,7 +94,9 @@ export interface DepartmentRecord {
   email?: string;
   website?: string;
   mapUrl?: string;
+  scope?: string;
   source: SourceRecord;
+  relatedSources?: SourceRecord[];
   status: VerificationStatus;
 }
 
@@ -99,5 +124,19 @@ export interface TransparencySection {
   description: string;
   summary: string;
   sources: SourceRecord[];
+  records?: TransparencyRecord[];
+  status: VerificationStatus;
+}
+
+export interface TransparencyRecord {
+  id: string;
+  title: string;
+  summary: string;
+  period: string;
+  authority: SourceAuthority;
+  jurisdiction: string;
+  amount?: string;
+  projectStatus?: string;
+  source: SourceRecord;
   status: VerificationStatus;
 }
