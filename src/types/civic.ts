@@ -6,6 +6,8 @@ export type SourceAuthority =
 export type SourceType =
   | 'open-data'
   | 'budget'
+  | 'financial-report'
+  | 'full-disclosure'
   | 'audit'
   | 'procurement'
   | 'directory'
@@ -25,6 +27,7 @@ export interface SourceRecord {
   jurisdiction: string;
   sourceType: SourceType;
   publicationDate?: string;
+  extractionDate?: string;
   dataPeriod?: string;
   verificationNote?: string;
 }
@@ -69,6 +72,39 @@ export interface StatisticRecord {
   description: string;
   source: SourceRecord;
   status: VerificationStatus;
+}
+
+export type FinancialMetricKey =
+  | 'currentOperatingIncome'
+  | 'localSources'
+  | 'externalSources'
+  | 'currentOperatingExpenditures'
+  | 'netOperatingIncome'
+  | 'cashBalanceEnd'
+  | 'generalPublicServices'
+  | 'socialServices'
+  | 'economicServices'
+  | 'debtServiceInterest';
+
+export interface FinancialSnapshot {
+  id: string;
+  fiscalYear: number;
+  metrics: Record<FinancialMetricKey, number>;
+  extractionDate: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+  reviewNote?: string;
+}
+
+export interface FdpDocumentRecord {
+  id: string;
+  documentType: string;
+  fiscalPeriod: string;
+  documentUrl?: string;
+  sourcePortal: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+  reviewNote: string;
 }
 
 export type LegislationType = 'ordinance' | 'resolution' | 'executive-order';

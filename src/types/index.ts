@@ -10,6 +10,9 @@ export interface NavigationItem {
 
 export type {
   DepartmentRecord,
+  FdpDocumentRecord,
+  FinancialMetricKey,
+  FinancialSnapshot,
   LegislationRecord,
   Requirement,
   ServiceRecord,

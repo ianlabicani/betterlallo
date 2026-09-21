@@ -1,5 +1,7 @@
 import type {
   DepartmentRecord,
+  FdpDocumentRecord,
+  FinancialSnapshot,
   LegislationRecord,
   ServiceRecord,
   SourceRecord,
@@ -187,6 +189,53 @@ export const officialSources = {
     dataPeriod: 'Public dashboard reviewed 2026-09-21',
     verificationNote:
       'The dashboard supports school-record identification; it does not establish municipal education-assistance requirements.',
+  }),
+  blgfSreFy2023: source({
+    label: 'BLGF Statement of Receipts and Expenditures, FY 2023',
+    url: 'https://blgf.gov.ph/wp-content/uploads/2024/09/By-LGU-SRE-2023.xlsx',
+    status: 'verified',
+    authority: 'national',
+    jurisdiction: 'Lal-Lo municipality, Cagayan',
+    sourceType: 'financial-report',
+    extractionDate: '2024-05-28',
+    dataPeriod: 'FY 2023 annual SRE',
+    verificationNote:
+      'The BLGF workbook contains the Lal-Lo municipality row. Values are reported through the BLGF LIFT system from LGU SRE submissions and are not an audit opinion.',
+  }),
+  blgfSreFy2024: source({
+    label: 'BLGF Statement of Receipts and Expenditures, FY 2024',
+    url: 'https://blgf.gov.ph/wp-content/uploads/2026/01/By-LGU-SRE-2024.xlsx',
+    status: 'verified',
+    authority: 'national',
+    jurisdiction: 'Lal-Lo municipality, Cagayan',
+    sourceType: 'financial-report',
+    extractionDate: '2025-11-27',
+    dataPeriod: 'FY 2024 annual SRE',
+    verificationNote:
+      'The BLGF workbook contains the Lal-Lo municipality row. Values are reported through the BLGF LIFT system from LGU SRE submissions and are not an audit opinion.',
+  }),
+  blgfSreFy2025: source({
+    label: 'BLGF Statement of Receipts and Expenditures, FY 2025',
+    url: 'https://blgf.gov.ph/wp-content/uploads/2026/05/By-LGU-SRE-2025.xlsx',
+    status: 'verified',
+    authority: 'national',
+    jurisdiction: 'Lal-Lo municipality, Cagayan',
+    sourceType: 'financial-report',
+    extractionDate: '2026-03-03',
+    dataPeriod: 'FY 2025 annual SRE',
+    verificationNote:
+      'The BLGF workbook contains the Lal-Lo municipality row. Values are reported through the BLGF LIFT system from LGU SRE submissions and are not an audit opinion.',
+  }),
+  fullDisclosurePortal: source({
+    label: 'DILG Full Disclosure Policy Portal reports',
+    url: 'https://fdpp.dilg.gov.ph/fdpp/report',
+    status: 'verified',
+    authority: 'national',
+    jurisdiction: 'Philippine local government units; Lal-lo filter available',
+    sourceType: 'full-disclosure',
+    dataPeriod: 'Portal reviewed 2026-09-21',
+    verificationNote:
+      'The portal provides public filters for document type, region, province, municipality, period, and quarter. Individual Lal-lo documents are published only after their exact record is reviewed.',
   }),
   dbm: source({
     label: 'DBM Budget of Expenditures and Sources of Financing FY 2026',
@@ -762,6 +811,92 @@ export const statisticRecords: StatisticRecord[] = [
   },
 ];
 
+export const financialSnapshots: FinancialSnapshot[] = [
+  {
+    id: 'blgf-sre-lallo-fy2023',
+    fiscalYear: 2023,
+    metrics: {
+      currentOperatingIncome: 357166857.06,
+      localSources: 38905538.8,
+      externalSources: 318261318.26,
+      currentOperatingExpenditures: 258259783.46,
+      netOperatingIncome: 98907073.6,
+      cashBalanceEnd: 158115405.87,
+      generalPublicServices: 193115636.04,
+      socialServices: 38596798.42,
+      economicServices: 25263857.67,
+      debtServiceInterest: 1283491.33,
+    },
+    extractionDate: '2024-05-28',
+    source: officialSources.blgfSreFy2023,
+    status: 'verified',
+    reviewNote:
+      'The Lal-Lo municipality row was reviewed against the workbook column headings and displayed PHP-million format.',
+  },
+  {
+    id: 'blgf-sre-lallo-fy2024',
+    fiscalYear: 2024,
+    metrics: {
+      currentOperatingIncome: 391612500.24,
+      localSources: 55915653.37,
+      externalSources: 335696846.87,
+      currentOperatingExpenditures: 286199224.37,
+      netOperatingIncome: 105413275.87,
+      cashBalanceEnd: 151812919.75,
+      generalPublicServices: 185180660.25,
+      socialServices: 50103473.49,
+      economicServices: 35058450.64,
+      debtServiceInterest: 15856639.99,
+    },
+    extractionDate: '2025-11-27',
+    source: officialSources.blgfSreFy2024,
+    status: 'verified',
+    reviewNote:
+      'The Lal-Lo municipality row was reviewed against the workbook column headings and displayed PHP-million format.',
+  },
+  {
+    id: 'blgf-sre-lallo-fy2025',
+    fiscalYear: 2025,
+    metrics: {
+      currentOperatingIncome: 458151828.33,
+      localSources: 59668346.33,
+      externalSources: 398483482,
+      currentOperatingExpenditures: 341155013.58,
+      netOperatingIncome: 116996814.75,
+      cashBalanceEnd: 176521490.35,
+      generalPublicServices: 221634390.4,
+      socialServices: 51643451.4,
+      economicServices: 62589324.89,
+      debtServiceInterest: 5287846.89,
+    },
+    extractionDate: '2026-03-03',
+    source: officialSources.blgfSreFy2025,
+    status: 'verified',
+    reviewNote:
+      'The Lal-Lo municipality row was reviewed against the workbook column headings and displayed PHP-million format.',
+  },
+];
+
+export const fdpDocumentRecords: FdpDocumentRecord[] = [
+  'Annual Budget Report',
+  'Annual Procurement Plan',
+  'Statement of Receipts and Expenditures',
+  '20% of the National Tax Allotment Utilization',
+  'Local Disaster Risk Reduction and Management Fund Utilization',
+  'Report of Special Education Fund Utilization',
+  'Quarterly Statement of Cash Flow',
+  'Bid Results on Civil Works, Goods and Services, and Consulting Services',
+].map((documentType, index) => ({
+  id: `fdp-lallo-${index + 1}`,
+  documentType,
+  fiscalPeriod: 'Portal periods 2022-2026',
+  sourcePortal: officialSources.fullDisclosurePortal.url,
+  source: officialSources.fullDisclosurePortal,
+  status: 'pending',
+  reviewNote:
+    'Lal-lo-specific document URL was not approved in this review. Use the official portal filters to check the current posting before treating a document as published evidence.',
+}));
+
 export const legislationRecords: LegislationRecord[] = [];
 
 export const transparencySections: TransparencySection[] = [
@@ -769,10 +904,14 @@ export const transparencySections: TransparencySection[] = [
     slug: 'financial',
     title: 'Financial records',
     description:
-      'Budget, expenditure, audit, and financial-management records for Lal-lo.',
+      'Budget, expenditure, and financial-management records for Lal-lo.',
     summary:
-      'DBM FY2024-FY2026 municipality-table links are shown below. The current PDF text layer exposes higher-level rows rather than a readable Lal-lo row, so amounts remain pending table-layout review; the COA Water District audit is intentionally excluded from municipal-government finance.',
+      'BLGF annual Statement of Receipts and Expenditures snapshots for FY2023-FY2025 are verified and shown in Philippine pesos. Approved-budget amounts remain separate pending DBM row review, and the COA Water District audit is excluded from municipal-government finance.',
     sources: [
+      officialSources.blgfSreFy2023,
+      officialSources.blgfSreFy2024,
+      officialSources.blgfSreFy2025,
+      officialSources.fullDisclosurePortal,
       officialSources.dbmFy2024,
       officialSources.dbmFy2025,
       officialSources.dbmFy2026,
@@ -780,9 +919,9 @@ export const transparencySections: TransparencySection[] = [
     records: [
       {
         id: 'dbm-lallo-fy2024-2026',
-        title: 'DBM municipality receipts and expenditures table set',
+        title: 'DBM approved-budget municipality table set',
         summary:
-          'Official FY2024-FY2026 DBM tables include municipality-level financial statements. Amounts are not reproduced until Lal-lo’s row is checked and approved.',
+          'Official FY2024-FY2026 DBM tables remain a separate approved-budget source. Amounts are not reproduced until Lal-lo’s row is checked and approved.',
         period: 'FY 2024-FY 2026',
         authority: 'national',
         jurisdiction: 'Lal-lo, Cagayan',
@@ -791,7 +930,7 @@ export const transparencySections: TransparencySection[] = [
         status: 'pending',
       },
     ],
-    status: 'pending',
+    status: 'verified',
   },
   {
     slug: 'procurement',
