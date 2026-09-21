@@ -15,6 +15,10 @@
   "navbar": {
     "government": "Pamahalaan",
     "services": "Mga serbisyo",
+    "statistics": "Estadistika",
+    "openlgu": "OpenLGU",
+    "transparency": "Transparency",
+    "search": "Maghanap",
     "hotlines": "Mga hotline",
     "holidays": "Mga pista opisyal"
   },

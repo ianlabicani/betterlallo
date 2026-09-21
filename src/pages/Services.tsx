@@ -15,6 +15,7 @@ import SEO from '../components/SEO';
 import { Card, CardContent } from '@bettergov/kapwa/card';
 import { Banner } from '@bettergov/kapwa/banner';
 import { useState, useEffect } from 'react';
+import ServiceRecordDirectory from '../components/civic/ServiceRecordDirectory';
 
 const Services: React.FC = () => {
   const { category } = useParams();
@@ -56,6 +57,7 @@ const Services: React.FC = () => {
           title={`All local government services`}
           description={`All services provided by the ${import.meta.env.VITE_GOVERNMENT_NAME} government. Find what you need for citizenship, business, education, and more.`}
         />
+        <ServiceRecordDirectory />
       </>
     );
   }

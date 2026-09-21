@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import {
-  X,
-  Menu,
-  ChevronDown,
-  Globe,
-  Search,
-  CheckCircle2,
-} from 'lucide-react';
+import { X, Menu, ChevronDown, Globe, CheckCircle2 } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 import type { LanguageType } from '../../types/index';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n/languages';
-import { isMeilisearchEnabled } from '../../lib/meilisearch';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -121,15 +113,15 @@ const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center space-x-8 pr-24">
             {mainNavigation.map(item => (
               <div key={item.label} className="relative group">
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors"
                 >
-                  {t(`navbar.${item.label.replace(' ', '').toLowerCase()}`)}
+                  {t(`navbar.${item.label.replace(/\s/g, '').toLowerCase()}`)}
                   {item.children && (
                     <ChevronDown className="ml-1 h-4 w-4 text-gray-800 group-hover:text-primary-600 transition-colors" />
                   )}
-                </a>
+                </Link>
                 {item.children && (
                   <div className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div
@@ -160,15 +152,6 @@ const Navbar: React.FC = () => {
             >
               About
             </Link>
-            {isMeilisearchEnabled && (
-              <Link
-                to="/search"
-                className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors"
-              >
-                <Search className="h-4 w-4 mr-1" />
-                Search
-              </Link>
-            )}
             {/* <Link
               to="/sitemap"
               className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors"
@@ -204,32 +187,43 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-2 pt-2 pb-4 space-y-1 border-t border-gray-200 bg-white">
           {mainNavigation.map(item => (
             <div key={item.label}>
-              <button
-                onClick={() => toggleSubmenu(item.label)}
-                className="w-full flex justify-between items-center px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-500"
-              >
-                {t(`navbar.${item.label.toLowerCase()}`)}
-                {item.children && (
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform ${
-                      activeMenu === item.label ? 'transform rotate-180' : ''
-                    }`}
-                  />
-                )}
-              </button>
-              {item.children && activeMenu === item.label && (
-                <div className="pl-6 py-2 space-y-1 bg-gray-50">
-                  {item.children.map(child => (
-                    <Link
-                      key={child.label}
-                      to={child.href}
-                      onClick={closeMenu}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
+              {item.children ? (
+                <>
+                  <button
+                    onClick={() => toggleSubmenu(item.label)}
+                    className="w-full flex justify-between items-center px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-500"
+                    aria-expanded={activeMenu === item.label}
+                  >
+                    {t(`navbar.${item.label.replace(/\s/g, '').toLowerCase()}`)}
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform ${
+                        activeMenu === item.label ? 'transform rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {activeMenu === item.label && (
+                    <div className="pl-6 py-2 space-y-1 bg-gray-50">
+                      {item.children.map(child => (
+                        <Link
+                          key={child.label}
+                          to={child.href}
+                          onClick={closeMenu}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to={item.href}
+                  onClick={closeMenu}
+                  className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-500"
+                >
+                  {t(`navbar.${item.label.replace(/\s/g, '').toLowerCase()}`)}
+                </Link>
               )}
             </div>
           ))}
@@ -249,15 +243,6 @@ const Navbar: React.FC = () => {
           >
             About
           </Link>
-          {isMeilisearchEnabled && (
-            <Link
-              to="/search"
-              onClick={closeMenu}
-              className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-500"
-            >
-              Search
-            </Link>
-          )}
           <div className="px-4 py-3 border-t border-gray-200">
             <div className="flex items-center">
               <Globe className="h-5 w-5 text-gray-800 mr-2" />

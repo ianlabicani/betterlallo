@@ -9,6 +9,11 @@ This is a community project, not the official website of the Municipal Governmen
 - English and Filipino interface text
 - Lal-lo overview, officials, departments, barangays, and transparency sections
 - Service guides for health, education, business, social welfare, agriculture, infrastructure, waste, environment, disaster preparedness, and land use
+- BetterLB-inspired quick access to financial, infrastructure, legislation, and statistics sections
+- Structured service-record views with eligibility, requirements, fees, processing time, steps, responsible office, and verification states
+- Searchable municipal office directory, statistics register, OpenLGU legislation filters, and financial/procurement/infrastructure transparency views
+- Build-time local search with optional Meilisearch enhancement
+- No-key Open-Meteo weather and Leaflet/OpenStreetMap map with loading, timeout, offline, and unavailable states
 - Source links and last-reviewed notes for public information
 - Static React, TypeScript, Vite, Tailwind, YAML, and Markdown content workflow
 
@@ -38,6 +43,9 @@ Use `npm run dev:yaml` when you need to regenerate the YAML-derived content outp
 - `content/services/` — service category indexes and Markdown guides
 - `src/data/services.yaml` — service categories and navigation metadata
 - `src/data/government.yaml` — government categories and navigation metadata
+- `src/data/civicRecords.ts` — typed source-backed service, department, statistic, legislation, and transparency records
+- `src/data/contentIndex.ts` — build-time client-side search index
+- `src/components/civic/` — structured civic records, sources, weather, and map UI
 - `src/i18n/locales/` — English and Filipino interface translations
 - `env.example` — public configuration values for a local or deployed environment
 
@@ -46,6 +54,8 @@ Use `npm run dev:yaml` when you need to regenerate the YAML-derived content outp
 Prefer current sources from Lal-lo and Cagayan government offices, PSA, COA, DBM, and other official government publishers. Do not invent contacts, fees, schedules, requirements, or project information. If a local detail has not been verified, leave it out or label it as pending verification.
 
 The portal currently links to the Provincial Government of Cagayan, PSA’s Lal-lo PSGC profile, and Cagayan PDRRMO sources. Add a source URL and review date when publishing new factual content.
+
+Map and weather coordinates are public configuration values for the Lal-lo Municipal Hall OpenStreetMap feature. Open-Meteo is fetched client-side without an API key. The BetterLGU directory contribution remains separate and no registration pull request is opened by this repository.
 
 ## Repository setup
 

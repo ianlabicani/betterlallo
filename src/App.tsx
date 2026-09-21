@@ -9,7 +9,12 @@ import Document from './pages/Document';
 import Government from './pages/Government';
 import Search from './pages/Search';
 import About from './pages/About';
-import { isMeilisearchEnabled } from './lib/meilisearch';
+import ServiceRecordPage from './pages/ServiceRecordPage';
+import GovernmentDirectory from './pages/GovernmentDirectory';
+import Officials from './pages/Officials';
+import Statistics from './pages/Statistics';
+import OpenLGU from './pages/OpenLGU';
+import Transparency from './pages/Transparency';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 
 function App() {
@@ -23,21 +28,32 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/openlgu" element={<OpenLGU />} />
+              <Route path="/transparency/:section" element={<Transparency />} />
+              <Route path="/transparency" element={<Transparency />} />
+              <Route path="/search" element={<Search />} />
+              <Route
+                path="/services/record/:serviceSlug"
+                element={<ServiceRecordPage />}
+              />
               <Route path="/services/:category" element={<Services />} />
               <Route path="/services" element={<Services />} />
               <Route
                 path="/services/:category/:documentSlug"
                 element={<Document categoryType="service" />}
               />
+              <Route
+                path="/government/directory"
+                element={<GovernmentDirectory />}
+              />
+              <Route path="/government/officials" element={<Officials />} />
               <Route path="/government/:category" element={<Government />} />
               <Route path="/government" element={<Government />} />
               <Route
                 path="/government/:category/:documentSlug"
                 element={<Document categoryType="government" />}
               />
-              {isMeilisearchEnabled && (
-                <Route path="/search" element={<Search />} />
-              )}
               <Route path="/:lang/:documentSlug" element={<Document />} />
               <Route path="/:documentSlug" element={<Document />} />
             </Routes>

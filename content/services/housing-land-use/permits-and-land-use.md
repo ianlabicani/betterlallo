@@ -12,6 +12,11 @@ Before buying materials, starting construction, or changing a property’s use, 
 
 Ask the municipal planning, engineering, or building-permit office for the current checklist. Requirements depend on the project and must be confirmed before submission.
 
+## Official reference
+
+- [Department of Human Settlements and Urban Development](https://dhsud.gov.ph/) — national housing, land-use, and permitting information.
+- [BetterLal-lo public information sources](../../government/overview/data-sources) — verification policy for local office details.
+
 **Last reviewed:** 2026-09-21
 
 **Status:** Lal-lo zoning maps, application forms, fees, office contacts, and processing times are pending verification.

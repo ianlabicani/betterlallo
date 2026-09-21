@@ -7,3 +7,16 @@ export interface NavigationItem {
   href: string;
   children?: NavigationItem[];
 }
+
+export type {
+  DepartmentRecord,
+  LegislationRecord,
+  Requirement,
+  ServiceRecord,
+  ServiceStep,
+  SourceRecord,
+  StatisticRecord,
+  TransparencySection,
+  VerificationStatus,
+  WeatherSnapshot,
+} from './civic';

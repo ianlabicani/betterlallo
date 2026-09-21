@@ -13,10 +13,38 @@ export const mainNavigation: NavigationItem[] = [
   {
     label: 'Government',
     href: '/government/overview',
-    children: governmentCategories.categories.map(category => ({
-      label: category.category,
-      href: `/government/${category.slug}`,
-    })),
+    children: [
+      { label: 'Elected officials', href: '/government/officials' },
+      { label: 'Municipal office directory', href: '/government/directory' },
+      ...governmentCategories.categories.map(category => ({
+        label: category.category,
+        href: `/government/${category.slug}`,
+      })),
+    ],
+  },
+  {
+    label: 'Statistics',
+    href: '/statistics',
+  },
+  {
+    label: 'OpenLGU',
+    href: '/openlgu',
+  },
+  {
+    label: 'Transparency',
+    href: '/transparency',
+    children: [
+      { label: 'Financial records', href: '/transparency/financial' },
+      { label: 'Procurement', href: '/transparency/procurement' },
+      {
+        label: 'Projects and infrastructure',
+        href: '/transparency/infrastructure',
+      },
+    ],
+  },
+  {
+    label: 'Search',
+    href: '/search',
   },
 ];
 
@@ -37,6 +65,7 @@ export const footerNavigation = {
       title: 'Services',
       links: [
         { label: 'All Services', href: '/services' },
+        { label: 'Structured service records', href: '/services' },
         { label: 'Health Services', href: '/services/health-services' },
         { label: 'Business and Livelihood', href: '/services/business' },
         {
@@ -52,6 +81,7 @@ export const footerNavigation = {
     {
       title: 'Government',
       links: [
+        { label: 'Municipal office directory', href: '/government/directory' },
         { label: 'Government Departments', href: '/government/departments' },
         { label: 'Barangays', href: '/government/barangays' },
         {
@@ -62,6 +92,15 @@ export const footerNavigation = {
           label: 'PSA Lal-lo Profile',
           href: 'https://psa.gov.ph/classification/psgc/barangays/0201516000',
         },
+      ],
+    },
+    {
+      title: 'Explore',
+      links: [
+        { label: 'Statistics', href: '/statistics' },
+        { label: 'OpenLGU legislation', href: '/openlgu' },
+        { label: 'Transparency', href: '/transparency' },
+        { label: 'Search', href: '/search' },
       ],
     },
   ],

@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 pt-12 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center mb-4">
               <CheckCircle2 className="h-12 w-12 mr-3" aria-hidden="true" />
