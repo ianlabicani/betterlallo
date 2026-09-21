@@ -9,6 +9,8 @@ BetterLal-lo uses a source-first workflow. A page should tell readers what it is
 - Philippine Statistics Authority: geographic and barangay classification data.
 - Commission on Audit: audit reports and financial records for local government units.
 - Department of Budget and Management: national budget and local-government open-data sources.
+- Bureau of Local Government Finance: annual and quarterly Statement of Receipts and Expenditures data from the LIFT system.
+- Department of the Interior and Local Government: Full Disclosure Policy Portal documents and compliance records.
 - Cagayan PDRRMO: disaster-risk-reduction and emergency information relevant to Lal-lo.
 
 ## Scope and verification rules
@@ -19,6 +21,7 @@ BetterLal-lo uses a source-first workflow. A page should tell readers what it is
 - Search results, third-party directories, and social posts can identify leads but are not direct evidence for publication.
 - Conflicting official names or values stay pending until the source dates and jurisdiction are reconciled.
 - COA records for the Lal-lo Water District are not municipal-government audit records and are excluded from municipal finance summaries.
+- BLGF SRE records are financial-report snapshots. They must not be relabeled as audits, approved budgets, or treasury-account balances.
 
 Import candidates are kept in the repository source ledger and draft folder for human review. Draft imports never publish automatically; a reviewer must confirm jurisdiction, dates, values, and wording before a factual record moves into the app data.
 
@@ -31,6 +34,8 @@ When sources conflict, the page should show the conflict or defer to the most re
 - [PSA Lal-lo profile](https://psa.gov.ph/classification/psgc/barangays/0201516000)
 - [Cagayan municipal directory](https://cagayan.gov.ph/city-and-municipalities/)
 - [DBM Open Data](https://www.dbm.gov.ph/index.php/open-data)
+- [BLGF local finance data](https://blgf.gov.ph/lgu-fiscal-data/)
+- [DILG Full Disclosure Policy Portal](https://fdpp.dilg.gov.ph/fdpp/report)
 - [COA](https://www.coa.gov.ph/)
 - [Cagayan PDRRMO](https://pdrrmo.cagayan.gov.ph/)
 - [PSA OpenSTAT 2024 Population tables](https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__1A__PO_2024/?tablelist=true)
