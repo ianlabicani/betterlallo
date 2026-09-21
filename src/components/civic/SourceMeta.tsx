@@ -2,7 +2,7 @@ import type { SourceRecord, VerificationStatus } from '../../types/civic';
 
 const statusLabels: Record<VerificationStatus, string> = {
   verified: 'Verified source',
-  pending: 'Pending verification',
+  pending: 'Source review pending',
   unverified: 'Unverified',
 };
 
@@ -39,10 +39,45 @@ export function SourceMeta({ source }: { source: SourceRecord }) {
           </a>
         </span>
       </div>
-      <p className="mt-1">
+      <dl className="mt-2 grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
+        <div>
+          <dt className="inline font-semibold text-gray-700">Authority:</dt>{' '}
+          <dd className="inline capitalize">{source.authority}</dd>
+        </div>
+        <div>
+          <dt className="inline font-semibold text-gray-700">Scope:</dt>{' '}
+          <dd className="inline">{source.jurisdiction}</dd>
+        </div>
+        <div>
+          <dt className="inline font-semibold text-gray-700">Record type:</dt>{' '}
+          <dd className="inline capitalize">{source.sourceType}</dd>
+        </div>
+        {source.dataPeriod && (
+          <div>
+            <dt className="inline font-semibold text-gray-700">Period:</dt>{' '}
+            <dd className="inline">{source.dataPeriod}</dd>
+          </div>
+        )}
+        {source.publicationDate && (
+          <div>
+            <dt className="inline font-semibold text-gray-700">Published:</dt>{' '}
+            <dd className="inline">
+              <time dateTime={source.publicationDate}>
+                {source.publicationDate}
+              </time>
+            </dd>
+          </div>
+        )}
+      </dl>
+      <p className="mt-2">
         Last reviewed{' '}
         <time dateTime={source.lastVerified}>{source.lastVerified}</time>.
       </p>
+      {source.verificationNote && (
+        <p className="mt-2 rounded-md bg-gray-50 p-2 leading-relaxed">
+          {source.verificationNote}
+        </p>
+      )}
     </div>
   );
 }

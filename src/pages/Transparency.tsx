@@ -126,9 +126,80 @@ export default function Transparency() {
             {selected.summary}
           </p>
           <p className="mt-3 text-sm text-gray-600">
-            This page will support source-backed summaries, document links,
-            update dates, and integrity labels as records are verified.
+            Every register entry keeps its owning authority, geographic scope,
+            period, source link, and integrity label visible.
           </p>
+        </section>
+
+        <section
+          className="mt-8"
+          aria-labelledby="transparency-records-heading"
+        >
+          <h2
+            id="transparency-records-heading"
+            className="mb-4 text-xl font-semibold text-gray-900"
+          >
+            Records register
+          </h2>
+          {selected.records?.length ? (
+            <div className="space-y-4">
+              {selected.records.map(record => (
+                <article
+                  key={record.id}
+                  className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {record.title}
+                    </h3>
+                    <VerificationBadge status={record.status} />
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-700">
+                    {record.summary}
+                  </p>
+                  <dl className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                      <dt className="text-gray-500">Authority</dt>
+                      <dd className="font-medium capitalize text-gray-900">
+                        {record.authority}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-gray-500">Scope</dt>
+                      <dd className="font-medium text-gray-900">
+                        {record.jurisdiction}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-gray-500">Period</dt>
+                      <dd className="font-medium text-gray-900">
+                        {record.period}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-gray-500">Amount / status</dt>
+                      <dd className="font-medium text-gray-900">
+                        {record.amount ??
+                          record.projectStatus ??
+                          'Not published'}
+                      </dd>
+                    </div>
+                  </dl>
+                  {record.amount && record.projectStatus && (
+                    <p className="mt-2 text-sm text-gray-600">
+                      Status: {record.projectStatus}
+                    </p>
+                  )}
+                  <SourceMeta source={record.source} />
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-lg border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-700">
+              No Lal-lo records are published in this section yet. The source
+              register below shows where the next review can begin.
+            </div>
+          )}
         </section>
 
         <section

@@ -54,13 +54,16 @@ export default function Officials() {
                 </p>
               ) : (
                 <p className="mt-5 text-sm text-amber-800">
-                  Current names pending verification.
+                  Current names are not published by the cited source.
                 </p>
               )}
               <p className="mt-3 text-sm leading-relaxed text-gray-600">
                 {official.description}
               </p>
               <SourceMeta source={official.source} />
+              {official.relatedSources?.map(source => (
+                <SourceMeta key={source.url} source={source} />
+              ))}
             </article>
           ))}
         </div>

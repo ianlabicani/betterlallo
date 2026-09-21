@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FileText, Search as SearchIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import SEO from '../components/SEO';
-import { SourceMeta } from '../components/civic/SourceMeta';
+import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
 import { legislationRecords } from '../data/civicRecords';
 import type { LegislationType } from '../types/civic';
 
@@ -185,9 +185,7 @@ export default function OpenLGU() {
                       {record.title}
                     </h2>
                   </div>
-                  <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">
-                    Pending verification
-                  </span>
+                  <VerificationBadge status={record.status} />
                 </div>
                 <dl className="mt-4 grid grid-cols-2 gap-3 text-sm md:grid-cols-4">
                   <div>

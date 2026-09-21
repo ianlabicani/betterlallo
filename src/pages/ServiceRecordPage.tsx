@@ -8,10 +8,12 @@ function DetailValue({
   label,
   value,
   pending = false,
+  pendingReason,
 }: {
   label: string;
   value?: string;
   pending?: boolean;
+  pendingReason?: string;
 }) {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4">
@@ -21,7 +23,11 @@ function DetailValue({
       <dd
         className={`mt-2 text-sm ${value ? 'text-gray-900' : 'text-amber-800'}`}
       >
-        {value ?? (pending ? 'Pending verification' : 'Not published')}
+        {value ??
+          (pending
+            ? (pendingReason ??
+              'Not published: the cited source does not include this field.')
+            : 'Not published: the cited source does not include this field.')}
       </dd>
     </div>
   );
@@ -94,26 +100,31 @@ export default function ServiceRecordPage() {
               label="Who may apply"
               value={record.whoMayApply}
               pending={pending.has('eligibility')}
+              pendingReason="Not published: no directly applicable Lal-lo eligibility rule has been located."
             />
             <DetailValue
               label="Processing time"
               value={record.processingTime}
               pending={pending.has('processing time')}
+              pendingReason="Not published: the cited source does not give a Lal-lo-specific processing time."
             />
             <DetailValue
               label="Fees"
               value={record.fees}
               pending={pending.has('fees')}
+              pendingReason="Not published: no directly applicable Lal-lo fee schedule has been located."
             />
             <DetailValue
               label="Responsible office"
               value={record.responsibleOffice}
               pending={pending.has('responsible office')}
+              pendingReason="Not published: the cited source does not identify a Lal-lo municipal office for this field."
             />
             <DetailValue
               label="Contact"
               value={record.contact}
               pending={pending.has('contact')}
+              pendingReason="Not published: no directly applicable contact has been located."
             />
             <div className="rounded-lg border border-gray-200 bg-white p-4">
               <dt className="text-xs font-semibold uppercase tracking-wide text-gray-500">
@@ -131,7 +142,10 @@ export default function ServiceRecordPage() {
                     <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   </a>
                 ) : (
-                  <span className="text-amber-800">Pending verification</span>
+                  <span className="text-amber-800">
+                    Not published: no official online application channel has
+                    been located.
+                  </span>
                 )}
               </dd>
             </div>
@@ -155,7 +169,8 @@ export default function ServiceRecordPage() {
               </ul>
             ) : (
               <p className="mt-3 text-sm text-amber-800">
-                Pending verification. Do not treat this page as a complete
+                Not published: the cited source does not provide a complete
+                Lal-lo checklist. Do not treat this page as a complete
                 checklist.
               </p>
             )}
@@ -178,14 +193,17 @@ export default function ServiceRecordPage() {
               </ol>
             ) : (
               <p className="mt-3 text-sm text-amber-800">
-                Pending verification from an official Lal-lo service
-                publication.
+                Not published: the cited source does not provide a
+                Lal-lo-specific application sequence.
               </p>
             )}
           </div>
         </section>
 
         <SourceMeta source={record.source} />
+        {record.relatedSources?.map(relatedSource => (
+          <SourceMeta key={relatedSource.url} source={relatedSource} />
+        ))}
       </main>
     </>
   );

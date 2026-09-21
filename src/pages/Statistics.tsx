@@ -4,6 +4,12 @@ import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
 import { statisticRecords } from '../data/civicRecords';
 import WeatherMapSection from '../components/civic/WeatherMapSection';
 
+function formatValue(value: string | number | undefined) {
+  return typeof value === 'number'
+    ? new Intl.NumberFormat('en-PH').format(value)
+    : value;
+}
+
 export default function Statistics() {
   return (
     <>
@@ -61,7 +67,7 @@ export default function Statistics() {
                   <VerificationBadge status={statistic.status} />
                 </div>
                 <p className="mt-5 text-3xl font-bold text-gray-900">
-                  {statistic.value ?? 'Pending'}
+                  {formatValue(statistic.value) ?? 'Not published'}
                   {statistic.value !== undefined && statistic.unit && (
                     <span className="ml-1 text-base font-medium text-gray-600">
                       {statistic.unit}
@@ -126,7 +132,7 @@ export default function Statistics() {
                       {statistic.label}
                     </th>
                     <td className="px-4 py-4 text-gray-700">
-                      {statistic.value ?? 'Pending verification'}
+                      {formatValue(statistic.value) ?? 'Not published'}
                       {statistic.value !== undefined && statistic.unit
                         ? ` ${statistic.unit}`
                         : ''}

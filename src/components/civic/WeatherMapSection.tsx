@@ -19,6 +19,11 @@ const weatherSource = {
   url: 'https://open-meteo.com/',
   lastVerified: '2026-09-21',
   status: 'verified' as const,
+  authority: 'national' as const,
+  jurisdiction: 'Live forecast for configured Lal-lo coordinates',
+  sourceType: 'open-data' as const,
+  verificationNote:
+    'Live weather is fetched at runtime and is not a municipal civic record.',
 };
 
 const weatherLabels: Record<number, string> = {

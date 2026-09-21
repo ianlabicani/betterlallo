@@ -1,7 +1,7 @@
 import { ArrowRight, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router';
 import { serviceRecords } from '../../data/civicRecords';
-import { SourceMeta } from './SourceMeta';
+import { SourceMeta, VerificationBadge } from './SourceMeta';
 
 export default function ServiceRecordDirectory() {
   return (
@@ -40,9 +40,7 @@ export default function ServiceRecordDirectory() {
                 <span className="text-xs font-semibold uppercase tracking-wide text-primary-700">
                   {record.category}
                 </span>
-                <span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-800">
-                  Pending details
-                </span>
+                <VerificationBadge status={record.status} />
               </div>
               <h3 className="text-lg font-semibold text-gray-900">
                 {record.title}
@@ -52,7 +50,8 @@ export default function ServiceRecordDirectory() {
               </p>
               {record.pendingFields && (
                 <p className="mt-4 rounded-md bg-amber-50 p-3 text-xs leading-relaxed text-amber-900">
-                  Pending verification: {record.pendingFields.join(', ')}.
+                  Not published from the cited source:{' '}
+                  {record.pendingFields.join(', ')}.
                 </p>
               )}
               <SourceMeta source={record.source} />
