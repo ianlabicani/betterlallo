@@ -135,16 +135,16 @@ VITE_CONTACT_EMAIL="${contactEmail}"
 VITE_CONTACT_PHONE="${contactPhone}"
 
 # Social Media (Optional)
-VITE_FACEBOOK_URL="https://facebook.com/your-government"
-VITE_TWITTER_URL="https://twitter.com/your-government"
-VITE_INSTAGRAM_URL="https://instagram.com/your-government"
-VITE_YOUTUBE_URL="https://youtube.com/your-government"
+VITE_FACEBOOK_URL=""
+VITE_TWITTER_URL=""
+VITE_INSTAGRAM_URL=""
+VITE_YOUTUBE_URL=""
 
 # SEO
 VITE_SITE_DESCRIPTION="Official website of ${governmentName}"
 VITE_SITE_KEYWORDS="government, local government, services, ${governmentName.toLowerCase()}"
 VITE_OG_IMAGE_URL="${websiteUrl}/og-image.jpg"
-VITE_TWITTER_HANDLE="@your-government"
+VITE_TWITTER_HANDLE=""
 
 # Analytics (Optional)
 VITE_GOOGLE_ANALYTICS_ID=""

@@ -1,28 +1,24 @@
 {
-  "common": {
-    "welcome": "Welcome",
-    "home": "Home",
-    "about": "About",
-    "contact": "Contact",
-    "services": "Services",
-    "language": "Language"
-  },
-  "navigation": {
-    "home": "Home",
-    "about": "About",
-    "services": "Services",
-    "contact": "Contact",
-    "login": "Login",
-    "register": "Register"
-  },
+  "site_name": "BetterLal-lo",
+  "site_description": "Community civic information portal",
   "hero": {
-    "title": "Better Local Government",
-    "subtitle": "Transforming communities through digital innovation",
-    "cta": "Get Started"
+    "subtitle": "Find public services and local information for Lal-lo, Cagayan."
+  },
+  "services": {
+    "title": "Services and practical guides",
+    "description": "Start with plain-language guides to local services, requirements, and offices."
+  },
+  "governmentActivity": {
+    "title": "Government and public records",
+    "description": "Browse departments, barangays, and transparency sources for Lal-lo."
+  },
+  "navbar": {
+    "government": "Government",
+    "services": "Services",
+    "hotlines": "Hotlines",
+    "holidays": "Holidays"
   },
   "footer": {
-    "copyright": "© 2026 Better Local Government. All rights reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "copyright": "© 2026 BetterLal-lo. Community-run public information portal."
   }
 }

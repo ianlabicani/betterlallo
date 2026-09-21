@@ -1,28 +1,24 @@
 {
-  "common": {
-    "welcome": "Maligayang Pagdating",
-    "home": "Tahanan",
-    "about": "Tungkol",
-    "contact": "Makipag-ugnayan",
-    "services": "Mga Serbisyo",
-    "language": "Wika"
-  },
-  "navigation": {
-    "home": "Tahanan",
-    "about": "Tungkol",
-    "services": "Mga Serbisyo",
-    "contact": "Makipag-ugnayan",
-    "login": "Mag-login",
-    "register": "Magparehistro"
-  },
+  "site_name": "BetterLal-lo",
+  "site_description": "Community civic information portal",
   "hero": {
-    "title": "Mas Mabuting Pamahalaang Lokal",
-    "subtitle": "Binabago ang mga komunidad sa pamamagitan ng digital na inobasyon",
-    "cta": "Magsimula"
+    "subtitle": "Hanapin ang mga serbisyong pampubliko at lokal na impormasyon para sa Lal-lo, Cagayan."
+  },
+  "services": {
+    "title": "Mga serbisyo at gabay",
+    "description": "Magsimula sa mga gabay sa serbisyo, kinakailangan, at tanggapan."
+  },
+  "governmentActivity": {
+    "title": "Pamahalaan at mga pampublikong tala",
+    "description": "Tingnan ang mga tanggapan, barangay, at mga sanggunian para sa transparency ng Lal-lo."
+  },
+  "navbar": {
+    "government": "Pamahalaan",
+    "services": "Mga serbisyo",
+    "hotlines": "Mga hotline",
+    "holidays": "Mga pista opisyal"
   },
   "footer": {
-    "copyright": "© 2024 Mas Mabuting Pamahalaang Lokal. Lahat ng karapatan ay nakalaan.",
-    "privacy": "Patakaran sa Privacy",
-    "terms": "Mga Tuntunin ng Serbisyo"
+    "copyright": "© 2026 BetterLal-lo. Community-run na portal ng pampublikong impormasyon."
   }
 }

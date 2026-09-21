@@ -1,0 +1,10 @@
+title: 'About Lal-lo'
+description: 'Start with the municipality’s identity, public-information sources, and the way BetterLal-lo verifies content.'
+layout: grid
+pages:
+  - name: 'About Lal-lo'
+    slug: 'about-lallo'
+    description: 'Municipality profile, source policy, and links to official public information.'
+  - name: 'Public information sources'
+    slug: 'data-sources'
+    description: 'A practical map of the government and statistical sources used by this portal.'

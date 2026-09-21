@@ -1,0 +1,13 @@
+title: 'Transparency documents'
+description: 'Use these pages as a starting point for finding official Lal-lo records. Links are added only when the source can be verified.'
+layout: grid
+pages:
+  - name: 'Budget and financial records'
+    slug: 'budget'
+    description: 'Where to look for local budgets, expenditures, and audit records.'
+  - name: 'Projects and procurement'
+    slug: 'projects'
+    description: 'How to trace infrastructure, social programs, and procurement notices.'
+  - name: 'Ordinances and resolutions'
+    slug: 'ordinances'
+    description: 'How to find current municipal legislative documents.'

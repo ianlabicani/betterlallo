@@ -1,10 +1,9 @@
-# Department Pages
-# This file contains all the pages/governments available under the Department
+# Government department pages for the Municipality of Lal-lo
 
 pages:
   - name: 'Executive'
     slug: 'executive'
-    description: "Find out about your Mayor and Vice Mayor, including upcoming events, the Mayor's Community Assistance Program, mayoral history, and information about other historic roles in the local government unit."
+    description: 'The Office of the Mayor and the municipal executive offices responsible for local administration and public programs.'
   - name: 'Legislative'
     slug: 'legislative'
-    description: 'As of the 2025–2028 term, the Sangguniang Panlungsod (City Council) of Lapu-Lapu City has 12 elected councilors, with the Vice Mayor as the presiding officer of the council.'
+    description: 'The Sangguniang Bayan and public sources for municipal ordinances and resolutions.'

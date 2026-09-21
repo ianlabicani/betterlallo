@@ -1,0 +1,20 @@
+# About Lal-lo
+
+**Lal-lo** is a municipality in the province of Cagayan, in the Cagayan Valley (Region II). BetterLal-lo is an independent community project that organizes public information about the municipality for residents, visitors, and local civic groups.
+
+## What this portal does
+
+- Explains where residents can look for municipal services and requirements.
+- Organizes public information about departments, barangays, and local records.
+- Links back to official and primary sources whenever a record is available online.
+- Identifies when information was checked and avoids inventing missing contacts or requirements.
+
+## What this portal does not do
+
+BetterLal-lo is not the official website of the Municipal Government of Lal-lo. It does not accept applications, issue permits, replace emergency hotlines, or speak on behalf of municipal offices. Confirm time-sensitive information with the responsible office before acting on it.
+
+## Source and update note
+
+- [Provincial Government of Cagayan — City and Municipalities](https://cagayan.gov.ph/city-and-municipalities/)
+- [PSA — Municipality of Lal-Lo PSGC profile](https://psa.gov.ph/classification/psgc/barangays/0201516000)
+- Checked: 21 September 2026

@@ -1,0 +1,7 @@
+title: 'Barangays of Lal-lo'
+description: 'The PSA profile lists 35 barangays in the Municipality of Lal-lo. Use the official PSGC page as the current reference for names and classification.'
+layout: list
+pages:
+  - name: 'Barangay directory'
+    slug: 'directory'
+    description: 'Names and PSA codes for the municipality’s 35 barangays.'

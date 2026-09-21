@@ -49,6 +49,7 @@ const Navbar: React.FC = () => {
               href="https://bettergov.ph/join-us"
               className="text-xs text-primary-600 hover:text-primary-700 font-semibold transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               🚀 Join Us
             </a>
@@ -56,6 +57,7 @@ const Navbar: React.FC = () => {
               href="https://bettergov.ph/about"
               className="text-xs text-gray-800 hover:text-primary-600 transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               About BetterGov
             </a>
@@ -63,6 +65,7 @@ const Navbar: React.FC = () => {
               href="https://www.gov.ph"
               className="text-xs text-gray-800 hover:text-primary-600 transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               Official Gov.ph
             </a>
@@ -178,9 +181,11 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isOpen ? 'Close main menu' : 'Open main menu'}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
             >
-              <span className="sr-only">Open main menu</span>
               {isOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
               ) : (
@@ -192,7 +197,10 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
+      <div
+        id="mobile-navigation"
+        className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}
+      >
         <div className="container mx-auto px-2 pt-2 pb-4 space-y-1 border-t border-gray-200 bg-white">
           {mainNavigation.map(item => (
             <div key={item.label}>
@@ -225,13 +233,15 @@ const Navbar: React.FC = () => {
               )}
             </div>
           ))}
-          <Link
-            to="/join-us"
+          <a
+            href="https://bettergov.ph/join-us"
+            target="_blank"
+            rel="noreferrer"
             onClick={closeMenu}
             className="block px-4 py-2 text-base font-semibold text-primary-600 hover:bg-primary-50 hover:text-primary-700"
           >
             🚀 Join Us
-          </Link>
+          </a>
           <Link
             to="/about"
             onClick={closeMenu}
@@ -248,13 +258,6 @@ const Navbar: React.FC = () => {
               Search
             </Link>
           )}
-          <Link
-            to="/sitemap"
-            onClick={closeMenu}
-            className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-500"
-          >
-            Sitemap
-          </Link>
           <div className="px-4 py-3 border-t border-gray-200">
             <div className="flex items-center">
               <Globe className="h-5 w-5 text-gray-800 mr-2" />

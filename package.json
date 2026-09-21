@@ -1,7 +1,8 @@
 {
-  "name": "betterlocalgov",
+  "name": "betterlallo",
   "private": true,
   "version": "0.3.0",
+  "description": "Community civic information portal for Lal-lo, Cagayan",
   "type": "module",
   "scripts": {
     "dev": "vite",

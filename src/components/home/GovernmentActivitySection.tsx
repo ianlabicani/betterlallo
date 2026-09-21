@@ -42,8 +42,8 @@ export default function GovernmentActivitySection({
   const displayedCategories = governmentCategories.categories as Category[];
 
   return (
-    <Section id="#government">
-      <Heading level={2}>{title || t('title')}</Heading>
+    <Section id="government">
+      <Heading level={2}>{title || t('governmentActivity.title')}</Heading>
       <Text className="text-gray-600 mb-6">
         {description || t('governmentActivity.description')}
       </Text>

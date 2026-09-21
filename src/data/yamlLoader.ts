@@ -1,6 +1,7 @@
 import * as yaml from 'js-yaml';
+import servicesYamlContent from './services.yaml?raw';
+import governmentYamlContent from './government.yaml?raw';
 
-// Type definitions for the services data
 export interface Subcategory {
   name: string;
   slug: string;
@@ -12,12 +13,12 @@ export interface Category {
   slug: string;
   description: string;
   icon: string;
-  subcategories?: Subcategory[]; // Keep for backward compatibility
+  subcategories?: Subcategory[];
 }
 
 export interface CategoryData {
   categories: Category[];
-  description: string;
+  description?: string;
 }
 
 export interface CategoryIndexData {
@@ -27,11 +28,6 @@ export interface CategoryIndexData {
   pages: Subcategory[];
 }
 
-// Import the YAML file as raw text
-import servicesYamlContent from './services.yaml?raw';
-import governmentActivitiesYamlContent from './government.yaml?raw';
-
-// Import all category index files statically
 import healthServicesIndex from '../../content/services/health-services/index.yaml?raw';
 import educationIndex from '../../content/services/education/index.yaml?raw';
 import businessIndex from '../../content/services/business/index.yaml?raw';
@@ -43,10 +39,11 @@ import environmentIndex from '../../content/services/environment/index.yaml?raw'
 import disasterPreparednessIndex from '../../content/services/disaster-preparedness/index.yaml?raw';
 import housingLandUseIndex from '../../content/services/housing-land-use/index.yaml?raw';
 import governmentDepartmentsIndex from '../../content/government/departments/index.yaml?raw';
-import governmentDepartmentsLegislativeIndex from '../../content/government/departments/legislative/index.yaml?raw';
+import governmentOverviewIndex from '../../content/government/overview/index.yaml?raw';
+import governmentBarangaysIndex from '../../content/government/barangays/index.yaml?raw';
+import governmentTransparencyIndex from '../../content/government/transparency/index.yaml?raw';
 
-// Create a mapping of category slugs to their YAML content
-const categoryIndexMap: { [key: string]: string } = {
+const categoryIndexMap: Record<string, string> = {
   'health-services': healthServicesIndex,
   education: educationIndex,
   business: businessIndex,
@@ -58,16 +55,15 @@ const categoryIndexMap: { [key: string]: string } = {
   'disaster-preparedness': disasterPreparednessIndex,
   'housing-land-use': housingLandUseIndex,
   departments: governmentDepartmentsIndex,
-  legislative: governmentDepartmentsLegislativeIndex,
+  overview: governmentOverviewIndex,
+  barangays: governmentBarangaysIndex,
+  transparency: governmentTransparencyIndex,
 };
 
-// Parse the YAML content
-export const serviceCategories: CategoryData = yaml.load(
-  servicesYamlContent
-) as CategoryData;
+export const serviceCategories = yaml.load(servicesYamlContent) as CategoryData;
 
-export const governmentCategories: CategoryData = yaml.load(
-  governmentActivitiesYamlContent
+export const governmentCategories = yaml.load(
+  governmentYamlContent
 ) as CategoryData;
 
 export interface CategoryIndex {
@@ -77,18 +73,14 @@ export interface CategoryIndex {
   pages: Subcategory[];
 }
 
-// Function to load category index data
 export async function loadCategoryIndex(
   categorySlug: string
 ): Promise<CategoryIndex> {
   const yamlContent = categoryIndexMap[categorySlug];
-  if (!yamlContent) {
-    return { layout: 'list', pages: [] };
-  }
+  if (!yamlContent) return { layout: 'list', pages: [] };
+
   try {
-    const indexData: CategoryIndexData = yaml.load(
-      yamlContent
-    ) as CategoryIndexData;
+    const indexData = yaml.load(yamlContent) as CategoryIndexData;
     return {
       title: indexData.title,
       description: indexData.description,
@@ -96,30 +88,22 @@ export async function loadCategoryIndex(
       pages: indexData.pages || [],
     };
   } catch (parseError) {
-    console.warn(
-      `Failed to parse YAML content for category ${categorySlug}:`,
-      parseError
-    );
+    console.warn(`Failed to parse category ${categorySlug}:`, parseError);
     return { layout: 'list', pages: [] };
   }
 }
 
-// Function to get subcategories for a category (with caching)
 const categoryCache = new Map<string, CategoryIndex>();
 
 export async function getCategorySubcategories(
   categorySlug: string
 ): Promise<CategoryIndex> {
-  if (categoryCache.has(categorySlug)) {
-    return categoryCache.get(categorySlug)!;
-  }
-
+  if (categoryCache.has(categorySlug)) return categoryCache.get(categorySlug)!;
   const result = await loadCategoryIndex(categorySlug);
   categoryCache.set(categorySlug, result);
   return result;
 }
 
-/** Returns true if a slug has a registered index in categoryIndexMap */
 export function isNestedCategory(slug: string): boolean {
   return slug in categoryIndexMap;
 }

@@ -1,15 +1,6 @@
-# Housing & Land Use Category Pages
-# This file contains all the pages/services available under the Housing & Land Use category
+# Housing and Land Use category pages for Lal-lo.
 
 pages:
-  - name: 'Apply for socialized housing or relocation projects'
-    slug: 'apply-for-socialized-housing-or-relocation-projects'
-    description: 'Information about applying for socialized housing and relocation projects from your local government.'
-    
-  - name: 'Request zoning, land use, or building permits'
-    slug: 'request-zoning-land-use-or-building-permits'
-    description: 'How to request zoning, land use, and building permits from your local government.'
-    
-  - name: 'Ask about available relocation sites in case of demolition'
-    slug: 'ask-about-available-relocation-sites-in-case-of-demolition'
-    description: 'Information about available relocation sites in case of demolition or displacement.'
+  - name: 'Confirm land-use, zoning, and building requirements'
+    slug: 'permits-and-land-use'
+    description: 'A checklist for confirming zoning, building, occupancy, and related permit requirements before applying.'
