@@ -38,6 +38,44 @@ npm run source-drafts
 
 Use `npm run dev:yaml` when you need to regenerate the YAML-derived content output before starting Vite.
 
+## Optional Jev developer quality workflow
+
+BetterLal-lo includes a project-scoped Codex MCP configuration for [Jev](https://docs.typesafe.ai/), TypeSafe's typed judgment layer. Jev returns structured judgments that can help focus development attention; it does not write code, commit changes, prove correctness, or replace deterministic checks and human review. See the [Jev coding-agent guidance](https://docs.typesafe.ai/introduction/coding-agents.md) for the broader model and limitations.
+
+The configuration is tracked in [`.codex/config.toml`](.codex/config.toml). The Jev MCP package is pinned to a known version for repeatable setup; update that pin deliberately when changing the workflow.
+
+### One-time developer setup
+
+Each developer completes these steps on their own machine:
+
+1. Create a TypeSafe API key and store it in the user environment as `TYPESAFE_API_KEY`. Never put the key in this repository, `.env.local`, a `VITE_` variable, a prompt, or the committed Codex configuration.
+
+   For a temporary shell session:
+
+   ```bash
+   export TYPESAFE_API_KEY='your-new-typesafe-key'
+   ```
+
+2. Install the TypeSafe agent skill for Codex using the [official installation guidance](https://docs.typesafe.ai/agent-skill.md):
+
+   ```bash
+   npx skills add typesafe-ai/skills --skill typesafe-ai
+   ```
+
+   The installer is project-local by default; use `-g` only if you intentionally want a global installation.
+
+3. Open the project in Codex and restart the client if it was already open. Confirm that the project-scoped `jev` MCP server is listed with `jev_classify`, `jev_review`, and `jev_gate` enabled.
+
+Jev can be used at three optional checkpoints:
+
+- Classify change risk and affected areas before choosing review and test depth.
+- Review a focused diff and its evidence with `jev_review`.
+- Check completion claims and reported test evidence with `jev_gate` before handoff.
+
+Jev improves where attention goes; it does not prove correctness. BetterLal-lo's authoritative checks remain `npm run lint`, `npm run build`, `npm run format:check`, `npm run source-drafts`, and human review. If the API key is missing, authentication fails, the service is unavailable or rate-limited, or a result is malformed or low-confidence, use those deterministic checks and normal human review instead.
+
+Only send Jev the focused repository context needed for the judgment. Do not send `.env` files, credentials, dependencies, build output, or unrelated source files.
+
 ## Content locations
 
 - `content/government/` — overview, departments, barangays, and transparency pages
