@@ -90,7 +90,10 @@ function isChatResponse(value: unknown): value is PublicChatResponse {
         source !== null &&
         typeof source.label === 'string' &&
         typeof source.url === 'string' &&
-        typeof source.lastVerified === 'string'
+        typeof source.lastVerified === 'string' &&
+        typeof source.authority === 'string' &&
+        typeof source.jurisdiction === 'string' &&
+        typeof source.sourceType === 'string'
     ) &&
     Array.isArray(reply.suggestedPrompts) &&
     reply.suggestedPrompts.every(prompt => typeof prompt === 'string') &&
@@ -436,7 +439,20 @@ export default function PublicChat() {
                                   >
                                     {source.label}
                                   </a>{' '}
-                                  <span>(reviewed {source.lastVerified})</span>
+                                  <span>
+                                    (
+                                    {source.retrievedAt
+                                      ? `retrieved ${source.retrievedAt.slice(0, 10)}`
+                                      : `reviewed ${source.lastVerified}`}
+                                    ; {source.authority}; {source.jurisdiction};{' '}
+                                    {source.sourceType})
+                                  </span>
+                                  {source.release && (
+                                    <span> Release: {source.release}.</span>
+                                  )}
+                                  {source.limitations?.length ? (
+                                    <span> {source.limitations.join(' ')}</span>
+                                  ) : null}
                                 </li>
                               ))}
                           </ul>
