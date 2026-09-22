@@ -42,6 +42,7 @@ function initialMessage(language: ChatLanguage): ChatMessage {
     reply: {
       text,
       links: [],
+      relatedLinks: [],
       sources: [],
       suggestedPrompts:
         language === 'fil'
@@ -73,6 +74,15 @@ function isChatResponse(value: unknown): value is PublicChatResponse {
         typeof link.label === 'string' &&
         typeof link.url === 'string'
     ) &&
+    (reply.relatedLinks === undefined ||
+      (Array.isArray(reply.relatedLinks) &&
+        reply.relatedLinks.every(
+          link =>
+            typeof link === 'object' &&
+            link !== null &&
+            typeof link.label === 'string' &&
+            typeof link.url === 'string'
+        ))) &&
     Array.isArray(reply.sources) &&
     reply.sources.every(
       source =>
@@ -120,6 +130,10 @@ function isSafeSourceUrl(url: string): boolean {
   } catch {
     return false;
   }
+}
+
+function isSafeChatLink(url: string): boolean {
+  return isSafeInternalLink(url) || isSafeSourceUrl(url);
 }
 
 function currentLanguage(language: string): ChatLanguage {
@@ -346,26 +360,60 @@ export default function PublicChat() {
                   <p className="whitespace-pre-wrap">{item.text}</p>
                   {item.reply && item.role === 'assistant' && (
                     <div className="mt-3 space-y-3 border-t border-gray-300/70 pt-3">
-                      {item.reply.links.length > 0 && (
+                      {item.reply.links.filter(link => isSafeChatLink(link.url))
+                        .length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {item.reply.links
-                            .filter(link => isSafeInternalLink(link.url))
-                            .map(link => (
-                              <a
-                                key={link.url}
-                                href={link.url}
-                                onClick={close}
-                                className="inline-flex items-center gap-1 rounded-full border border-primary-200 bg-white px-3 py-1.5 text-xs font-semibold text-primary-800 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                              >
-                                {link.label}
-                                <ExternalLink
-                                  className="h-3 w-3"
-                                  aria-hidden="true"
-                                />
-                              </a>
-                            ))}
+                            .filter(link => isSafeChatLink(link.url))
+                            .map(link => {
+                              const external = !isSafeInternalLink(link.url);
+
+                              return (
+                                <a
+                                  key={link.url}
+                                  href={link.url}
+                                  onClick={external ? undefined : close}
+                                  target={external ? '_blank' : undefined}
+                                  rel={external ? 'noreferrer' : undefined}
+                                  className="inline-flex items-center gap-1 rounded-full border border-primary-200 bg-white px-3 py-1.5 text-xs font-semibold text-primary-800 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                >
+                                  {link.label}
+                                  <ExternalLink
+                                    className="h-3 w-3"
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              );
+                            })}
                         </div>
                       )}
+                      {item.reply.relatedLinks?.filter(link =>
+                        isSafeChatLink(link.url)
+                      ).length ? (
+                        <div className="text-xs text-gray-600">
+                          <p className="font-semibold text-primary-800">
+                            {language === 'fil'
+                              ? 'Mga kaugnay na source'
+                              : 'Related sources'}
+                          </p>
+                          <ul className="mt-2 space-y-1">
+                            {item.reply.relatedLinks
+                              .filter(link => isSafeChatLink(link.url))
+                              .map(link => (
+                                <li key={link.url}>
+                                  <a
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="font-medium text-primary-700 underline"
+                                  >
+                                    {link.label}
+                                  </a>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      ) : null}
                       {item.reply.sources.filter(source =>
                         isSafeSourceUrl(source.url)
                       ).length > 0 && (
@@ -425,8 +473,8 @@ export default function PublicChat() {
                     aria-hidden="true"
                   />
                   {language === 'fil'
-                    ? 'Sinusuri ang mga source…'
-                    : 'Checking verified sources…'}
+                    ? 'Sinusuri ang mga aprubadong source…'
+                    : 'Checking approved sources…'}
                 </div>
               </div>
             )}
