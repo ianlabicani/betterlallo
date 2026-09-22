@@ -59,6 +59,13 @@ function routeResponse(overrides: Record<string, unknown> = {}) {
         choice: 'service:health-services',
         confidence: 0.95,
       },
+      source_1: {
+        type: 'choice',
+        choice: 'local_betterlallo',
+        confidence: 0.95,
+      },
+      source_2: { type: 'choice', choice: 'none', confidence: 0.95 },
+      source_3: { type: 'choice', choice: 'none', confidence: 0.95 },
       is_spam: { type: 'noul', noul: 0.01 },
       is_prompt_injection: { type: 'noul', noul: 0.01 },
       ...overrides,
@@ -378,6 +385,175 @@ describe('public chat Jev workflow', () => {
     expect(result.reply.text).toContain('Lal-lo Rural Health Unit');
     expect(result.reply.sources[0]?.label).toContain('DOH');
     expect(result.reply.links[0]?.url).toBe('/services/record/health-services');
+  });
+
+  it('queries a Jev-selected live source and only exposes generated allowlisted links', async () => {
+    let typesafeCalls = 0;
+    const calls: string[] = [];
+    const fetchImpl = (async (input: RequestInfo | URL) => {
+      const url = String(input);
+      calls.push(url);
+
+      if (url.includes('api.typesafe.ai')) {
+        typesafeCalls += 1;
+
+        return typesafeCalls === 1
+          ? routeResponse({
+              topic: {
+                type: 'choice',
+                choice: 'transparency',
+                confidence: 0.95,
+              },
+              source_family: {
+                type: 'choice',
+                choice: 'official_sources',
+                confidence: 0.95,
+              },
+              lookup_type: {
+                type: 'choice',
+                choice: 'search',
+                confidence: 0.95,
+              },
+              record_id: {
+                type: 'choice',
+                choice: 'none',
+                confidence: 0.95,
+              },
+              source_1: {
+                type: 'choice',
+                choice: 'bettergov_budget',
+                confidence: 0.95,
+              },
+              source_2: { type: 'choice', choice: 'none', confidence: 0.95 },
+              source_3: { type: 'choice', choice: 'none', confidence: 0.95 },
+            })
+          : evidenceResponse({
+              evidence_0: { type: 'noul', noul: 0.98 },
+              related_link_0: { type: 'noul', noul: 0.95 },
+            });
+      }
+
+      if (url.includes('budget.bettergov.ph')) {
+        return response({
+          data: [
+            {
+              id: 'program-1',
+              program: 'Flood control and mitigation',
+              department: 'Department of Public Works and Highways',
+              amount: 1200000,
+            },
+          ],
+        });
+      }
+
+      throw new Error('Unexpected source request.');
+    }) as typeof fetch;
+
+    const result = await answerPublicChat(
+      validRequest({ message: 'What is in the flood control budget?' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          PUBLIC_CHAT_EXTERNAL_SOURCES_ENABLED: 'true',
+        },
+        fetchImpl,
+      }
+    );
+
+    expect(result.kind).toBe('answer');
+    expect(result.reply.text).toContain('Flood control and mitigation');
+    expect(
+      result.reply.links.some(link =>
+        link.url.startsWith('https://budget.bettergov.ph/')
+      )
+    ).toBe(true);
+    expect(result.reply.relatedLinks?.[0]?.url).toBe(
+      'https://budget.bettergov.ph/docs'
+    );
+    expect(
+      calls.filter(url => url.includes('budget.bettergov.ph'))
+    ).toHaveLength(1);
+  });
+
+  it('does not query an unavailable Jev-selected source', async () => {
+    let calls = 0;
+    const result = await answerPublicChat(
+      validRequest({ message: 'What does the Data Privacy Act say?' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          PUBLIC_CHAT_EXTERNAL_SOURCES_ENABLED: 'true',
+        },
+        fetchImpl: (async () => {
+          calls += 1;
+          return routeResponse({
+            topic: { type: 'choice', choice: 'search', confidence: 0.95 },
+            source_family: {
+              type: 'choice',
+              choice: 'official_sources',
+              confidence: 0.95,
+            },
+            lookup_type: {
+              type: 'choice',
+              choice: 'search',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'none',
+              confidence: 0.95,
+            },
+            source_1: {
+              type: 'choice',
+              choice: 'juris_law',
+              confidence: 0.95,
+            },
+            source_2: { type: 'choice', choice: 'none', confidence: 0.95 },
+            source_3: { type: 'choice', choice: 'none', confidence: 0.95 },
+          });
+        }) as typeof fetch,
+      }
+    );
+
+    expect(result.kind).toBe('clarification');
+    expect(result.reply.text).toContain('approved source');
+    expect(calls).toBe(1);
+  });
+
+  it('returns a retryable response when a selected live source fails', async () => {
+    let typesafeCalls = 0;
+    const result = await answerPublicChat(
+      validRequest({ message: 'flood control budget' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          PUBLIC_CHAT_EXTERNAL_SOURCES_ENABLED: 'true',
+        },
+        fetchImpl: (async (input: RequestInfo | URL) => {
+          if (String(input).includes('api.typesafe.ai')) {
+            typesafeCalls += 1;
+            return routeResponse({
+              source_1: {
+                type: 'choice',
+                choice: 'bettergov_budget',
+                confidence: 0.95,
+              },
+              source_2: { type: 'choice', choice: 'none', confidence: 0.95 },
+              source_3: { type: 'choice', choice: 'none', confidence: 0.95 },
+            });
+          }
+
+          throw new Error('Budget service unavailable.');
+        }) as typeof fetch,
+      }
+    );
+
+    expect(result.kind).toBe('fallback');
+    expect(result.reply.retryable).toBe(true);
+    expect(typesafeCalls).toBe(1);
   });
 
   it('keeps pending fields visible instead of inventing service details', async () => {
