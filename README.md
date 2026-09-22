@@ -36,6 +36,7 @@ Useful checks:
 
 ```bash
 npm run lint
+npm run test:chat
 npm run build
 npm run source-drafts
 ```
@@ -79,6 +80,63 @@ Jev can be used at three optional checkpoints:
 Jev improves where attention goes; it does not prove correctness. BetterLal-lo's authoritative checks remain `npm run lint`, `npm run build`, `npm run format:check`, `npm run source-drafts`, and human review. If the API key is missing, authentication fails, the service is unavailable or rate-limited, or a result is malformed or low-confidence, use those deterministic checks and normal human review instead.
 
 Only send Jev the focused repository context needed for the judgment. Do not send `.env` files, credentials, dependencies, build output, or unrelated source files.
+
+## Optional public Jev chat
+
+The public chat is a Vercel-only, source-backed feature. It uses a two-stage
+workflow: Jev routes the question and screens it, BetterLal-lo retrieves only
+allowlisted local records, and Jev checks whether the retrieved evidence is
+relevant and sufficient. BetterLal-lo then renders the answer, links, and source
+metadata from code. Jev does not write unsupervised prose, call arbitrary tools,
+or prove that a record is current.
+
+The design follows the TypeSafe model of using small typed judgments in code and
+the [TypeSafe HTTP API](https://docs.typesafe.ai/api.md). It also follows the
+source-separation pattern used by Kuya J: sources own their records, Jev routes
+and filters, and the application owns lookups, policy, citations, and limits.
+The first release does not add a vector database, runtime MCP tools, a database,
+or a second text-generation provider.
+
+### Enable it on Vercel
+
+Set these values in the Vercel project environment. Keep the server values out
+of browser-facing `VITE_` variables and never commit the API key:
+
+```text
+VITE_PUBLIC_CHAT_ENABLED=true
+TYPESAFE_CHAT_ENABLED=true
+TYPESAFE_MODEL=jev-latest
+TYPESAFE_API_KEY=<server-only TypeSafe key>
+```
+
+Keep `VITE_PUBLIC_CHAT_ENABLED=false` for static deployments that do not deploy
+the root `/api/chat` Vercel Function. The existing SPA rewrite remains for page
+routes; Vercel resolves filesystem functions before rewrites. Configure a
+Vercel Firewall rate-limit rule for `/api/chat` before enabling the feature in
+production.
+
+For local end-to-end testing, use `vercel dev` with the server variables
+provided by a secure user or process environment. `npm run dev` remains useful
+for the static site, but it does not provide the `/api/chat` function.
+
+### Chat limits and fallback behavior
+
+The chat accepts English and Filipino, limits messages and history, and exposes
+only internal BetterLal-lo links plus canonical HTTPS source links. Pending
+fields remain pending: the chat does not invent fees, requirements, schedules,
+contacts, or procedures. Emergency and transaction answers still require
+confirmation with the responsible office.
+
+Low-confidence routing, insufficient evidence, conflicting records, missing
+configuration, provider timeouts, malformed responses, and service failures
+produce a readable clarification or fallback. Retryable failures expose a
+retry action and do not affect the rest of the navigation. Ilocano chat is not
+yet translated; it falls back to English chat text while existing Ilocano page
+translations remain available.
+
+Do not send secrets, personal documents, `.env` files, dependency directories,
+build output, or unrelated source content to Jev. The chat does not retain
+conversation history on the server.
 
 ## Content locations
 
