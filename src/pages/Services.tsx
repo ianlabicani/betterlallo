@@ -16,6 +16,8 @@ import { Card, CardContent } from '@bettergov/kapwa/card';
 import { Banner } from '@bettergov/kapwa/banner';
 import { useState, useEffect } from 'react';
 import ServiceRecordDirectory from '../components/civic/ServiceRecordDirectory';
+import CharterProcedureLinks from '../components/civic/CharterProcedureLinks';
+import { getCharterProcedureRecords } from '../data/charterServiceMappings';
 
 const Services: React.FC = () => {
   const { category } = useParams();
@@ -31,6 +33,9 @@ const Services: React.FC = () => {
   };
 
   const categoryData = getCategory();
+  const charterProcedures = category
+    ? getCharterProcedureRecords(category)
+    : [];
   const Icon = LucideIcons[
     categoryData?.icon as keyof typeof LucideIcons
   ] as React.ComponentType<{ className?: string }>;
@@ -156,6 +161,7 @@ const Services: React.FC = () => {
                 ))}
               </div>
             )}
+            <CharterProcedureLinks records={charterProcedures} />
           </>
         )}
       </Section>

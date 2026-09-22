@@ -13,6 +13,7 @@ import type {
 } from '../types/civic';
 import {
   barangayRecords,
+  citizenCharter2026Document,
   civicContacts,
   departmentRecords,
   financialSnapshots,
@@ -94,7 +95,7 @@ const contactResources: VerifiedResourceEntry[] = verifiedRecords(
 }));
 
 const serviceResources: VerifiedResourceEntry[] = verifiedRecords(
-  serviceRecords
+  serviceRecords.filter(record => record.includeInResourceHub !== false)
 ).map(record => serviceEntry(record));
 
 function serviceEntry(record: ServiceRecord): VerifiedResourceEntry {
@@ -291,6 +292,22 @@ export const verifiedResourceGroups: VerifiedResourceGroup[] = [
         'Open barangay-clearance and related guidance.',
         '/services/barangay-services'
       ),
+      {
+        id: 'citizens-charter-2026-official',
+        label: 'Official Citizen’s Charter 2026 PDF',
+        description:
+          'Open the municipal charter at its canonical Google Drive source.',
+        href: citizenCharter2026Document.officialUrl,
+        linkType: 'external',
+      },
+      {
+        id: 'citizens-charter-2026-local',
+        label: 'Local Citizen’s Charter 2026 mirror',
+        description:
+          'Open the checked-in 299-page PDF mirror bundled with BetterLal-lo.',
+        href: citizenCharter2026Document.localUrl,
+        linkType: 'internal',
+      },
     ],
     resources: serviceResources,
     pendingMessage:

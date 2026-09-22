@@ -23,6 +23,12 @@ import {
   type CategoryIndex,
 } from '../data/yamlLoader';
 import SEO from '../components/SEO';
+import CharterProcedureLinks from '../components/civic/CharterProcedureLinks';
+import {
+  getCharterProcedurePageTitle,
+  getCharterProcedureRecords,
+} from '../data/charterServiceMappings';
+import type { ServiceRecord } from '../types/civic';
 
 interface DocumentProps {
   theme?: string;
@@ -37,6 +43,9 @@ export default function Document({
   const [markdownContent, setMarkdownContent] =
     useState<MarkdownContent | null>(null);
   const [nestedIndex, setNestedIndex] = useState<CategoryIndex | null>(null);
+  const [charterOnlyRecords, setCharterOnlyRecords] = useState<
+    ServiceRecord[] | null
+  >(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -59,6 +68,9 @@ export default function Document({
       try {
         setLoading(true);
         setError(null);
+        setMarkdownContent(null);
+        setNestedIndex(null);
+        setCharterOnlyRecords(null);
 
         const isGovernment = categoryType === 'government';
         const categories = isGovernment
@@ -67,6 +79,30 @@ export default function Document({
         const sectionLabel = isGovernment ? 'Government' : 'Services';
         const sectionHref = isGovernment ? '/government' : '/services';
         const categoryData = categories.find(c => c.slug === category);
+
+        const charterRecords =
+          categoryType === 'service' && category && documentSlug
+            ? getCharterProcedureRecords(category, documentSlug)
+            : [];
+
+        if (category === 'citizens-charter-2026' && charterRecords.length) {
+          setCharterOnlyRecords(charterRecords);
+          setBreadcrumbs([
+            { label: 'Home', href: '/' },
+            { label: sectionLabel, href: sectionHref },
+            {
+              label: categoryData?.category ?? category,
+              href: `${sectionHref}/${category}`,
+            },
+            {
+              label:
+                getCharterProcedurePageTitle(category, documentSlug) ??
+                documentSlug,
+              href: `${sectionHref}/${category}/${documentSlug}`,
+            },
+          ]);
+          return;
+        }
 
         // If the slug maps to its own index, render it as a nested listing
         if (isNestedCategory(documentSlug)) {
@@ -193,6 +229,36 @@ export default function Document({
               ))}
             </div>
           )}
+          {categoryType === 'service' && category && documentSlug && (
+            <CharterProcedureLinks
+              records={getCharterProcedureRecords(category, documentSlug)}
+            />
+          )}
+        </Section>
+      </>
+    );
+  }
+
+  if (charterOnlyRecords) {
+    const pageTitle =
+      getCharterProcedurePageTitle('citizens-charter-2026', documentSlug) ??
+      documentSlug;
+
+    return (
+      <>
+        <SEO
+          title={pageTitle}
+          description={`Citizen’s Charter 2026 procedures for ${pageTitle}.`}
+          keywords={`${pageTitle}, Citizen’s Charter 2026, Lal-lo services`}
+        />
+        <Section className="p-3 mb-12">
+          <Breadcrumbs className="mb-8" items={breadcrumbs} />
+          <Heading level={2}>{pageTitle}</Heading>
+          <Text className="mt-2 text-gray-600">
+            Procedures published under this Lal-lo Citizen’s Charter 2026
+            service category.
+          </Text>
+          <CharterProcedureLinks records={charterOnlyRecords} />
         </Section>
       </>
     );
@@ -227,6 +293,11 @@ export default function Document({
             </ReactMarkdown>
           </CardHeader>
         </Card>
+        {categoryType === 'service' && category && documentSlug && (
+          <CharterProcedureLinks
+            records={getCharterProcedureRecords(category, documentSlug)}
+          />
+        )}
       </Section>
     </>
   );

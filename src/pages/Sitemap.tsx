@@ -24,6 +24,7 @@ const sections = [
       ['Barangay services', '/services/barangay-services'],
       ['Social welfare', '/services/social-welfare'],
       ['Disaster preparedness', '/services/disaster-preparedness'],
+      ['Citizen’s Charter 2026 procedures', '/services/citizens-charter-2026'],
     ],
   },
   {

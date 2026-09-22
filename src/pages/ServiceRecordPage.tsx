@@ -2,7 +2,10 @@ import { Link, useParams } from 'react-router';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import SEO from '../components/SEO';
 import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
-import { serviceRecords } from '../data/civicRecords';
+import {
+  citizenCharter2026Document,
+  serviceRecords,
+} from '../data/civicRecords';
 
 function DetailValue({
   label,
@@ -97,6 +100,16 @@ export default function ServiceRecordPage() {
               value={record.classification}
             />
             <DetailValue
+              label="Transaction type"
+              value={record.transactionTypes?.join(' · ')}
+              pending={pending.has('transaction type')}
+            />
+            <DetailValue
+              label="Charter page reference"
+              value={record.charterPages}
+              pending={pending.has('source location')}
+            />
+            <DetailValue
               label="Who may apply"
               value={record.whoMayApply}
               pending={pending.has('eligibility')}
@@ -181,11 +194,16 @@ export default function ServiceRecordPage() {
             </h2>
             {record.steps?.length ? (
               <ol className="mt-4 space-y-3 text-sm text-gray-700">
-                {record.steps.map(step => (
-                  <li key={step.number}>
+                {record.steps.map((step, index) => (
+                  <li key={`${step.number}-${index}`}>
                     <span className="mr-2 font-semibold text-primary-700">
-                      {step.number}.
+                      {step.number}
                     </span>
+                    {step.role === 'agency' && (
+                      <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                        Agency action:
+                      </span>
+                    )}
                     {step.action}
                     {step.office ? ` (${step.office})` : ''}
                   </li>
@@ -201,6 +219,36 @@ export default function ServiceRecordPage() {
         </section>
 
         <SourceMeta source={record.source} />
+        {record.recordKind === 'charter-procedure' && (
+          <div className="mt-4 rounded-lg border border-primary-100 bg-primary-50 p-4 text-sm text-gray-700">
+            <p className="font-semibold text-gray-900">
+              Citizen’s Charter 2026 source document
+            </p>
+            <p className="mt-1">
+              This procedure was transcribed from PDF page {record.charterPages}
+              . The official Drive URL is canonical; the local mirror is a
+              static copy for reliable access.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <a
+                href={citizenCharter2026Document.officialUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-primary-700 underline underline-offset-2"
+              >
+                Open official PDF
+              </a>
+              <a
+                href={citizenCharter2026Document.localUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-primary-700 underline underline-offset-2"
+              >
+                Open local PDF mirror
+              </a>
+            </div>
+          </div>
+        )}
         {record.relatedSources?.map(relatedSource => (
           <SourceMeta key={relatedSource.url} source={relatedSource} />
         ))}

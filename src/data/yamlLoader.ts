@@ -45,6 +45,7 @@ import governmentDepartmentsIndex from '../../content/government/departments/ind
 import governmentOverviewIndex from '../../content/government/overview/index.yaml?raw';
 import governmentBarangaysIndex from '../../content/government/barangays/index.yaml?raw';
 import governmentTransparencyIndex from '../../content/government/transparency/index.yaml?raw';
+import citizensCharter2026Index from '../../content/services/citizens-charter-2026/index.yaml?raw';
 
 const categoryIndexMap: Record<string, string> = {
   'health-services': healthServicesIndex,
@@ -60,6 +61,7 @@ const categoryIndexMap: Record<string, string> = {
   certificates: certificatesIndex,
   'tax-payments': taxPaymentsIndex,
   'barangay-services': barangayServicesIndex,
+  'citizens-charter-2026': citizensCharter2026Index,
   departments: governmentDepartmentsIndex,
   overview: governmentOverviewIndex,
   barangays: governmentBarangaysIndex,

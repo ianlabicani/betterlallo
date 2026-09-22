@@ -13,6 +13,11 @@ import type {
   TransparencySection,
   UpdateRecord,
 } from '../types/civic.js';
+import {
+  createCitizensCharter2026Records,
+  type CharterOfficeContact,
+  type FeedbackMechanism,
+} from './citizensCharter2026.js';
 
 export const REVIEW_DATE = '2026-09-21';
 
@@ -395,6 +400,29 @@ export const officialSources = {
     verificationNote:
       'A general agency homepage cannot verify Lal-lo-specific land-use requirements or fees.',
   }),
+  lalloCitizenCharter2026: source({
+    label: 'Municipality of Lal-lo Citizen’s Charter 2026, 1st Edition',
+    url: 'https://drive.google.com/file/d/1eN3iHfY1Kl7m7FeNN4-g6RkhWvR0fYzYzH/view?usp=drivesdk',
+    status: 'verified',
+    authority: 'municipal',
+    jurisdiction: 'Municipality of Lal-lo, Cagayan',
+    sourceType: 'citizens-charter',
+    publicationDate: '2026-03-26',
+    dataPeriod: '2026 Citizen’s Charter, 1st Edition; 299 pages',
+    verificationNote:
+      'Primary municipal source. The official PDF is mirrored locally for reliable access; the Google Drive URL remains the canonical source.',
+  }),
+  lalloCharterAnnouncement: source({
+    label: 'LGU Lal-lo official Facebook Citizen’s Charter 2026 announcement',
+    url: 'https://www.facebook.com/LguLalloCagayan/posts/pfbid0MLywRiPy8ei95QHYmqo8DBqecy4ER9UoEhGuBEcSnpvHEDW3nfFK7hWA4FfebCmFl',
+    status: 'verified',
+    authority: 'municipal',
+    jurisdiction: 'Municipality of Lal-lo, Cagayan',
+    sourceType: 'citizens-charter',
+    dataPeriod: 'Official announcement linking the Citizen’s Charter 2026 PDF',
+    verificationNote:
+      'Supporting provenance. The announcement identifies the document and publishes the QR code that resolves to the canonical PDF.',
+  }),
 };
 
 export const civicContacts: CivicContact[] = [
@@ -545,6 +573,146 @@ export const updateRecords: UpdateRecord[] = [
 ];
 
 export const onlineServiceLinks: OnlineServiceLink[] = [];
+
+export const citizenCharter2026Document = {
+  officialUrl: officialSources.lalloCitizenCharter2026.url,
+  localUrl: '/documents/ARTA_CC_20260326.pdf',
+  label: 'Lal-lo Citizen’s Charter 2026, 1st Edition',
+  pageCount: 299,
+  source: officialSources.lalloCitizenCharter2026,
+};
+
+const charterOfficeContact = (
+  slug: string,
+  name: string,
+  telephoneNumbers: string[]
+): CharterOfficeContact => ({
+  slug,
+  name,
+  address: 'LGU LAL-LO',
+  telephone: telephoneNumbers.join(' / '),
+  telephoneNumbers,
+  source: officialSources.lalloCitizenCharter2026,
+  status: 'verified',
+});
+
+export const charterOfficeContacts: CharterOfficeContact[] = [
+  charterOfficeContact('office-of-the-mayor', 'Office of the Mayor', [
+    '0966-710-4073',
+  ]),
+  charterOfficeContact(
+    'human-resource-management',
+    'Human Resource Management Office',
+    ['0997-573-7041']
+  ),
+  charterOfficeContact(
+    'local-youth-development',
+    'Local Youth Development Office',
+    ['0917-528-2307']
+  ),
+  charterOfficeContact('municipal-population', 'Municipal Population Office', [
+    '0997-240-8436',
+  ]),
+  charterOfficeContact(
+    'public-employment-service',
+    'Public Employment Service Office',
+    ['0997-240-8436', '0906-452-2617']
+  ),
+  charterOfficeContact('disability-affairs', 'Disability Affairs Office', [
+    '0965-796-3519',
+  ]),
+  charterOfficeContact('information-office', 'Information Office', [
+    '0956-475-2408',
+  ]),
+  charterOfficeContact(
+    'business-permits-and-licensing',
+    'Business Permit and Licensing Office',
+    ['0965-795-0191']
+  ),
+  charterOfficeContact('sangguniang-bayan', 'Vice Mayor/Sangguniang Bayan', [
+    '0917-570-9621',
+    '0916-743-3604',
+  ]),
+  charterOfficeContact('municipal-tourism', 'Municipal Tourism Office', [
+    '0917-188-4175',
+    '0945-762-8797',
+  ]),
+  charterOfficeContact('municipal-administrator', 'Municipal Administrator', [
+    '0917-188-4175',
+  ]),
+  charterOfficeContact('municipal-budget', 'Municipal Budget Office', [
+    '0915-862-2135',
+  ]),
+  charterOfficeContact('municipal-accounting', 'Municipal Accounting Office', [
+    '0917-775-4775',
+  ]),
+  charterOfficeContact(
+    'municipal-planning',
+    'Municipal Planning & Development Office',
+    ['0945-973-6809']
+  ),
+  charterOfficeContact(
+    'municipal-agriculture',
+    'Municipal Agriculture Office',
+    ['0995-672-8487']
+  ),
+  charterOfficeContact(
+    'municipal-engineering',
+    'Municipal Engineering Office',
+    ['0917-522-3213']
+  ),
+  charterOfficeContact(
+    'municipal-general-services',
+    'Municipal General Services Office',
+    ['0917-775-4775', '0917-638-4683']
+  ),
+  charterOfficeContact(
+    'municipal-social-welfare',
+    'Municipal Social Welfare and Development Office',
+    ['0906-452-2617', '0997-240-8436']
+  ),
+  charterOfficeContact('municipal-assessor', 'Municipal Assessor’s Office', [
+    '0916-887-0740',
+  ]),
+  charterOfficeContact('municipal-treasurer', 'Municipal Treasurer’s Office', [
+    '0936-277-6866',
+  ]),
+  charterOfficeContact(
+    'civil-registrar',
+    'Municipal Civil Registrar’s Office',
+    ['0915-984-0816']
+  ),
+  charterOfficeContact(
+    'municipal-environment',
+    'Environment & Natural Resources Office',
+    ['0977-344-1947']
+  ),
+  charterOfficeContact('municipal-health-office', 'Municipal Health Office', [
+    '0917-620-5685',
+  ]),
+  charterOfficeContact(
+    'municipal-disaster-risk-reduction',
+    'Municipal Disaster Risk Reduction and Management Office',
+    ['0917-802-0971', '0977-126-6662', '0977-126-6664']
+  ),
+];
+
+export const feedbackMechanism: FeedbackMechanism = {
+  submissionLocation:
+    'Feedback forms are available at the Reception Table. Drop completed forms in the suggestion box in the lobby of Lal-lo Municipal Hall.',
+  processingSchedule:
+    'The Human Resource Management Office opens the suggestion box every Friday and records the feedback. Complaints are opened and evaluated daily by the complaints officer, investigated, forwarded to the relevant office, reported to the Head of Agency, and followed up with the client.',
+  complaintRequirements:
+    'Use the client Complaint form in the suggestion box or telephone. Provide the name of the person complained of, the incident, and supporting evidence.',
+  followUpPhone: '0966-710-4073',
+  externalHotlines: [
+    { label: 'Presidential Complaints Center', value: '8888' },
+    { label: 'CSC Contact Center ng Bayan', value: '0908-881-6565' },
+    { label: 'Anti-Red Tape Authority', value: '8478-5093' },
+  ],
+  source: officialSources.lalloCitizenCharter2026,
+  status: 'verified',
+};
 
 export const heritageRecords: HeritageRecord[] = [
   {
@@ -754,6 +922,10 @@ export const serviceRecords: ServiceRecord[] = [
     source: officialSources.dhsud,
     status: 'pending',
   },
+  ...createCitizensCharter2026Records(
+    officialSources.lalloCitizenCharter2026,
+    officialSources.lalloCharterAnnouncement
+  ),
 ];
 
 const pendingDepartmentSource = source({
@@ -767,7 +939,7 @@ const pendingDepartmentSource = source({
     'The available provincial directory does not publish this municipal office profile, so a contact or officeholder is not inferred.',
 });
 
-export const departmentRecords: DepartmentRecord[] = [
+const baseDepartmentRecords: DepartmentRecord[] = [
   {
     slug: 'office-of-the-mayor',
     name: 'Office of the Mayor',
@@ -829,6 +1001,45 @@ export const departmentRecords: DepartmentRecord[] = [
     source: pendingDepartmentSource,
     status: 'pending' as const,
   })),
+];
+
+function charterContactForDepartment(
+  record: DepartmentRecord
+): CharterOfficeContact | undefined {
+  return charterOfficeContacts.find(contact => contact.slug === record.slug);
+}
+
+const charterDepartmentRecords: DepartmentRecord[] = charterOfficeContacts
+  .filter(
+    contact =>
+      !baseDepartmentRecords.some(record => record.slug === contact.slug)
+  )
+  .map(contact => ({
+    slug: contact.slug,
+    name: contact.name,
+    description: `${contact.name} contact listed in the Lal-lo Citizen’s Charter 2026 office directory.`,
+    telephone: contact.telephone,
+    telephoneNumbers: contact.telephoneNumbers,
+    scope: 'Municipality of Lal-lo; LGU LAL-LO office directory',
+    source: contact.source,
+    status: contact.status,
+  }));
+
+export const departmentRecords: DepartmentRecord[] = [
+  ...baseDepartmentRecords.map(record => {
+    const contact = charterContactForDepartment(record);
+    if (!contact) return record;
+
+    return {
+      ...record,
+      telephone: contact.telephone,
+      telephoneNumbers: contact.telephoneNumbers,
+      scope: `${record.scope ?? 'Municipality of Lal-lo'}; LGU LAL-LO office directory`,
+      source: contact.source,
+      status: 'verified' as const,
+    };
+  }),
+  ...charterDepartmentRecords,
 ];
 
 export const publicDirectoryRecords: DepartmentRecord[] = [

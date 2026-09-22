@@ -12,6 +12,7 @@ export interface ContentSearchHit {
   categorySlug: string;
   slug: string;
   url: string;
+  searchText?: string;
 }
 
 const markdownHits: ContentSearchHit[] = localContentIndex;
@@ -26,6 +27,20 @@ const structuredServiceHits: ContentSearchHit[] = serviceRecords.map(
     categorySlug: record.slug,
     slug: record.slug,
     url: `/services/record/${record.slug}`,
+    searchText: [
+      record.title,
+      record.description,
+      record.category,
+      record.classification,
+      record.responsibleOffice,
+      record.transactionTypes?.join(' '),
+      record.charterPages,
+      record.requirements?.map(requirement => requirement.name).join(' '),
+      record.fees,
+      record.processingTime,
+    ]
+      .filter(Boolean)
+      .join(' '),
   })
 );
 
@@ -50,6 +65,7 @@ export function searchLocalContent(
         hit.description,
         hit.category,
         hit.categorySlug,
+        hit.searchText,
       ]
         .join(' ')
         .toLowerCase();

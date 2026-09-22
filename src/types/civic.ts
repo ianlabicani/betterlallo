@@ -136,13 +136,17 @@ export interface VerifiedResourceGroup {
 export interface Requirement {
   name: string;
   notes?: string;
+  whereToSecure?: string;
 }
 
 export interface ServiceStep {
-  number: number;
+  number: number | string;
   action: string;
   office?: string;
+  role?: 'client' | 'agency';
 }
+
+export type ServiceRecordKind = 'overview' | 'charter-procedure';
 
 export interface ServiceRecord {
   slug: string;
@@ -158,6 +162,11 @@ export interface ServiceRecord {
   responsibleOffice?: string;
   contact?: string;
   onlinePortal?: string;
+  transactionTypes?: string[];
+  charterPages?: string;
+  recordKind?: ServiceRecordKind;
+  includeInResourceHub?: boolean;
+  charterExcerpt?: string;
   pendingFields?: string[];
   source: SourceRecord;
   relatedSources?: SourceRecord[];
@@ -228,6 +237,7 @@ export interface DepartmentRecord {
   description: string;
   head?: string;
   telephone?: string;
+  telephoneNumbers?: string[];
   email?: string;
   website?: string;
   mapUrl?: string;

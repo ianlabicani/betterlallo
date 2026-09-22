@@ -2,7 +2,7 @@ import { ExternalLink, Mail, MapPin, Phone, ShieldAlert } from 'lucide-react';
 import { Link } from 'react-router';
 import SEO from '../components/SEO';
 import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
-import { civicContacts } from '../data/civicRecords';
+import { civicContacts, feedbackMechanism } from '../data/civicRecords';
 import { lalloLocation } from '../data/location';
 
 const contactGroups = [
@@ -128,6 +128,12 @@ export default function Contact() {
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   Emergency contacts
                 </a>
+                <a
+                  href="#feedback"
+                  className="inline-flex items-center gap-2 rounded-md border border-amber-800 px-4 py-2 font-semibold text-amber-900 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:ring-offset-2"
+                >
+                  Feedback and complaints
+                </a>
                 <Link
                   to="/government/directory"
                   className="inline-flex items-center gap-2 rounded-md border border-amber-800 px-4 py-2 font-semibold text-amber-900 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:ring-offset-2"
@@ -172,6 +178,90 @@ export default function Contact() {
             })}
 
             <section
+              id="feedback"
+              className="scroll-mt-36"
+              aria-labelledby="feedback-heading"
+            >
+              <div className="mb-5 max-w-3xl">
+                <h2
+                  id="feedback-heading"
+                  className="text-2xl font-bold text-gray-900"
+                >
+                  Feedback and complaints
+                </h2>
+                <p className="mt-2 text-gray-600">
+                  The following mechanism is published on page 297 of the Lal-lo
+                  Citizen’s Charter 2026. BetterLal-lo does not submit a
+                  complaint on your behalf.
+                </p>
+              </div>
+              <div className="grid gap-5 lg:grid-cols-2">
+                <article className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                  <h3 className="font-semibold text-gray-900">
+                    Submit feedback or a complaint
+                  </h3>
+                  <dl className="mt-4 space-y-4 text-sm leading-relaxed text-gray-700">
+                    <div>
+                      <dt className="font-semibold text-gray-900">Location</dt>
+                      <dd className="mt-1">
+                        {feedbackMechanism.submissionLocation}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-gray-900">
+                        Complaint requirements
+                      </dt>
+                      <dd className="mt-1">
+                        {feedbackMechanism.complaintRequirements}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-gray-900">
+                        Processing and follow-up
+                      </dt>
+                      <dd className="mt-1">
+                        {feedbackMechanism.processingSchedule}
+                      </dd>
+                    </div>
+                  </dl>
+                  <a
+                    href={phoneHref(feedbackMechanism.followUpPhone)}
+                    className="mt-5 inline-flex items-center gap-2 font-semibold text-primary-700 underline underline-offset-2"
+                  >
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                    Follow up: {feedbackMechanism.followUpPhone}
+                  </a>
+                  <SourceMeta source={feedbackMechanism.source} />
+                </article>
+                <article className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                  <h3 className="font-semibold text-gray-900">
+                    External complaint hotlines
+                  </h3>
+                  <div className="mt-4 space-y-3">
+                    {feedbackMechanism.externalHotlines.map(hotline => (
+                      <a
+                        key={hotline.value}
+                        href={phoneHref(hotline.value)}
+                        className="flex items-center justify-between gap-4 rounded-md border border-gray-100 bg-gray-50 px-4 py-3 text-sm hover:border-primary-200 hover:bg-primary-50"
+                      >
+                        <span className="font-semibold text-gray-800">
+                          {hotline.label}
+                        </span>
+                        <span className="whitespace-nowrap font-semibold text-primary-700">
+                          {hotline.value}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                  <p className="mt-4 text-xs leading-relaxed text-gray-600">
+                    These hotlines are reproduced from the municipal charter;
+                    confirm current availability before relying on them.
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <section
               id="municipal-contact"
               aria-labelledby="municipal-contact-heading"
             >
@@ -183,19 +273,23 @@ export default function Contact() {
                   Municipal government contact
                 </h2>
                 <p className="mt-2 text-gray-600">
-                  A current municipal hall phone number, email address, office
-                  hours, and evacuation procedure have not been published in a
-                  source approved for this portal. Those fields remain pending;
-                  BetterLal-lo does not guess them.
+                  The charter publishes municipal office phone numbers and the
+                  follow-up contact below. Email, office hours, and evacuation
+                  procedures remain pending a directly applicable publication.
                 </p>
               </div>
               <div className="grid gap-5 lg:grid-cols-2">
                 <article className="rounded-lg border border-dashed border-amber-300 bg-amber-50 p-5">
                   <h3 className="font-semibold text-gray-900">
-                    Municipal details awaiting a current source
+                    Municipal details published in the charter
                   </h3>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700">
-                    <li>Municipal hall phone and email</li>
+                    <li>
+                      Feedback and complaints follow-up:{' '}
+                      {feedbackMechanism.followUpPhone}
+                    </li>
+                    <li>Office phone listings: see the municipal directory</li>
+                    <li>Municipal hall address: LGU LAL-LO</li>
                     <li>Office hours and appointment instructions</li>
                     <li>Municipal evacuation procedures and local hotlines</li>
                   </ul>

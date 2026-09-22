@@ -9,6 +9,15 @@ import {
 import type { DepartmentRecord } from '../types/civic';
 
 function DirectoryCard({ record }: { record: DepartmentRecord }) {
+  const telephoneNumbers =
+    record.telephoneNumbers ??
+    (record.telephone
+      ? record.telephone
+          .split(/\s*\/\s*|\s*·\s*/)
+          .map(number => number.trim())
+          .filter(Boolean)
+      : []);
+
   return (
     <article
       id={record.slug}
@@ -31,14 +40,19 @@ function DirectoryCard({ record }: { record: DepartmentRecord }) {
           <span className="font-semibold">Head / contact:</span> {record.head}
         </p>
       )}
-      {record.telephone && (
-        <a
-          href={`tel:${record.telephone.replace(/[^+\d]/g, '')}`}
-          className="mt-2 inline-flex items-center gap-2 text-sm text-gray-800 hover:text-primary-700"
-        >
-          <Phone className="h-4 w-4" aria-hidden="true" />
-          <span>{record.telephone}</span>
-        </a>
+      {telephoneNumbers.length > 0 && (
+        <div className="mt-2 space-y-1">
+          {telephoneNumbers.map(number => (
+            <a
+              key={number}
+              href={`tel:${number.replace(/[^+\d]/g, '')}`}
+              className="flex items-center gap-2 text-sm text-gray-800 hover:text-primary-700"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              <span>{number}</span>
+            </a>
+          ))}
+        </div>
       )}
       {record.email && (
         <a
@@ -90,6 +104,7 @@ export default function GovernmentDirectory() {
         record.scope,
         record.head,
         record.telephone,
+        record.telephoneNumbers?.join(' '),
         record.email,
       ]
         .filter(Boolean)

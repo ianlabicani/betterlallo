@@ -81,3 +81,9 @@ categories:
     slug: 'barangay-services'
     description: 'Prepare for barangay clearances and local requests while keeping unpublished fees and requirements clearly pending.'
     icon: 'Landmark'
+
+  # Citizen’s Charter 2026 procedures
+  - category: 'Citizen’s Charter 2026'
+    slug: 'citizens-charter-2026'
+    description: 'Browse every procedure published in the Municipality of Lal-lo Citizen’s Charter 2026, organized by office and service category.'
+    icon: 'ClipboardList'
