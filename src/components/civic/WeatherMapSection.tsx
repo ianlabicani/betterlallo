@@ -137,7 +137,7 @@ export default function WeatherMapSection() {
           <WeatherPanel />
           {lalloLocation ? (
             <div
-              className="overflow-hidden rounded-lg border border-gray-200 bg-white"
+              className="relative isolate z-0 overflow-hidden rounded-lg border border-gray-200 bg-white"
               role="region"
               aria-label="Map of Lal-lo Municipal Hall"
             >
