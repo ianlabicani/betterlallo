@@ -4,6 +4,24 @@ export type ChatLanguage = 'en' | 'fil';
 
 export type ChatRole = 'user' | 'assistant';
 
+export type PublicChatSourceId =
+  | 'local_betterlallo'
+  | 'juris_law'
+  | 'juris_bills'
+  | 'bettergov_budget'
+  | 'bettergov_services'
+  | 'bettergov_officials'
+  | 'bettergov_statistics'
+  | 'bettergov_classifications'
+  | 'bettergov_flood_control'
+  | 'dpwh_public_works'
+  | 'asean_regional_indicators';
+
+export type PublicChatSourceAvailability = 'ready' | 'unavailable';
+
+export type PublicChatSourceCapability =
+  'search' | 'list' | 'exact_record' | 'faq';
+
 export type ChatSourceFamily =
   'structured_records' | 'faq_policy' | 'local_guides' | 'official_sources';
 
@@ -43,16 +61,33 @@ export interface ChatSourceMetadata {
   authority: string;
   jurisdiction: string;
   sourceType: string;
+  sourceId?: PublicChatSourceId;
+  retrievedAt?: string;
+  release?: string;
+  limitations?: string[];
 }
+
+export type ChatLinkKind = 'evidence' | 'related';
 
 export interface ChatLink {
   label: string;
   url: string;
+  kind?: ChatLinkKind;
+  sourceId?: PublicChatSourceId;
+}
+
+export interface ChatLinkCandidate {
+  id: string;
+  label: string;
+  url: string;
+  kind: ChatLinkKind;
+  sourceId?: PublicChatSourceId;
 }
 
 export interface ChatReply {
   text: string;
   links: ChatLink[];
+  relatedLinks?: ChatLink[];
   sources: ChatSourceMetadata[];
   suggestedPrompts: string[];
   retryable: boolean;
@@ -74,6 +109,12 @@ export interface PublicChatRecord {
   status: VerificationStatus;
   sources: ChatSourceMetadata[];
   pendingFields?: string[];
+  sourceId?: PublicChatSourceId;
+  canonicalUrl?: string;
+  retrievedAt?: string;
+  release?: string;
+  limitations?: string[];
+  linkCandidates?: ChatLinkCandidate[];
 }
 
 export interface PublicChatEvidence extends PublicChatRecord {
@@ -87,4 +128,5 @@ export interface ChatAnswerContext {
   message: string;
   evidence: PublicChatEvidence[];
   conflict: boolean;
+  relatedLinks?: ChatLink[];
 }
