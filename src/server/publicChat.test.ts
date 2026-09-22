@@ -132,6 +132,16 @@ describe('public chat knowledge', () => {
 
     expect(results[0]?.id).toBe('faq:review-policy');
   });
+
+  it('finds the source-backed Lal-lo origin record', () => {
+    const results = searchPublicChatRecords(
+      'origin of lallo',
+      'structured_records',
+      3
+    );
+
+    expect(results[0]?.id).toBe('heritage:lalloc-nueva-segovia');
+  });
 });
 
 describe('public chat request validation', () => {
@@ -226,6 +236,44 @@ describe('public chat Jev workflow', () => {
     expect(result.kind).toBe('answer');
     expect(result.reply.text).toContain('Published records include');
     expect(result.reply.text).toContain('last-reviewed date');
+  });
+
+  it('answers a Lal-lo origin question from the historical record', async () => {
+    const result = await answerPublicChat(
+      validRequest({ message: 'origin of lallo' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          TYPESAFE_MODEL: 'jev-latest',
+        },
+        fetchImpl: queuedFetch([
+          routeResponse({
+            topic: { type: 'choice', choice: 'heritage', confidence: 0.95 },
+            source_family: {
+              type: 'choice',
+              choice: 'structured_records',
+              confidence: 0.95,
+            },
+            lookup_type: {
+              type: 'choice',
+              choice: 'exact_record',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'heritage:lalloc-nueva-segovia',
+              confidence: 0.95,
+            },
+          }),
+          evidenceResponse(),
+        ]),
+      }
+    );
+
+    expect(result.kind).toBe('answer');
+    expect(result.reply.text).toContain('named Nueva Segovia');
+    expect(result.reply.sources[0]?.label).toContain('National Historical');
   });
 
   it('routes to a verified service and performs an evidence check', async () => {

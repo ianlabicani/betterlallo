@@ -41,7 +41,8 @@ const topics: Record<ChatTopic, string> = {
     'A question about procurement, infrastructure, financial, or public transparency records.',
   updates:
     'A question about a published update, release, or dated public record.',
-  heritage: 'A question about Lal-lo heritage sites or tourism references.',
+  heritage:
+    'A question about Lal-lo heritage sites, local history, or the origin and former name of Lal-lo such as Nueva Segovia.',
   faq: 'A question that clearly matches BetterLal-lo FAQ or source-policy guidance.',
   search:
     'A broad request to find a relevant BetterLal-lo guide or public record.',
@@ -63,10 +64,10 @@ const sourceFamilies: Record<ChatSourceFamily, string> = {
 
 const lookupTypes: Record<ChatLookupType, string> = {
   exact_record:
-    'The visitor asks about one named record, service, office, statistic, or site.',
+    'The visitor asks about one named record, service, office, statistic, site, or the documented origin/history of one named place.',
   list: 'The visitor asks for a list or overview of several supported records, including a general service-directory question such as "What services are listed?".',
   search:
-    'The visitor needs a source-backed search across local guides or records.',
+    'The visitor needs a source-backed search across local guides or records and has not named one specific record or historical place.',
   faq: 'The visitor asks a scope, policy, safety, or frequently asked question.',
   scope_policy:
     'The visitor asks what the portal does or does not do, how information is verified, how records are reviewed, or why a field is pending.',
@@ -361,7 +362,7 @@ function routeQuestions(
   catalog: ReturnType<typeof getSourceCatalog>
 ): Record<string, Record<string, unknown>> {
   const recordCriteria: Record<string, string | null> = {
-    none: 'No one supplied record is clearly requested.',
+    none: 'No one supplied record is clearly requested and the visitor is not asking about the documented history or origin of a supplied place.',
     unclear: 'The requested record is not clear enough to select safely.',
   };
 
@@ -388,7 +389,7 @@ function routeQuestions(
       languageContexts
     ),
     record_id: choiceQuestion(
-      'Does the visitor clearly name one supplied BetterLal-lo record?',
+      'Does the visitor clearly name one supplied BetterLal-lo record, or ask about the documented history or origin represented by one supplied heritage record?',
       recordCriteria
     ),
     is_spam: noulQuestion(
@@ -407,7 +408,8 @@ function routeQuestions(
 function evidenceQuestions(
   evidence: PublicChatEvidence[],
   collectionLookup = false,
-  policyLookup = false
+  policyLookup = false,
+  heritageLookup = false
 ): Record<string, Record<string, unknown>> {
   const questions: Record<string, Record<string, unknown>> = {};
 
@@ -422,13 +424,19 @@ function evidenceQuestions(
       questions[`evidence_${index}`] = noulQuestion(
         policyLookup
           ? `Could the approved BetterLal-lo FAQ policy record answer how information is verified without adding outside facts? Candidate: ${item.title}. Summary: ${item.summary}.`
-          : `Could candidate evidence ${index + 1} help answer the current visitor question? Candidate: ${item.title}. Summary: ${item.summary}.`,
+          : heritageLookup
+            ? `Could this approved BetterLal-lo historical record answer the visitor's question about Lal-lo's origin or early history without adding outside facts? Candidate: ${item.title}. Summary: ${item.summary}.`
+            : `Could candidate evidence ${index + 1} help answer the current visitor question? Candidate: ${item.title}. Summary: ${item.summary}.`,
         policyLookup
           ? 'The candidate directly explains the portal’s source-review policy and supports a safe answer.'
-          : 'The candidate directly supports the requested answer and is within the visitor’s question scope.',
+          : heritageLookup
+            ? 'The candidate directly documents the requested Lal-lo origin or early-history fact and supports a source-backed answer.'
+            : 'The candidate directly supports the requested answer and is within the visitor’s question scope.',
         policyLookup
           ? 'The candidate does not establish the portal’s verification policy or would require guessing.'
-          : 'The candidate is unrelated, insufficient, or outside the requested scope.'
+          : heritageLookup
+            ? 'The candidate does not establish the requested Lal-lo origin or early-history fact or would require guessing.'
+            : 'The candidate is unrelated, insufficient, or outside the requested scope.'
       );
     });
   }
@@ -445,11 +453,17 @@ function evidenceQuestions(
           'The approved policy record directly supports a reliable explanation of the portal’s verification approach; no external certification claim is needed.',
           'The policy record does not establish a reliable explanation of the portal’s verification approach.'
         )
-      : noulQuestion(
-          'Is the supplied candidate evidence sufficient to answer the current question accurately without guessing or adding outside facts?',
-          'The approved candidate evidence is sufficient for a source-backed answer.',
-          'The evidence is incomplete, stale, pending, or otherwise insufficient for a reliable answer.'
-        );
+      : heritageLookup
+        ? noulQuestion(
+            'Can this approved historical record answer the visitor’s question about Lal-lo’s origin or early history using only the stated source-backed facts?',
+            'The historical record is sufficient for a concise source-backed answer and does not require invented context.',
+            'The historical record does not establish the requested origin or early-history fact.'
+          )
+        : noulQuestion(
+            'Is the supplied candidate evidence sufficient to answer the current question accurately without guessing or adding outside facts?',
+            'The approved candidate evidence is sufficient for a source-backed answer.',
+            'The evidence is incomplete, stale, pending, or otherwise insufficient for a reliable answer.'
+          );
   questions.conflict = noulQuestion(
     'Do the supplied candidate records conflict on the specific fact the visitor is asking about?',
     'The records disagree or establish different scopes that must remain visible.',
@@ -605,8 +619,12 @@ function renderAnswer(context: ChatAnswerContext): PublicChatResponse {
       : 'Here is the source-backed information available in BetterLal-lo:';
   const caution =
     language === 'fil'
-      ? 'Kumpirmahin ang kasalukuyang availability, requirements, fees, at schedules sa responsableng tanggapan bago gumawa ng transaksyon.'
-      : 'Confirm current availability, requirements, fees, and schedules with the responsible office before making a transaction.';
+      ? topic === 'heritage'
+        ? 'Suriin ang naka-link na historical source para sa buong konteksto; hindi inilalahad dito ang mga detalyeng hindi nito itinataguyod.'
+        : 'Kumpirmahin ang kasalukuyang availability, requirements, fees, at schedules sa responsableng tanggapan bago gumawa ng transaksyon.'
+      : topic === 'heritage'
+        ? 'Review the linked historical source for full context; this answer does not add details that the source does not establish.'
+        : 'Confirm current availability, requirements, fees, and schedules with the responsible office before making a transaction.';
 
   if (lookupType === 'list') {
     const listText = evidence
@@ -784,6 +802,7 @@ export async function answerPublicChat(
         : sourceFamilyForTopic(topic);
     const isServiceList = topic === 'services' && lookupType === 'list';
     const policyLookup = topic === 'faq' || lookupType === 'scope_policy';
+    const heritageLookup = topic === 'heritage';
     const selectedRecord = recordAnswer?.choice;
     const selectedRecordConfidence = recordAnswer?.confidence ?? 0;
     const recordId =
@@ -863,7 +882,7 @@ export async function answerPublicChat(
             : {}),
         candidate_evidence: evidenceState,
       },
-      evidenceQuestions(evidence, isServiceList, policyLookup),
+      evidenceQuestions(evidence, isServiceList, policyLookup, heritageLookup),
       environment,
       fetchImpl
     );

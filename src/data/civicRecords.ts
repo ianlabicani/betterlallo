@@ -104,7 +104,7 @@ export const officialSources = {
     sourceType: 'history',
     dataPeriod: 'NHCP registry entry',
     verificationNote:
-      'The registry identifies Lalloc-Nueva Segovia / the Diocese of Nueva Segovia as a recognized historical site.',
+      'The registry records that Lalloc was named Nueva Segovia in 1581 and identifies its former role as the seat of the Diocese of Nueva Segovia and the capital of Cagayan.',
   }),
   pdrrmo: source({
     label: 'Cagayan PDRRMO: We Care Lal-lo program and contacts',
@@ -570,7 +570,7 @@ export const heritageRecords: HeritageRecord[] = [
     name: 'Lalloc-Nueva Segovia / Diocese of Nueva Segovia',
     location: 'Lal-lo, Cagayan',
     description:
-      'A recognized historical-site registry entry from the National Historical Commission of the Philippines.',
+      'The National Historical Commission of the Philippines historical marker records the early history and origin of Lal-lo: the town of Lalloc was named Nueva Segovia by Juan Pablo Carrión in 1581. It was the seat of the Diocese of Nueva Segovia until 1755 and the capital of Cagayan until 1839.',
     source: officialSources.nhcpHistory,
     status: 'verified',
   },
