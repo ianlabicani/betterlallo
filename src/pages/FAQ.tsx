@@ -1,81 +1,6 @@
 import { Link } from 'react-router';
 import SEO from '../components/SEO';
-
-const questions = [
-  {
-    question: 'Is BetterLal-lo the official municipal government website?',
-    answer: (
-      <>
-        No. BetterLal-lo is an independent, community-run information portal. It
-        links to official sources but does not speak for the Municipal
-        Government of Lal-lo or accept applications and payments.
-      </>
-    ),
-  },
-  {
-    question: 'Can I use the portal to apply, pay, or file a report?',
-    answer: (
-      <>
-        Not currently. The portal provides guides and source links. Confirm the
-        current transaction channel with the responsible office, request an
-        official receipt for payments, and do not send personal documents to an
-        unofficial intermediary.
-      </>
-    ),
-  },
-  {
-    question: 'How are contacts, updates, and statistics reviewed?',
-    answer: (
-      <>
-        Published records include an attributable source, jurisdiction, period
-        where available, and last-reviewed date. The portal keeps a record
-        pending when the source does not establish a local detail.
-      </>
-    ),
-  },
-  {
-    question: 'Why does a page say that a field is pending?',
-    answer: (
-      <>
-        A pending label means the evidence needed for that exact Lal-lo detail
-        was not found or approved for publication. It is intentional: fees,
-        requirements, schedules, phone numbers, and procedures are not guessed.
-      </>
-    ),
-  },
-  {
-    question: 'Where can I find emergency contact references?',
-    answer: (
-      <>
-        Open the{' '}
-        <Link
-          to="/contact#emergency"
-          className="font-semibold text-primary-700 underline"
-        >
-          emergency and contact hub
-        </Link>
-        . Follow current responder instructions and confirm channel availability
-        before relying on a published number.
-      </>
-    ),
-  },
-  {
-    question: 'How can I suggest a correction?',
-    answer: (
-      <>
-        Use the{' '}
-        <Link
-          to="/contribute"
-          className="font-semibold text-primary-700 underline"
-        >
-          contribution guide
-        </Link>{' '}
-        to send the exact source, field, period, and correction. Maintainers
-        review changes before they are added to the static site.
-      </>
-    ),
-  },
-];
+import { publicChatFaqs } from '../data/publicChatKnowledge';
 
 export default function FAQ() {
   return (
@@ -99,7 +24,7 @@ export default function FAQ() {
           </p>
         </div>
         <div className="space-y-3">
-          {questions.map(item => (
+          {publicChatFaqs.map(item => (
             <details
               key={item.question}
               className="group rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
@@ -116,7 +41,15 @@ export default function FAQ() {
                 </span>
               </summary>
               <p className="mt-4 max-w-3xl leading-relaxed text-gray-700">
-                {item.answer}
+                {item.answer}{' '}
+                {item.link && (
+                  <Link
+                    to={item.link.href}
+                    className="font-semibold text-primary-700 underline"
+                  >
+                    {item.link.label}
+                  </Link>
+                )}
               </p>
             </details>
           ))}

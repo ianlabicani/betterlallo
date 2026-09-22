@@ -1,4 +1,5 @@
 import { serviceRecords } from './civicRecords';
+import { localContentIndex } from './localContentIndex';
 
 export type ContentType = 'service' | 'government';
 
@@ -13,49 +14,7 @@ export interface ContentSearchHit {
   url: string;
 }
 
-const markdownModules = import.meta.glob('../../content/**/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-}) as Record<string, string>;
-
-function cleanDescription(markdown: string): string {
-  const withoutHeading = markdown.replace(/^#\s+.+$/m, '').trim();
-  const paragraph = withoutHeading.split(/\n\s*\n/)[0] ?? '';
-  return paragraph.replace(/^>\s*/, '').replace(/[*_`]/g, '').trim();
-}
-
-function titleFromMarkdown(markdown: string, fallback: string): string {
-  return markdown.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? fallback;
-}
-
-const markdownHits: ContentSearchHit[] = Object.entries(markdownModules)
-  .map(([path, markdown]) => {
-    const match = path.match(
-      /content\/(services|government)\/([^/]+)\/([^/]+)\.md$/
-    );
-    if (!match) return null;
-
-    const [, section, categorySlug, slug] = match;
-    const contentType: ContentType =
-      section === 'services' ? 'service' : 'government';
-    const category = categorySlug
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-
-    return {
-      id: `${contentType}-${categorySlug}-${slug}`,
-      title: titleFromMarkdown(markdown, slug),
-      description: cleanDescription(markdown),
-      type: contentType,
-      category,
-      categorySlug,
-      slug,
-      url: `/${contentType === 'service' ? 'services' : 'government'}/${categorySlug}/${slug}`,
-    };
-  })
-  .filter((hit): hit is ContentSearchHit => hit !== null);
+const markdownHits: ContentSearchHit[] = localContentIndex;
 
 const structuredServiceHits: ContentSearchHit[] = serviceRecords.map(
   record => ({
