@@ -25,7 +25,8 @@
     "heritageandtourism": "Pamanang kultura at turismo",
     "suggestacorrection": "Magmungkahi ng pagwawasto",
     "hotlines": "Mga hotline",
-    "holidays": "Mga pista opisyal"
+    "holidays": "Mga pista opisyal",
+    "currentdatetime": "Kasalukuyang petsa at oras sa Lal-lo: {{date}}, {{time}}"
   },
   "footer": {
     "copyright": "© 2026 BetterLal-lo. Community-run na portal ng pampublikong impormasyon."

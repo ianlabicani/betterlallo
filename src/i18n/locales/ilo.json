@@ -25,7 +25,8 @@
     "heritageandtourism": "Daniw ken turismo",
     "suggestacorrection": "Isingasing ti panagurnos",
     "hotlines": "Dagiti hotline",
-    "holidays": "Dagiti panawen ti piesta"
+    "holidays": "Dagiti panawen ti piesta",
+    "currentdatetime": "Agdama a petsa ken oras iti Lal-lo: {{date}}, {{time}}"
   },
   "footer": {
     "copyright": "© 2026 BetterLal-lo. Portal ti komunidad para iti pampubliko nga impormasion."

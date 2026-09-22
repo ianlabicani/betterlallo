@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Menu, ChevronDown, Globe, CheckCircle2 } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 import type { LanguageType } from '../../types/index';
@@ -7,10 +7,28 @@ import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n/languages';
 import NavbarWeather from '../civic/NavbarWeather';
 
+const LALLO_TIME_ZONE = 'Asia/Manila';
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState(() => new Date());
   const { t, i18n } = useTranslation('common');
+
+  useEffect(() => {
+    let intervalId: number | undefined;
+    const updateTime = () => setCurrentTime(new Date());
+    const millisecondsUntilNextMinute = 60_000 - (Date.now() % 60_000);
+    const timeoutId = window.setTimeout(() => {
+      updateTime();
+      intervalId = window.setInterval(updateTime, 60_000);
+    }, millisecondsUntilNextMinute);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -32,12 +50,51 @@ const Navbar: React.FC = () => {
     i18n.changeLanguage(newLanguage);
   };
 
+  const locale =
+    i18n.language === 'fil'
+      ? 'fil-PH'
+      : i18n.language === 'ilo'
+        ? 'ilo-PH'
+        : 'en-PH';
+  const fullDate = new Intl.DateTimeFormat(locale, {
+    timeZone: LALLO_TIME_ZONE,
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(currentTime);
+  const compactDate = new Intl.DateTimeFormat(locale, {
+    timeZone: LALLO_TIME_ZONE,
+    month: 'short',
+    day: 'numeric',
+  }).format(currentTime);
+  const time = new Intl.DateTimeFormat(locale, {
+    timeZone: LALLO_TIME_ZONE,
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  }).format(currentTime);
+
   return (
     <nav className="bg-white shadow-sm">
       {/* Top bar with language switcher and additional links */}
       <div className="border-b border-gray-200">
-        <div className="container mx-auto px-4 flex justify-end items-center h-10">
-          <div className="flex items-center space-x-4">
+        <div className="container mx-auto px-4 flex items-center gap-3 h-10 overflow-x-auto whitespace-nowrap">
+          <time
+            dateTime={currentTime.toISOString()}
+            aria-label={t('navbar.currentdatetime', {
+              date: fullDate,
+              time,
+            })}
+            className="shrink-0 text-xs text-gray-600"
+          >
+            <span className="hidden sm:inline">
+              {fullDate} · {time}
+            </span>
+            <span className="sm:hidden">
+              {compactDate} · {time}
+            </span>
+          </time>
+          <div className="ml-auto flex shrink-0 items-center space-x-4">
             <a
               href="https://bettergov.ph/join-us"
               className="text-xs text-primary-600 hover:text-primary-700 font-semibold transition-colors"

@@ -25,7 +25,8 @@
     "heritageandtourism": "Heritage and tourism",
     "suggestacorrection": "Suggest a correction",
     "hotlines": "Hotlines",
-    "holidays": "Holidays"
+    "holidays": "Holidays",
+    "currentdatetime": "Current date and time in Lal-lo: {{date}}, {{time}}"
   },
   "footer": {
     "copyright": "© 2026 BetterLal-lo. Community-run public information portal."
