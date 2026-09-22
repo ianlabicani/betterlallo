@@ -28,19 +28,32 @@ function asksVerificationPolicy(query: string): boolean {
   );
 }
 
+function asksForServiceList(query: string): boolean {
+  const normalizedQuery = query
+    .toLowerCase()
+    .trim()
+    .replace(/[?!.,]+$/, '');
+  const hasServices = /\bservices?\b/.test(normalizedQuery);
+  const hasListLanguage =
+    /\b(list|listed|available|offer|provide|browse|show)\b/.test(
+      normalizedQuery
+    );
+  const isShortOverview =
+    /^(?:services?|(?:what|which)\s+(?:are\s+)?(?:the\s+)?services?)$/.test(
+      normalizedQuery
+    );
+
+  return hasServices && (hasListLanguage || isShortOverview);
+}
+
 export function getSourceCatalog(query?: string) {
   const catalog = getPublicChatCatalog();
   if (!query) return catalog;
 
-  const normalizedQuery = query.toLowerCase();
-  const asksForServiceList =
-    /\bservices?\b/.test(normalizedQuery) &&
-    /\b(list|listed|available|offer|provide|browse|show)\b/.test(
-      normalizedQuery
-    );
+  const asksForServiceListRequest = asksForServiceList(query);
   const asksVerificationPolicyRequest = asksVerificationPolicy(query);
 
-  if (asksForServiceList) {
+  if (asksForServiceListRequest) {
     return catalog
       .filter(record => record.id.startsWith('service:'))
       .slice(0, 12);

@@ -115,12 +115,18 @@ describe('public chat knowledge', () => {
   });
 
   it('exposes the complete service collection for a broad service-list request', () => {
-    const catalog = getSourceCatalog('What services are listed?');
+    for (const query of [
+      'services',
+      'what are the services',
+      'What services are listed?',
+    ]) {
+      const catalog = getSourceCatalog(query);
 
-    expect(catalog.length).toBeGreaterThan(1);
-    expect(catalog.every(record => record.id.startsWith('service:'))).toBe(
-      true
-    );
+      expect(catalog.length).toBeGreaterThan(1);
+      expect(catalog.every(record => record.id.startsWith('service:'))).toBe(
+        true
+      );
+    }
   });
 
   it('matches the verification FAQ wording used by the chat prompt', () => {
@@ -204,6 +210,42 @@ describe('public chat Jev workflow', () => {
     expect(result.reply.links).toHaveLength(
       getSourceCatalog('What services are listed?').length
     );
+  });
+
+  it('answers short service collection prompts', async () => {
+    for (const message of ['services', 'what are the services']) {
+      const result = await answerPublicChat(validRequest({ message }), {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          TYPESAFE_MODEL: 'jev-latest',
+        },
+        fetchImpl: queuedFetch([
+          routeResponse({
+            topic: { type: 'choice', choice: 'services', confidence: 0.95 },
+            source_family: {
+              type: 'choice',
+              choice: 'structured_records',
+              confidence: 0.95,
+            },
+            lookup_type: {
+              type: 'choice',
+              choice: 'list',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'none',
+              confidence: 0.95,
+            },
+          }),
+          listEvidenceResponse(),
+        ]),
+      });
+
+      expect(result.kind).toBe('answer');
+      expect(result.reply.text).toContain('Services currently listed:');
+    }
   });
 
   it('answers the built-in verification prompt from the policy record', async () => {

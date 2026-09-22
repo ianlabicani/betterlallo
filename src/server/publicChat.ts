@@ -30,7 +30,7 @@ const topics: Record<ChatTopic, string> = {
   scope:
     'A question about BetterLal-lo, the basic overview of Lal-lo, its location or identity, its independence, or what the portal can do. A short request such as "about Lal-lo" belongs here.',
   services:
-    'A question about local services, service records, requirements, fees, or steps. This includes broad requests such as "What services are listed?" or "Which services can I browse?".',
+    'A question about local services, service records, requirements, fees, or steps. Short collection requests such as "services", "what are the services?", "What services are listed?", or "Which services can I browse?" belong here.',
   contacts:
     'A question asking for an office, directory record, phone number, or email.',
   emergency:
@@ -65,7 +65,7 @@ const sourceFamilies: Record<ChatSourceFamily, string> = {
 const lookupTypes: Record<ChatLookupType, string> = {
   exact_record:
     'The visitor asks about one named record, service, office, statistic, site, a short overview such as "about Lal-lo", or the documented origin/history of one named place.',
-  list: 'The visitor asks for a list or overview of several supported records, including a general service-directory question such as "What services are listed?".',
+  list: 'The visitor asks for a list or overview of several supported records, including short service-directory questions such as "services", "what are the services?", or "What services are listed?".',
   search:
     'The visitor needs a source-backed search across local guides or records and has not named one specific record or historical place.',
   faq: 'The visitor asks a scope, policy, safety, or frequently asked question.',
