@@ -5,6 +5,14 @@ import './fonts.css';
 import './index.css';
 import './i18n';
 
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      // Offline support is an enhancement; the portal remains usable online.
+    });
+  });
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

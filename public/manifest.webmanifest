@@ -1,0 +1,19 @@
+{
+  "name": "BetterLal-lo Civic Information Portal",
+  "short_name": "BetterLal-lo",
+  "description": "Community-run public information for Lal-lo, Cagayan.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f766e",
+  "lang": "en-PH",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

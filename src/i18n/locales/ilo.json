@@ -1,0 +1,33 @@
+{
+  "site_name": "BetterLal-lo",
+  "site_description": "Portal ti impormasion iti komunidad",
+  "hero": {
+    "subtitle": "Biroken dagiti serbisyo publiko ken lokal nga impormasion para iti Lal-lo, Cagayan."
+  },
+  "services": {
+    "title": "Dagiti serbisyo ken praktikal a giya",
+    "description": "Rugian dagiti nalaka a maawatan a giya iti serbisyo, kasapulan, ken opisina."
+  },
+  "governmentActivity": {
+    "title": "Gobierno ken pampubliko a rekord",
+    "description": "Biroken dagiti departamento, barangay, ken source ti transparency iti Lal-lo."
+  },
+  "navbar": {
+    "government": "Gobierno",
+    "services": "Dagiti serbisyo",
+    "statistics": "Estadistika",
+    "openlgu": "OpenLGU",
+    "transparency": "Transparency",
+    "search": "Birok",
+    "explore": "Sukisok",
+    "contact": "Kontak",
+    "updates": "Dagiti update",
+    "heritageandtourism": "Daniw ken turismo",
+    "suggestacorrection": "Isingasing ti panagurnos",
+    "hotlines": "Dagiti hotline",
+    "holidays": "Dagiti panawen ti piesta"
+  },
+  "footer": {
+    "copyright": "© 2026 BetterLal-lo. Portal ti komunidad para iti pampubliko nga impormasion."
+  }
+}

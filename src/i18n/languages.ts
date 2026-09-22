@@ -9,6 +9,7 @@ export interface LanguageInfo {
 export const LANGUAGES: Record<LanguageType, LanguageInfo> = {
   en: { code: 'en', name: 'English', nativeName: 'English' },
   fil: { code: 'fil', name: 'Tagalog', nativeName: 'Filipino/Tagalog' },
+  ilo: { code: 'ilo', name: 'Ilocano', nativeName: 'Ilocano' },
 };
 
 export const DEFAULT_LANGUAGE: LanguageType = 'en';
