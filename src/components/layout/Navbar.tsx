@@ -5,7 +5,6 @@ import {
   ChevronDown,
   Globe,
   Search,
-  CheckCircle2,
 } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 import type { LanguageType } from '../../types/index';
@@ -13,6 +12,7 @@ import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n/languages';
 import { isMeilisearchEnabled } from '../../lib/meilisearch';
+import betterLalloLogo from '../../assets/betterlallo.svg';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,12 +97,11 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <CheckCircle2 className="h-12 w-12 mr-3" />
-              {/* <img
-                src="/ph-logo.webp"
-                alt="Philippines Coat of Arms"
-                className="h-12 w-12 mr-3"
-              /> */}
+              <img
+                src={betterLalloLogo}
+                alt="BetterLallo logo"
+                className="mr-3 h-16 w-16 object-contain"
+              />
               <div>
                 <div className="text-black font-bold">
                   {import.meta.env.VITE_GOVERNMENT_NAME}
