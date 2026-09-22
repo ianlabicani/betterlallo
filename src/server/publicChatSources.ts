@@ -15,8 +15,15 @@ export interface PublicChatLookupRequest {
   limit?: number;
 }
 
-export function getSourceCatalog() {
-  return getPublicChatCatalog();
+export function getSourceCatalog(query?: string) {
+  const catalog = getPublicChatCatalog();
+  if (!query) return catalog;
+
+  const candidateIds = new Set(
+    searchPublicChatRecords(query, undefined, 12).map(record => record.id)
+  );
+
+  return catalog.filter(record => candidateIds.has(record.id));
 }
 
 export function lookupPublicChatSources({
