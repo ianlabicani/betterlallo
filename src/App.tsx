@@ -29,6 +29,7 @@ import Contribute from './pages/Contribute';
 import SkipLink from './components/layout/SkipLink';
 import EmergencyBar from './components/civic/EmergencyBar';
 import { WeatherProvider } from './components/civic/WeatherProvider';
+import PublicChat from './components/PublicChat';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 
 function App() {
@@ -94,6 +95,7 @@ function App() {
                 </Routes>
               </div>
               <Footer />
+              <PublicChat />
             </div>
           </WeatherProvider>
         </NuqsAdapter>
