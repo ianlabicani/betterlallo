@@ -6,12 +6,16 @@ This is a community project, not the official website of the Municipal Governmen
 
 ## Current scope
 
-- English and Filipino interface text
+- English, Filipino, and Ilocano interface text with English fallback for longer untranslated content
 - Lal-lo overview, officials, departments, barangays, and transparency sections
 - Service guides for health, education, business, social welfare, agriculture, infrastructure, waste, environment, disaster preparedness, and land use
 - BetterLB-inspired quick access to financial, infrastructure, legislation, and statistics sections
 - Structured service-record views with eligibility, requirements, fees, processing time, steps, responsible office, and verification states
 - Searchable municipal office directory, statistics register, OpenLGU legislation filters, and financial/procurement/infrastructure transparency views
+- Source-backed contact and emergency hub, compact verified-resources directory, updates feed, FAQ, legal/accessibility pages, sitemap, and a useful not-found route
+- Dedicated certificate, tax-payment, and barangay-clearance guides with explicit pending states for unpublished local requirements
+- Barangay population-by-record dashboard, downloadable CSV, municipal income snapshots, and heritage/tourism references
+- Installable PWA manifest, service-worker offline fallback, and a static-first contribution guide for corrections
 - Build-time local search with optional Meilisearch enhancement
 - No-key Open-Meteo weather and Leaflet/OpenStreetMap map with loading, timeout, offline, and unavailable states
 - Source links and last-reviewed notes for public information
@@ -82,10 +86,12 @@ Only send Jev the focused repository context needed for the judgment. Do not sen
 - `content/services/` — service category indexes and Markdown guides
 - `src/data/services.yaml` — service categories and navigation metadata
 - `src/data/government.yaml` — government categories and navigation metadata
-- `src/data/civicRecords.ts` — typed source-backed service, department, statistic, legislation, and transparency records
+- `src/data/civicRecords.ts` — typed source-backed service, contact, update, heritage, department, statistic, legislation, and transparency records
+- `src/data/verifiedResources.ts` — compact grouped resource links derived from verified civic records
 - `src/data/contentIndex.ts` — build-time client-side search index
 - `src/components/civic/` — structured civic records, sources, weather, and map UI
-- `src/i18n/locales/` — English and Filipino interface translations
+- `src/i18n/locales/` — English, Filipino, and Ilocano interface translations
+- `public/manifest.webmanifest`, `public/sw.js`, and `public/offline.html` — installable/offline portal support
 - `env.example` — public configuration values for a local or deployed environment
 - `research/source-ledger.md` — non-published official-source inventory and scope notes
 - `research/drafts/` — human-review-only import candidates; they are never loaded by the app
@@ -112,7 +118,7 @@ upstream https://github.com/iyanski/betterlocalgov.git
 
 ## Contributing
 
-Open an issue or pull request with the source for any correction or addition. Keep content plain-language, accessible, and specific about what has been verified. Translations beyond English and Filipino, including a future Ilocano version, can be added without changing the content model.
+Open an issue or pull request with the source for any correction or addition. Keep content plain-language, accessible, and specific about what has been verified. Longer-form translations, including Ilocano content, can be added without changing the content model.
 
 ## License
 
