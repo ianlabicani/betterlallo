@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
             <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
               <Link
-                to="/about#accessibility"
+                to="/accessibility"
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Accessibility

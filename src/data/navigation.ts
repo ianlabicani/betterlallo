@@ -23,24 +23,21 @@ export const mainNavigation: NavigationItem[] = [
     ],
   },
   {
-    label: 'Statistics',
+    label: 'Explore',
     href: '/statistics',
-  },
-  {
-    label: 'OpenLGU',
-    href: '/openlgu',
-  },
-  {
-    label: 'Transparency',
-    href: '/transparency',
     children: [
-      { label: 'Financial records', href: '/transparency/financial' },
-      { label: 'Procurement', href: '/transparency/procurement' },
-      {
-        label: 'Projects and infrastructure',
-        href: '/transparency/infrastructure',
-      },
+      { label: 'Verified resources', href: '/resources' },
+      { label: 'Updates', href: '/updates' },
+      { label: 'Statistics', href: '/statistics' },
+      { label: 'Heritage and tourism', href: '/heritage' },
+      { label: 'OpenLGU', href: '/openlgu' },
+      { label: 'Transparency', href: '/transparency' },
+      { label: 'Suggest a correction', href: '/contribute' },
     ],
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
   },
   {
     label: 'Search',
@@ -58,7 +55,10 @@ export const footerNavigation = {
           label: 'How information is verified',
           href: '/government/overview/about-lallo',
         },
-        { label: 'Accessibility', href: '/about#accessibility' },
+        { label: 'FAQ', href: '/faq' },
+        { label: 'Accessibility', href: '/accessibility' },
+        { label: 'Privacy', href: '/privacy' },
+        { label: 'Terms of use', href: '/terms-of-use' },
       ],
     },
     {
@@ -76,6 +76,12 @@ export const footerNavigation = {
           label: 'Agriculture and Fisheries',
           href: '/services/agriculture-fisheries',
         },
+        {
+          label: 'Certificates and vital records',
+          href: '/services/certificates',
+        },
+        { label: 'Tax payments', href: '/services/tax-payments' },
+        { label: 'Barangay services', href: '/services/barangay-services' },
       ],
     },
     {
@@ -92,6 +98,7 @@ export const footerNavigation = {
           label: 'PSA Lal-lo Profile',
           href: 'https://psa.gov.ph/classification/psgc/barangays/0201516000',
         },
+        { label: 'Heritage and tourism', href: '/heritage' },
       ],
     },
     {
@@ -101,6 +108,11 @@ export const footerNavigation = {
         { label: 'OpenLGU legislation', href: '/openlgu' },
         { label: 'Transparency', href: '/transparency' },
         { label: 'Search', href: '/search' },
+        { label: 'Verified resources', href: '/resources' },
+        { label: 'Updates', href: '/updates' },
+        { label: 'Contact and hotlines', href: '/contact' },
+        { label: 'Suggest a correction', href: '/contribute' },
+        { label: 'Sitemap', href: '/sitemap' },
       ],
     },
   ],

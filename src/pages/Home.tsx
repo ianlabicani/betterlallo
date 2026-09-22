@@ -5,6 +5,7 @@ import PortalHighlights from '../components/home/PortalHighlights';
 import QuickAccessSection from '../components/home/QuickAccessSection';
 import WeatherMapSection from '../components/civic/WeatherMapSection';
 import SEO from '../components/SEO';
+import UpdatesSection from '../components/home/UpdatesSection';
 
 const Home: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
         <PortalHighlights />
         <ServicesSection />
         <GovernmentActivitySection />
+        <UpdatesSection />
         <WeatherMapSection />
       </main>
     </>
