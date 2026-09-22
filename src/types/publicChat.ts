@@ -83,6 +83,7 @@ export interface PublicChatEvidence extends PublicChatRecord {
 export interface ChatAnswerContext {
   language: ChatLanguage;
   topic: ChatTopic;
+  lookupType: ChatLookupType;
   message: string;
   evidence: PublicChatEvidence[];
   conflict: boolean;

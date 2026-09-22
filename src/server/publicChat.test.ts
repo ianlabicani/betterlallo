@@ -4,6 +4,7 @@ import {
   parsePublicChatRequest,
   ChatUnavailableError,
 } from './publicChat';
+import { getSourceCatalog } from './publicChatSources';
 import {
   getPublicChatRecord,
   publicChatFaqs,
@@ -77,6 +78,18 @@ function evidenceResponse(overrides: Record<string, unknown> = {}) {
   });
 }
 
+function listEvidenceResponse(overrides: Record<string, unknown> = {}) {
+  return response({
+    model: 'jev-1.13.0',
+    answers: {
+      collection_relevant: { type: 'noul', noul: 0.98 },
+      sufficient: { type: 'noul', noul: 0.96 },
+      conflict: { type: 'noul', noul: 0.01 },
+      ...overrides,
+    },
+  });
+}
+
 describe('public chat knowledge', () => {
   it('shares the FAQ policy and finds pending service records locally', () => {
     expect(publicChatFaqs).toHaveLength(6);
@@ -100,6 +113,25 @@ describe('public chat knowledge', () => {
     expect(guides[0]?.id).toBe('guide:service-business-business-permits');
     expect(guides[0]?.internalPath).toBe('/services/business/business-permits');
   });
+
+  it('exposes the complete service collection for a broad service-list request', () => {
+    const catalog = getSourceCatalog('What services are listed?');
+
+    expect(catalog.length).toBeGreaterThan(1);
+    expect(catalog.every(record => record.id.startsWith('service:'))).toBe(
+      true
+    );
+  });
+
+  it('matches the verification FAQ wording used by the chat prompt', () => {
+    const results = searchPublicChatRecords(
+      'How is information verified?',
+      'faq_policy',
+      3
+    );
+
+    expect(results[0]?.id).toBe('faq:review-policy');
+  });
 });
 
 describe('public chat request validation', () => {
@@ -121,6 +153,81 @@ describe('public chat request validation', () => {
 });
 
 describe('public chat Jev workflow', () => {
+  it('lists the approved service records for a broad service question', async () => {
+    const result = await answerPublicChat(
+      validRequest({ message: 'What services are listed?' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          TYPESAFE_MODEL: 'jev-latest',
+        },
+        fetchImpl: queuedFetch([
+          routeResponse({
+            topic: { type: 'choice', choice: 'services', confidence: 0.95 },
+            lookup_type: {
+              type: 'choice',
+              choice: 'list',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'none',
+              confidence: 0.95,
+            },
+          }),
+          listEvidenceResponse(),
+        ]),
+      }
+    );
+
+    expect(result.kind).toBe('answer');
+    expect(result.reply.text).toContain('Services currently listed:');
+    expect(result.reply.text).toContain('Lal-lo Rural Health Unit information');
+    expect(result.reply.text).toContain('Business permits and registration');
+    expect(result.reply.links).toHaveLength(
+      getSourceCatalog('What services are listed?').length
+    );
+  });
+
+  it('answers the built-in verification prompt from the policy record', async () => {
+    const result = await answerPublicChat(
+      validRequest({ message: 'How is information verified?' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          TYPESAFE_MODEL: 'jev-latest',
+        },
+        fetchImpl: queuedFetch([
+          routeResponse({
+            topic: { type: 'choice', choice: 'faq', confidence: 0.95 },
+            source_family: {
+              type: 'choice',
+              choice: 'faq_policy',
+              confidence: 0.95,
+            },
+            lookup_type: {
+              type: 'choice',
+              choice: 'scope_policy',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'none',
+              confidence: 0.95,
+            },
+          }),
+          evidenceResponse(),
+        ]),
+      }
+    );
+
+    expect(result.kind).toBe('answer');
+    expect(result.reply.text).toContain('Published records include');
+    expect(result.reply.text).toContain('last-reviewed date');
+  });
+
   it('routes to a verified service and performs an evidence check', async () => {
     const result = await answerPublicChat(validRequest(), {
       env: {

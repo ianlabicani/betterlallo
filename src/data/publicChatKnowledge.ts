@@ -33,6 +33,7 @@ export interface PublicChatFaq {
   id: string;
   question: string;
   answer: string;
+  aliases?: string[];
   link?: {
     label: string;
     href: string;
@@ -57,6 +58,11 @@ export const publicChatFaqs: PublicChatFaq[] = [
     question: 'How are contacts, updates, and statistics reviewed?',
     answer:
       'Published records include an attributable source, jurisdiction, period where available, and last-reviewed date. The portal keeps a record pending when the source does not establish a local detail.',
+    aliases: [
+      'How is information verified?',
+      'How does BetterLal-lo verify information?',
+      'verified information and source review',
+    ],
   },
   {
     id: 'pending-fields',
@@ -387,7 +393,7 @@ function faqRecords(): PublicChatRecord[] {
     title: faq.question,
     summary: faq.answer,
     answerText: faq.answer,
-    searchText: `${faq.question} ${faq.answer}`,
+    searchText: [faq.question, faq.answer, ...(faq.aliases ?? [])].join(' '),
     internalPath: faq.link?.href ?? '/faq',
     status: 'verified',
     sources: [],
