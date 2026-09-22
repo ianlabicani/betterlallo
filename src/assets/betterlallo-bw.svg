@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">BetterLallo monochrome logo</title>
+  <desc id="desc">Monochrome mark inspired by the Magapit Suspension Bridge and the Cagayan River in Lal-lo.</desc>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 132H216" stroke-width="9"/>
+    <path d="M78 132L86 72H108L116 132" stroke-width="9"/>
+    <path d="M140 132L148 72H170L178 132" stroke-width="9"/>
+    <path d="M42 129C55 100 69 82 86 78C102 96 113 104 128 104C143 104 154 96 170 78C187 82 201 100 214 129" stroke-width="7"/>
+    <path d="M48 164C75 145 99 145 126 164C153 183 177 183 208 160" stroke-width="10"/>
+    <path d="M62 187C86 172 108 173 130 187C151 201 171 202 194 188" stroke-width="7" opacity=".62"/>
+  </g>
+</svg>
