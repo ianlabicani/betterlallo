@@ -12,7 +12,7 @@ import type {
   StatisticRecord,
   TransparencySection,
   UpdateRecord,
-} from '../types/civic';
+} from '../types/civic.js';
 
 export const REVIEW_DATE = '2026-09-21';
 

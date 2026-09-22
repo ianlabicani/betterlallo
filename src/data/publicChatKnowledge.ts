@@ -9,8 +9,8 @@ import {
   statisticRecords,
   transparencySections,
   updateRecords,
-} from './civicRecords';
-import { localContentIndex } from './localContentIndex';
+} from './civicRecords.js';
+import { localContentIndex } from './localContentIndex.js';
 import type {
   CivicContact,
   DepartmentRecord,
@@ -21,13 +21,13 @@ import type {
   StatisticRecord,
   TransparencyRecord,
   UpdateRecord,
-} from '../types/civic';
+} from '../types/civic.js';
 import type {
   ChatLanguage,
   ChatSourceFamily,
   ChatSourceMetadata,
   PublicChatRecord,
-} from '../types/publicChat';
+} from '../types/publicChat.js';
 
 export interface PublicChatFaq {
   id: string;
@@ -283,7 +283,7 @@ function toStatisticRecord(record: StatisticRecord): PublicChatRecord {
 }
 
 function toFinancialRecord(record: FinancialSnapshot): PublicChatRecord {
-  const metrics = Object.entries(record.metrics)
+  const metrics = (Object.entries(record.metrics) as Array<[string, number]>)
     .map(
       ([key, value]) =>
         `${key}: ₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2 })}`

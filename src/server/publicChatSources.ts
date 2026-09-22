@@ -2,8 +2,11 @@ import {
   getPublicChatCatalog,
   getPublicChatRecord,
   searchPublicChatRecords,
-} from '../data/publicChatKnowledge';
-import type { ChatSourceFamily, PublicChatEvidence } from '../types/publicChat';
+} from '../data/publicChatKnowledge.js';
+import type {
+  ChatSourceFamily,
+  PublicChatEvidence,
+} from '../types/publicChat.js';
 
 export interface PublicChatLookupRequest {
   query: string;

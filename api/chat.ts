@@ -3,7 +3,7 @@ import {
   ChatUnavailableError,
   createErrorResponse,
   parsePublicChatRequest,
-} from '../src/server/publicChat';
+} from '../src/server/publicChat.js';
 
 const chatApi = {
   async fetch(request: Request): Promise<Response> {

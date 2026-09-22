@@ -1,4 +1,7 @@
-import { getSourceCatalog, lookupPublicChatSources } from './publicChatSources';
+import {
+  getSourceCatalog,
+  lookupPublicChatSources,
+} from './publicChatSources.js';
 import type {
   ChatAnswerContext,
   ChatLanguage,
@@ -9,7 +12,7 @@ import type {
   PublicChatEvidence,
   PublicChatRequest,
   PublicChatResponse,
-} from '../types/publicChat';
+} from '../types/publicChat.js';
 
 const TYPESAFE_ENDPOINT = 'https://api.typesafe.ai/v1/systemone';
 const DEFAULT_MODEL = 'jev-latest';
