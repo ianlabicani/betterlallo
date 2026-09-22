@@ -1,0 +1,6 @@
+# Certificates and vital records category pages for Lal-lo.
+
+pages:
+  - name: 'Civil registry and certificates'
+    slug: 'civil-registry'
+    description: 'A source-first guide for checking birth, marriage, death, and other civil-registry record channels.'

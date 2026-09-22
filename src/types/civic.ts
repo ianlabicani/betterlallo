@@ -18,6 +18,64 @@ export type SourceType =
   | 'program-report'
   | 'legal-framework';
 
+export type CivicContactChannel = 'phone' | 'email' | 'website';
+
+export interface CivicContact {
+  id: string;
+  name: string;
+  category: string;
+  channel: CivicContactChannel;
+  value: string;
+  description?: string;
+  scope: string;
+  availability?: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+}
+
+export type UpdateType = 'announcement' | 'project' | 'data-release' | 'guide';
+
+export interface UpdateRecord {
+  id: string;
+  title: string;
+  type: UpdateType;
+  publishedDate?: string;
+  summary: string;
+  href: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+}
+
+export interface OnlineServiceLink {
+  id: string;
+  label: string;
+  description: string;
+  serviceCategory: string;
+  href: string;
+  authority: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+}
+
+export interface BarangayRecord {
+  name: string;
+  code: string;
+  population: number;
+  householdPopulation: number;
+  households: number;
+  classification: 'Urban' | 'Rural';
+  source: SourceRecord;
+}
+
+export interface HeritageRecord {
+  id: string;
+  name: string;
+  location: string;
+  description: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+}
+
 export interface SourceRecord {
   label: string;
   url: string;
@@ -30,6 +88,49 @@ export interface SourceRecord {
   extractionDate?: string;
   dataPeriod?: string;
   verificationNote?: string;
+}
+
+export type ResourceGroupId =
+  | 'contacts'
+  | 'services'
+  | 'government'
+  | 'records'
+  | 'data'
+  | 'heritage'
+  | 'updates'
+  | 'help';
+
+export type ResourceLinkType = 'internal' | 'external' | 'phone' | 'email';
+
+export interface ResourceCollectionLink {
+  id: string;
+  label: string;
+  description: string;
+  href: string;
+  linkType: 'internal' | 'external';
+}
+
+export interface VerifiedResourceEntry {
+  id: string;
+  group: ResourceGroupId;
+  title: string;
+  description: string;
+  href: string;
+  linkType: ResourceLinkType;
+  actionLabel: string;
+  portalHref?: string;
+  portalLabel?: string;
+  source: SourceRecord;
+  status: VerificationStatus;
+}
+
+export interface VerifiedResourceGroup {
+  id: ResourceGroupId;
+  title: string;
+  description: string;
+  collectionLinks: ResourceCollectionLink[];
+  resources: VerifiedResourceEntry[];
+  pendingMessage?: string;
 }
 
 export interface Requirement {

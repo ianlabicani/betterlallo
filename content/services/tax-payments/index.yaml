@@ -1,0 +1,6 @@
+# Tax-payment category pages for Lal-lo.
+
+pages:
+  - name: 'Municipal and real property tax payments'
+    slug: 'tax-payments'
+    description: 'A source-first checklist for confirming assessment, payment, receipt, and current tax-office channels.'

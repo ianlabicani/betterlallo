@@ -4,3 +4,6 @@ pages:
   - name: 'Find social welfare assistance'
     slug: 'social-welfare-assistance'
     description: 'How to verify assistance for older persons, solo parents, persons with disabilities, families, and emergencies.'
+  - name: 'Senior citizen and PWD assistance'
+    slug: 'senior-pwd-assistance'
+    description: 'A source-first checklist for confirming senior citizen and PWD registration, assistance, and documentary requirements.'

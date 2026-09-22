@@ -38,6 +38,9 @@ import garbageWasteDisposalIndex from '../../content/services/garbage-waste-disp
 import environmentIndex from '../../content/services/environment/index.yaml?raw';
 import disasterPreparednessIndex from '../../content/services/disaster-preparedness/index.yaml?raw';
 import housingLandUseIndex from '../../content/services/housing-land-use/index.yaml?raw';
+import certificatesIndex from '../../content/services/certificates/index.yaml?raw';
+import taxPaymentsIndex from '../../content/services/tax-payments/index.yaml?raw';
+import barangayServicesIndex from '../../content/services/barangay-services/index.yaml?raw';
 import governmentDepartmentsIndex from '../../content/government/departments/index.yaml?raw';
 import governmentOverviewIndex from '../../content/government/overview/index.yaml?raw';
 import governmentBarangaysIndex from '../../content/government/barangays/index.yaml?raw';
@@ -54,6 +57,9 @@ const categoryIndexMap: Record<string, string> = {
   environment: environmentIndex,
   'disaster-preparedness': disasterPreparednessIndex,
   'housing-land-use': housingLandUseIndex,
+  certificates: certificatesIndex,
+  'tax-payments': taxPaymentsIndex,
+  'barangay-services': barangayServicesIndex,
   departments: governmentDepartmentsIndex,
   overview: governmentOverviewIndex,
   barangays: governmentBarangaysIndex,

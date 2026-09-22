@@ -1,4 +1,4 @@
-# Start or Renew a Business Permit
+# Business Permits and BPLO
 
 Business permit requirements depend on the business activity, location, ownership, and the current municipal process. Use this checklist to prepare questions for the **Municipal Business Permits and Licensing Office (BPLO)** and your barangay.
 

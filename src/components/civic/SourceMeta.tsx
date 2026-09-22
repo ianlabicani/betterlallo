@@ -1,3 +1,4 @@
+import { ExternalLink } from 'lucide-react';
 import type { SourceRecord, VerificationStatus } from '../../types/civic';
 
 const statusLabels: Record<VerificationStatus, string> = {
@@ -12,17 +13,50 @@ const statusClasses: Record<VerificationStatus, string> = {
   unverified: 'bg-red-100 text-red-800',
 };
 
-export function VerificationBadge({ status }: { status: VerificationStatus }) {
+export function VerificationBadge({
+  status,
+  compact = false,
+}: {
+  status: VerificationStatus;
+  compact?: boolean;
+}) {
+  const label =
+    compact && status === 'verified' ? 'Verified' : statusLabels[status];
+
   return (
     <span
       className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${statusClasses[status]}`}
     >
-      {statusLabels[status]}
+      {label}
     </span>
   );
 }
 
-export function SourceMeta({ source }: { source: SourceRecord }) {
+export function SourceMeta({
+  source,
+  compact = false,
+}: {
+  source: SourceRecord;
+  compact?: boolean;
+}) {
+  if (compact) {
+    return (
+      <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-gray-500">
+        <VerificationBadge status={source.status} compact />
+        <a
+          href={source.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Open source details: ${source.label}`}
+          className="inline-flex items-center gap-1 font-semibold text-gray-600 underline underline-offset-2 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          Source details
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-4 border-t border-gray-100 pt-3 text-xs text-gray-600">
       <div className="flex flex-wrap items-center gap-2">

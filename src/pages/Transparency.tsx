@@ -160,7 +160,8 @@ export default function Transparency() {
               {selected.records.map(record => (
                 <article
                   key={record.id}
-                  className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
+                  id={`transparency-${record.id}`}
+                  className="scroll-mt-36 rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-lg font-semibold text-gray-900">

@@ -1,6 +1,6 @@
-import { ArrowRight, ClipboardList } from 'lucide-react';
+import { ArrowRight, ClipboardList, ExternalLink, Globe2 } from 'lucide-react';
 import { Link } from 'react-router';
-import { serviceRecords } from '../../data/civicRecords';
+import { onlineServiceLinks, serviceRecords } from '../../data/civicRecords';
 import { SourceMeta, VerificationBadge } from './SourceMeta';
 
 export default function ServiceRecordDirectory() {
@@ -64,6 +64,62 @@ export default function ServiceRecordDirectory() {
               </Link>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10" aria-labelledby="online-services-heading">
+          <div className="mb-4 flex items-start gap-3">
+            <Globe2
+              className="mt-1 h-6 w-6 shrink-0 text-primary-700"
+              aria-hidden="true"
+            />
+            <div>
+              <h3
+                id="online-services-heading"
+                className="text-xl font-bold text-gray-900"
+              >
+                Verified online service links
+              </h3>
+              <p className="mt-1 max-w-3xl text-sm text-gray-600">
+                Only links with a source that identifies the Lal-lo service are
+                published here. A general agency homepage is not treated as a
+                local application channel.
+              </p>
+            </div>
+          </div>
+          {onlineServiceLinks.length > 0 ? (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {onlineServiceLinks.map(link => (
+                <article
+                  key={link.id}
+                  className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
+                >
+                  <h4 className="font-semibold text-gray-900">{link.label}</h4>
+                  <p className="mt-2 text-sm text-gray-600">
+                    {link.description}
+                  </p>
+                  <p className="mt-3 text-sm text-gray-600">
+                    Authority: {link.authority}
+                  </p>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 inline-flex items-center gap-1 font-semibold text-primary-700 underline underline-offset-2"
+                  >
+                    Open service link{' '}
+                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <SourceMeta source={link.source} />
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-900">
+              No Lal-lo-specific online application or payment links have been
+              verified yet. Use the source-backed guide and contact the
+              responsible office before submitting documents or payment.
+            </div>
+          )}
         </div>
       </div>
     </section>

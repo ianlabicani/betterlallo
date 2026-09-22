@@ -63,3 +63,21 @@ categories:
     slug: 'housing-land-use'
     description: 'Confirm zoning, building, occupancy, housing, and land-use requirements before applying or building.'
     icon: 'Home'
+
+  # Certificates and Civil Registry
+  - category: 'Certificates & Vital Records'
+    slug: 'certificates'
+    description: 'Find source-backed guidance for civil-registry records, certificates, and local clearance questions.'
+    icon: 'FileCheck2'
+
+  # Taxes and payments
+  - category: 'Tax Payments'
+    slug: 'tax-payments'
+    description: 'Start with verified references for municipal taxes, real property tax, receipts, and payment questions.'
+    icon: 'Receipt'
+
+  # Barangay services
+  - category: 'Barangay Services'
+    slug: 'barangay-services'
+    description: 'Prepare for barangay clearances and local requests while keeping unpublished fees and requirements clearly pending.'
+    icon: 'Landmark'

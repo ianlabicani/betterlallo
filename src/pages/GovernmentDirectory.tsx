@@ -10,7 +10,10 @@ import type { DepartmentRecord } from '../types/civic';
 
 function DirectoryCard({ record }: { record: DepartmentRecord }) {
   return (
-    <article className="flex h-full flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+    <article
+      id={record.slug}
+      className="flex h-full scroll-mt-36 flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
+    >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-gray-900">{record.name}</h3>
         <VerificationBadge status={record.status} />

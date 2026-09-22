@@ -1,0 +1,6 @@
+# Barangay services category pages for Lal-lo.
+
+pages:
+  - name: 'Barangay clearance'
+    slug: 'barangay-clearance'
+    description: 'A practical checklist for confirming the issuing barangay, current requirements, fee, and release process.'
