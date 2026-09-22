@@ -15,6 +15,7 @@ import Officials from './pages/Officials';
 import Statistics from './pages/Statistics';
 import OpenLGU from './pages/OpenLGU';
 import Transparency from './pages/Transparency';
+import { WeatherProvider } from './components/civic/WeatherProvider';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <HelmetProvider>
       <Router>
         <NuqsAdapter>
+          <WeatherProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
             <ScrollToTop />
@@ -59,6 +61,7 @@ function App() {
             </Routes>
             <Footer />
           </div>
+          </WeatherProvider>
         </NuqsAdapter>
       </Router>
     </HelmetProvider>
