@@ -5,6 +5,7 @@ import type { LanguageType } from '../../types/index';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n/languages';
+import NavbarWeather from '../civic/NavbarWeather';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -146,6 +147,7 @@ const Navbar: React.FC = () => {
             ))}
           </div>
           <div className="hidden lg:flex items-center space-x-6">
+            <NavbarWeather />
             <Link
               to="/about"
               className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors"
@@ -185,6 +187,7 @@ const Navbar: React.FC = () => {
         className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}
       >
         <div className="container mx-auto px-2 pt-2 pb-4 space-y-1 border-t border-gray-200 bg-white">
+          {isOpen && <NavbarWeather mobile />}
           {mainNavigation.map(item => (
             <div key={item.label}>
               {item.children ? (
