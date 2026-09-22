@@ -28,7 +28,7 @@ const REQUEST_TIMEOUT_MS = 6000;
 const topics: Record<ChatTopic, string> = {
   greeting: 'A greeting or request for general help.',
   scope:
-    'A question about BetterLal-lo, its independence, or what the portal can do.',
+    'A question about BetterLal-lo, the basic overview of Lal-lo, its location or identity, its independence, or what the portal can do. A short request such as "about Lal-lo" belongs here.',
   services:
     'A question about local services, service records, requirements, fees, or steps. This includes broad requests such as "What services are listed?" or "Which services can I browse?".',
   contacts:
@@ -64,7 +64,7 @@ const sourceFamilies: Record<ChatSourceFamily, string> = {
 
 const lookupTypes: Record<ChatLookupType, string> = {
   exact_record:
-    'The visitor asks about one named record, service, office, statistic, site, or the documented origin/history of one named place.',
+    'The visitor asks about one named record, service, office, statistic, site, a short overview such as "about Lal-lo", or the documented origin/history of one named place.',
   list: 'The visitor asks for a list or overview of several supported records, including a general service-directory question such as "What services are listed?".',
   search:
     'The visitor needs a source-backed search across local guides or records and has not named one specific record or historical place.',
@@ -362,7 +362,7 @@ function routeQuestions(
   catalog: ReturnType<typeof getSourceCatalog>
 ): Record<string, Record<string, unknown>> {
   const recordCriteria: Record<string, string | null> = {
-    none: 'No one supplied record is clearly requested and the visitor is not asking about the documented history or origin of a supplied place.',
+    none: 'No one supplied record is clearly requested and the visitor is not asking for a short overview such as "about Lal-lo" or the documented history or origin of a supplied place.',
     unclear: 'The requested record is not clear enough to select safely.',
   };
 
@@ -389,7 +389,7 @@ function routeQuestions(
       languageContexts
     ),
     record_id: choiceQuestion(
-      'Does the visitor clearly name one supplied BetterLal-lo record, or ask about the documented history or origin represented by one supplied heritage record?',
+      'Does the visitor clearly name one supplied BetterLal-lo record, ask for a short overview such as "about Lal-lo", or ask about the documented history or origin represented by one supplied heritage record?',
       recordCriteria
     ),
     is_spam: noulQuestion(
@@ -409,7 +409,8 @@ function evidenceQuestions(
   evidence: PublicChatEvidence[],
   collectionLookup = false,
   policyLookup = false,
-  heritageLookup = false
+  heritageLookup = false,
+  overviewLookup = false
 ): Record<string, Record<string, unknown>> {
   const questions: Record<string, Record<string, unknown>> = {};
 
@@ -426,17 +427,23 @@ function evidenceQuestions(
           ? `Could the approved BetterLal-lo FAQ policy record answer how information is verified without adding outside facts? Candidate: ${item.title}. Summary: ${item.summary}.`
           : heritageLookup
             ? `Could this approved BetterLal-lo historical record answer the visitor's question about Lal-lo's origin or early history without adding outside facts? Candidate: ${item.title}. Summary: ${item.summary}.`
-            : `Could candidate evidence ${index + 1} help answer the current visitor question? Candidate: ${item.title}. Summary: ${item.summary}.`,
+            : overviewLookup
+              ? `Could this approved BetterLal-lo overview guide answer the short request "about Lal-lo" by identifying the municipality and the portal's bounded scope without adding outside facts? Candidate: ${item.title}. Summary: ${item.summary}.`
+              : `Could candidate evidence ${index + 1} help answer the current visitor question? Candidate: ${item.title}. Summary: ${item.summary}.`,
         policyLookup
           ? 'The candidate directly explains the portal’s source-review policy and supports a safe answer.'
           : heritageLookup
             ? 'The candidate directly documents the requested Lal-lo origin or early-history fact and supports a source-backed answer.'
-            : 'The candidate directly supports the requested answer and is within the visitor’s question scope.',
+            : overviewLookup
+              ? 'The candidate directly identifies Lal-lo and provides the approved overview of the municipality and BetterLal-lo’s bounded scope.'
+              : 'The candidate directly supports the requested answer and is within the visitor’s question scope.',
         policyLookup
           ? 'The candidate does not establish the portal’s verification policy or would require guessing.'
           : heritageLookup
             ? 'The candidate does not establish the requested Lal-lo origin or early-history fact or would require guessing.'
-            : 'The candidate is unrelated, insufficient, or outside the requested scope.'
+            : overviewLookup
+              ? 'The candidate does not establish the approved Lal-lo overview or would require guessing beyond its stated scope.'
+              : 'The candidate is unrelated, insufficient, or outside the requested scope.'
       );
     });
   }
@@ -459,11 +466,17 @@ function evidenceQuestions(
             'The historical record is sufficient for a concise source-backed answer and does not require invented context.',
             'The historical record does not establish the requested origin or early-history fact.'
           )
-        : noulQuestion(
-            'Is the supplied candidate evidence sufficient to answer the current question accurately without guessing or adding outside facts?',
-            'The approved candidate evidence is sufficient for a source-backed answer.',
-            'The evidence is incomplete, stale, pending, or otherwise insufficient for a reliable answer.'
-          );
+        : overviewLookup
+          ? noulQuestion(
+              'Can this approved BetterLal-lo overview guide answer the short request "about Lal-lo" by identifying the municipality and the portal’s bounded scope using only its stated source-backed facts?',
+              'The overview guide is sufficient for a concise source-backed answer about Lal-lo and does not require invented context.',
+              'The overview guide does not establish a reliable answer to the visitor’s question.'
+            )
+          : noulQuestion(
+              'Is the supplied candidate evidence sufficient to answer the current question accurately without guessing or adding outside facts?',
+              'The approved candidate evidence is sufficient for a source-backed answer.',
+              'The evidence is incomplete, stale, pending, or otherwise insufficient for a reliable answer.'
+            );
   questions.conflict = noulQuestion(
     'Do the supplied candidate records conflict on the specific fact the visitor is asking about?',
     'The records disagree or establish different scopes that must remain visible.',
@@ -619,11 +632,11 @@ function renderAnswer(context: ChatAnswerContext): PublicChatResponse {
       : 'Here is the source-backed information available in BetterLal-lo:';
   const caution =
     language === 'fil'
-      ? topic === 'heritage'
-        ? 'Suriin ang naka-link na historical source para sa buong konteksto; hindi inilalahad dito ang mga detalyeng hindi nito itinataguyod.'
+      ? topic === 'heritage' || topic === 'scope'
+        ? 'Suriin ang naka-link na source para sa buong konteksto; hindi inilalahad dito ang mga detalyeng hindi nito itinataguyod.'
         : 'Kumpirmahin ang kasalukuyang availability, requirements, fees, at schedules sa responsableng tanggapan bago gumawa ng transaksyon.'
-      : topic === 'heritage'
-        ? 'Review the linked historical source for full context; this answer does not add details that the source does not establish.'
+      : topic === 'heritage' || topic === 'scope'
+        ? 'Review the linked source for full context; this answer does not add details that the source does not establish.'
         : 'Confirm current availability, requirements, fees, and schedules with the responsible office before making a transaction.';
 
   if (lookupType === 'list') {
@@ -804,6 +817,9 @@ export async function answerPublicChat(
     const policyLookup = topic === 'faq' || lookupType === 'scope_policy';
     const heritageLookup = topic === 'heritage';
     const selectedRecord = recordAnswer?.choice;
+    const overviewLookup =
+      topic === 'scope' &&
+      selectedRecord === 'guide:government-overview-about-lallo';
     const selectedRecordConfidence = recordAnswer?.confidence ?? 0;
     const recordId =
       !isServiceList &&
@@ -879,10 +895,21 @@ export async function answerPublicChat(
                 policy_scope:
                   'This is a code-defined BetterLal-lo FAQ policy record. It is authoritative for explaining the portal’s own source-review and pending-data rules; it does not claim an external certification.',
               }
-            : {}),
+            : overviewLookup
+              ? {
+                  overview_scope:
+                    'The approved candidate is the BetterLal-lo overview guide. It may answer the short request "about Lal-lo" with only the municipality identity, location, and the portal’s stated independent scope.',
+                }
+              : {}),
         candidate_evidence: evidenceState,
       },
-      evidenceQuestions(evidence, isServiceList, policyLookup, heritageLookup),
+      evidenceQuestions(
+        evidence,
+        isServiceList,
+        policyLookup,
+        heritageLookup,
+        overviewLookup
+      ),
       environment,
       fetchImpl
     );

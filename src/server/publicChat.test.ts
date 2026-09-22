@@ -142,6 +142,12 @@ describe('public chat knowledge', () => {
 
     expect(results[0]?.id).toBe('heritage:lalloc-nueva-segovia');
   });
+
+  it('finds the approved Lal-lo overview guide', () => {
+    const results = searchPublicChatRecords('about lallo', 'local_guides', 3);
+
+    expect(results[0]?.id).toBe('guide:government-overview-about-lallo');
+  });
 });
 
 describe('public chat request validation', () => {
@@ -274,6 +280,46 @@ describe('public chat Jev workflow', () => {
     expect(result.kind).toBe('answer');
     expect(result.reply.text).toContain('named Nueva Segovia');
     expect(result.reply.sources[0]?.label).toContain('National Historical');
+  });
+
+  it('answers the short Lal-lo overview prompt from the approved guide', async () => {
+    const result = await answerPublicChat(
+      validRequest({ message: 'about lallo' }),
+      {
+        env: {
+          TYPESAFE_API_KEY: 'test-key',
+          TYPESAFE_CHAT_ENABLED: 'true',
+          TYPESAFE_MODEL: 'jev-latest',
+        },
+        fetchImpl: queuedFetch([
+          routeResponse({
+            topic: { type: 'choice', choice: 'scope', confidence: 0.95 },
+            source_family: {
+              type: 'choice',
+              choice: 'local_guides',
+              confidence: 0.95,
+            },
+            lookup_type: {
+              type: 'choice',
+              choice: 'exact_record',
+              confidence: 0.95,
+            },
+            record_id: {
+              type: 'choice',
+              choice: 'guide:government-overview-about-lallo',
+              confidence: 0.95,
+            },
+          }),
+          evidenceResponse(),
+        ]),
+      }
+    );
+
+    expect(result.kind).toBe('answer');
+    expect(result.reply.text).toContain(
+      'municipality in the province of Cagayan'
+    );
+    expect(result.reply.links[0]?.url).toBe('/government/overview/about-lallo');
   });
 
   it('routes to a verified service and performs an evidence check', async () => {
