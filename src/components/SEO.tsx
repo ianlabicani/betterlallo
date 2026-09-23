@@ -73,9 +73,6 @@ export default function SEO({
       {/* Canonical URL */}
       <link rel="canonical" href={fullUrl} />
 
-      {/* Favicon */}
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
       {/* Preconnect to external domains */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
