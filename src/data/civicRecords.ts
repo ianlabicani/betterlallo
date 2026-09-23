@@ -402,7 +402,7 @@ export const officialSources = {
   }),
   lalloCitizenCharter2026: source({
     label: 'Municipality of Lal-lo Citizen’s Charter 2026, 1st Edition',
-    url: 'https://drive.google.com/file/d/1eN3iHfY1Kl7m7FeNN4-g6RkhWvR0fYzYzH/view?usp=drivesdk',
+    url: 'https://drive.google.com/file/d/1eN3iHfY1Kl7m7FeNN4-g6RkhWvR0fYzH/view?usp=drivesdk',
     status: 'verified',
     authority: 'municipal',
     jurisdiction: 'Municipality of Lal-lo, Cagayan',
