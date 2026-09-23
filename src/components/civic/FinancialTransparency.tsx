@@ -330,6 +330,7 @@ export default function FinancialTransparency({
               <p className="mt-2 text-xs text-gray-500">
                 Source-reported annual amount
               </p>
+              <SourceMeta source={selected.source} compact />
             </article>
           ))}
         </div>
@@ -347,6 +348,7 @@ export default function FinancialTransparency({
             The bars are visual summaries. The accessible values and percentages
             are repeated in the text labels and source table below.
           </p>
+          <SourceMeta source={selected.source} compact />
         </div>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <MetricTable
@@ -371,6 +373,7 @@ export default function FinancialTransparency({
         >
           Annual data table
         </h2>
+        <SourceMeta source={selected.source} compact />
         <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
           <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
             <caption className="sr-only">

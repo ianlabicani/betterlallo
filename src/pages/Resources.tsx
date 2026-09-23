@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 import SEO from '../components/SEO';
-import { VerificationBadge } from '../components/civic/SourceMeta';
+import { SourceMeta, VerificationBadge } from '../components/civic/SourceMeta';
 import { verifiedResourceGroups } from '../data/verifiedResources';
 import type {
   ResourceCollectionLink,
@@ -116,6 +116,7 @@ function ResourceCard({ resource }: { resource: VerifiedResourceEntry }) {
       <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-gray-600">
         {resource.description}
       </p>
+      <SourceMeta source={resource.source} compact />
 
       <div className="mt-auto flex flex-wrap gap-2 pt-5">
         <ResourceAction

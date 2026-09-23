@@ -6,6 +6,7 @@ import {
   financialSnapshots,
   statisticRecords,
 } from '../data/civicRecords';
+import { buildBarangayCsv } from '../lib/barangayCsv';
 import WeatherMapSection from '../components/civic/WeatherMapSection';
 
 function formatValue(value: string | number | undefined) {
@@ -27,32 +28,7 @@ const municipalPopulation =
     statisticRecords.find(statistic => statistic.id === 'population')?.value
   ) || barangayRecords.reduce((total, record) => total + record.population, 0);
 
-const barangayCsv = [
-  [
-    'Barangay',
-    'PSGC code',
-    'Population',
-    'Household population',
-    'Households',
-    'Classification',
-  ],
-  ...barangayRecords.map(record => [
-    record.name,
-    record.code,
-    record.population,
-    record.householdPopulation,
-    record.households,
-    record.classification,
-  ]),
-]
-  .map(row => row.map(escapeCell).join(','))
-  .join('\n');
-
-const barangayCsvHref = `data:text/csv;charset=utf-8,${encodeURIComponent(barangayCsv)}`;
-
-function escapeCell(value: string | number) {
-  return `"${String(value).replaceAll('"', '""')}"`;
-}
+const barangayCsvHref = `data:text/csv;charset=utf-8,${encodeURIComponent(buildBarangayCsv(barangayRecords))}`;
 
 export default function Statistics() {
   return (
@@ -119,6 +95,7 @@ export default function Statistics() {
                   )}
                 </p>
                 <p className="mt-2 text-xs text-gray-500">{statistic.period}</p>
+                <SourceMeta source={statistic.source} compact />
               </article>
             ))}
           </div>

@@ -41,16 +41,16 @@ export function SourceMeta({
 }) {
   if (compact) {
     return (
-      <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-gray-500">
-        <VerificationBadge status={source.status} compact />
+      <div className="mt-4 flex flex-wrap items-center text-xs text-gray-600">
+        <span className="font-semibold">Source:&nbsp;</span>
         <a
           href={source.url}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Open source details: ${source.label}`}
+          aria-label={`Open source: ${source.label}`}
           className="inline-flex items-center gap-1 font-semibold text-gray-600 underline underline-offset-2 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         >
-          Source details
+          {source.label}
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
         </a>
       </div>
