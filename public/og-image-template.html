@@ -7,7 +7,7 @@
     <style>
       body {
         margin: 0;
-        padding: 0;
+        padding: 48px;
         font-family:
           'Inter',
           -apple-system,
@@ -20,16 +20,32 @@
         height: 630px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         color: white;
+        box-sizing: border-box;
       }
 
       .container {
-        text-align: center;
-        padding: 40px;
+        display: grid;
+        grid-template-columns: 440px 1fr;
+        align-items: center;
+        gap: 44px;
+        width: 100%;
       }
 
-      .logo {
+      .brand-image {
+        display: block;
+        width: 440px;
+        height: 440px;
+        object-fit: contain;
+        border-radius: 32px;
+      }
+
+      .copy {
+        text-align: left;
+      }
+
+      .title {
         font-size: 48px;
         font-weight: bold;
         margin-bottom: 20px;
@@ -44,7 +60,7 @@
       .description {
         font-size: 18px;
         opacity: 0.8;
-        max-width: 800px;
+        max-width: 600px;
         line-height: 1.4;
       }
 
@@ -60,14 +76,21 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="logo">BetterLal-lo</div>
-      <div class="subtitle">Civic information for Lal-lo, Cagayan</div>
-      <div class="description">
-        Find public services, local offices, barangays, and transparency
-        sources in one community portal.
+    <main class="container">
+      <img
+        class="brand-image"
+        src="./better-lallo-logo.png"
+        alt=""
+      />
+      <div class="copy">
+        <div class="title">BetterLal-lo</div>
+        <div class="subtitle">Civic information for Lal-lo, Cagayan</div>
+        <div class="description">
+          Find public services, local offices, barangays, and transparency
+          sources in one community portal.
+        </div>
+        <div class="badge">Municipality of Lal-lo · Cagayan Valley</div>
       </div>
-      <div class="badge">Municipality of Lal-lo · Cagayan Valley</div>
-    </div>
+    </main>
   </body>
 </html>
