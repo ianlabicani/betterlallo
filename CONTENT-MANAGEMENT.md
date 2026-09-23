@@ -270,6 +270,12 @@ _Italic text_
 
 ## Best Practices
 
+### Source Credits Before Publishing
+
+Before publishing government facts, data, news, or public resources, add a named source link where the information appears. Use the direct official page or document that supports the claim, and include its authority, jurisdiction, relevant publication date or data period, and last-reviewed date. See the [Content Writing Guide](CONTENT-GUIDE.md#source-attribution-and-review) for the page note format.
+
+If a direct source does not establish a Lal-lo-specific detail, mark it as pending or leave it out. Do not treat a general agency homepage as proof of a local fee, requirement, contact, schedule, or project. Keep preliminary or historical records qualified.
+
 ### Content Writing Tips
 
 1. **Use Clear, Simple Language**

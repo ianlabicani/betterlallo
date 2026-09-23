@@ -25,6 +25,17 @@ This guide helps content contributors create clear, helpful, and accessible cont
 - Provide current contact information
 - Update content regularly
 
+## Source Attribution and Review
+
+- Credit every published government fact, data value, news item, and public resource where readers encounter it. Name the publisher and link directly to the official page or document that supports the claim.
+- Identify the source's authority and the jurisdiction it covers. Include the publication date or data period when relevant, and record when the source was last reviewed.
+- Keep historical, preliminary, or otherwise limited records visibly qualified. A general agency homepage is not evidence for a Lal-lo-specific fee, requirement, contact, schedule, or project.
+- If a direct source is unavailable or official sources conflict, mark the detail as pending or leave it unpublished. Do not infer a source, period, or current status.
+
+At the end of every source-dependent page, add a section titled **Source and update note**. Name the publisher and page or document, link its direct official URL, identify its authority and jurisdiction, include the publication date or data period when relevant, and record the last-reviewed date in YYYY-MM-DD format.
+
+For downloadable data, include the source name, direct source URL, data period, and last-reviewed date in the exported file so the attribution travels with the data.
+
 ## 📋 Content Structure
 
 ### Department/Office Page Template
