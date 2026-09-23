@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  CheckCircle2,
-  Facebook,
-  Instagram,
-  Twitter,
-  Youtube,
-} from 'lucide-react';
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { footerNavigation } from '../../data/navigation';
+import BrandLogo from '../BrandLogo';
 
 const socialIcons = {
   Facebook: Facebook,
@@ -28,7 +23,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <CheckCircle2 className="h-12 w-12 mr-3" aria-hidden="true" />
+              <BrandLogo
+                alt=""
+                className="h-12 w-12 mr-3 shrink-0 object-contain"
+              />
               <div>
                 <div className="font-bold">{t('site_name')}</div>
                 <div className="text-xs text-gray-400">

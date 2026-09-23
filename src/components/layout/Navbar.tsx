@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { X, Menu, ChevronDown, Globe, CheckCircle2 } from 'lucide-react';
+import { X, Menu, ChevronDown, Globe } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 import type { LanguageType } from '../../types/index';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n/languages';
 import NavbarWeather from '../civic/NavbarWeather';
+import BrandLogo from '../BrandLogo';
 
 const LALLO_TIME_ZONE = 'Asia/Manila';
 
@@ -150,12 +151,10 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <CheckCircle2 className="h-12 w-12 mr-3" />
-              {/* <img
-                src="/ph-logo.webp"
-                alt="Philippines Coat of Arms"
-                className="h-12 w-12 mr-3"
-              /> */}
+              <BrandLogo
+                alt=""
+                className="h-12 w-12 mr-3 shrink-0 object-contain"
+              />
               <div>
                 <div className="text-black font-bold">
                   {import.meta.env.VITE_GOVERNMENT_NAME}
