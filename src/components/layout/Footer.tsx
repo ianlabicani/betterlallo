@@ -90,6 +90,17 @@ const Footer: React.FC = () => {
           ))}
         </div>
 
+        <div className="mt-8 flex justify-center">
+          <p className="flex w-full max-w-3xl flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-3xl border border-gray-700 bg-gray-800 px-5 py-5 text-center sm:px-8 sm:py-6">
+            <span className="text-lg text-gray-300 sm:text-2xl">
+              {t('footer.cost_to_people')}
+            </span>
+            <span className="whitespace-nowrap text-xl font-bold text-green-500 sm:text-2xl">
+              ₱0
+            </span>
+          </p>
+        </div>
+
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>

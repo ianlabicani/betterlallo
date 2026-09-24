@@ -29,6 +29,7 @@
     "currentdatetime": "Kasalukuyang petsa at oras sa Lal-lo: {{date}}, {{time}}"
   },
   "footer": {
+    "cost_to_people": "Gastos para sa mga mamamayan ng Pilipinas:",
     "copyright": "© 2026 BetterLal-lo. Community-run na portal ng pampublikong impormasyon."
   }
 }

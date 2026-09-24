@@ -29,6 +29,7 @@
     "currentdatetime": "Current date and time in Lal-lo: {{date}}, {{time}}"
   },
   "footer": {
+    "cost_to_people": "Cost to the People of the Philippines:",
     "copyright": "© 2026 BetterLal-lo. Community-run public information portal."
   }
 }
