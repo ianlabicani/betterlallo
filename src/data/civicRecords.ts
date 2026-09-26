@@ -100,16 +100,29 @@ export const officialSources = {
     verificationNote:
       'The article spells the mayor’s name as Florence Oliver Pascual and identifies heritage projects in Tucalana and Centro.',
   }),
+  provincialHistory: source({
+    label: 'Provincial Government of Cagayan: History',
+    url: 'https://cagayan.gov.ph/history/',
+    status: 'verified',
+    authority: 'provincial',
+    jurisdiction: 'Cagayan Province; Lal-lo history context',
+    sourceType: 'history',
+    dataPeriod: 'Provincial history page',
+    verificationNote:
+      'The page identifies Lal-lo as the former capital and describes shell-midden sites in Lal-lo and Gattaran as part of Cagayan’s early history.',
+  }),
   nhcpHistory: source({
-    label: 'National Historical Commission of the Philippines registry',
-    url: 'https://philhistoricsites.nhcp.gov.ph/registry_database/lalloc-nueva-segovia/',
+    label:
+      'National Historical Commission of the Philippines: Lalloc–Nueva Segovia',
+    url: 'https://nhcphistoricsites.blogspot.com/2011/11/church-of-nueva-segovia.html',
     status: 'verified',
     authority: 'national',
     jurisdiction: 'Lal-lo, Cagayan',
     sourceType: 'history',
-    dataPeriod: 'NHCP registry entry',
+    lastVerified: '2026-09-26',
+    dataPeriod: 'NHCP Historic Sites article; marker date 1939',
     verificationNote:
-      'The registry records that Lalloc was named Nueva Segovia in 1581 and identifies its former role as the seat of the Diocese of Nueva Segovia and the capital of Cagayan.',
+      'The NHCP Historic Sites page reproduces the 1939 Lalloc–Nueva Segovia marker text and identifies the page as a National Historical Commission of the Philippines source.',
   }),
   pdrrmo: source({
     label: 'Cagayan PDRRMO: We Care Lal-lo program and contacts',

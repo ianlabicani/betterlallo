@@ -71,11 +71,11 @@ function ResourceAction({
 
 function CollectionLink({ link }: { link: ResourceCollectionLink }) {
   return (
-    <li>
+    <li className="min-w-0">
       {link.linkType === 'internal' ? (
         <Link
           to={link.href}
-          className="group inline-flex items-center gap-1 text-sm font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          className="group inline-flex max-w-full items-start gap-1 text-sm font-semibold leading-snug text-primary-700 underline underline-offset-2 hover:text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         >
           {link.label}
           <ArrowRight
@@ -88,7 +88,7 @@ function CollectionLink({ link }: { link: ResourceCollectionLink }) {
           href={link.href}
           target="_blank"
           rel="noreferrer"
-          className="group inline-flex items-center gap-1 text-sm font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          className="group inline-flex max-w-full items-start gap-1 text-sm font-semibold leading-snug text-primary-700 underline underline-offset-2 hover:text-primary-950 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         >
           {link.label}
           <ExternalLink
@@ -97,7 +97,7 @@ function CollectionLink({ link }: { link: ResourceCollectionLink }) {
           />
         </a>
       )}
-      <p className="mt-1 text-xs leading-relaxed text-gray-500">
+      <p className="mt-1 max-w-[32ch] text-xs leading-relaxed text-gray-500">
         {link.description}
       </p>
     </li>
@@ -211,8 +211,8 @@ export default function Resources() {
                   className="scroll-mt-36"
                   aria-labelledby={`${group.id}-heading`}
                 >
-                  <div className="flex flex-col gap-4 border-b border-gray-200 pb-5 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-3xl">
+                  <div className="grid gap-6 border-b border-gray-200 pb-6 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,31rem)] lg:items-start lg:gap-12">
+                    <div className="max-w-2xl">
                       <div className="flex flex-wrap items-center gap-3">
                         <h2
                           id={`${group.id}-heading`}
@@ -228,7 +228,7 @@ export default function Resources() {
                     </div>
 
                     {group.collectionLinks.length > 0 && (
-                      <ul className="flex flex-wrap gap-x-5 gap-y-2 lg:max-w-md lg:justify-end">
+                      <ul className="grid gap-x-6 gap-y-4 lg:grid-cols-2 lg:border-l lg:border-gray-200 lg:pl-7">
                         {group.collectionLinks.map(link => (
                           <CollectionLink key={link.id} link={link} />
                         ))}

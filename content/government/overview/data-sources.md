@@ -40,6 +40,6 @@ When sources conflict, the page should show the conflict or defer to the most re
 - [Cagayan PDRRMO](https://pdrrmo.cagayan.gov.ph/)
 - [PSA OpenSTAT 2024 Population tables](https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__1A__PO_2024/?tablelist=true)
 - [PhilGEPS Lal-lo notice 13112765](https://notices.philgeps.gov.ph/GEPSNONPILOT/Tender/PrintableBidNoticeAbstractUI.aspx?refid=13112765)
-- [NHCP Lalloc-Nueva Segovia registry entry](https://philhistoricsites.nhcp.gov.ph/registry_database/lalloc-nueva-segovia/)
+- [NHCP Historic Sites Lalloc-Nueva Segovia entry](https://nhcphistoricsites.blogspot.com/2011/11/church-of-nueva-segovia.html)
 
 Checked: 21 September 2026

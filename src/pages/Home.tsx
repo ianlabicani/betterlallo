@@ -6,6 +6,7 @@ import QuickAccessSection from '../components/home/QuickAccessSection';
 import WeatherMapSection from '../components/civic/WeatherMapSection';
 import SEO from '../components/SEO';
 import UpdatesSection from '../components/home/UpdatesSection';
+import HistorySection from '../components/home/HistorySection';
 
 const Home: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
         <ServicesSection />
         <GovernmentActivitySection />
         <WeatherMapSection />
+        <HistorySection />
       </main>
     </>
   );
