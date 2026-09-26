@@ -36,19 +36,28 @@ export default function GovernmentActivitySection({
     const IconComponent = LucideIcons[
       category as keyof typeof LucideIcons
     ] as React.ComponentType<{ className?: string }>;
-    return IconComponent ? <IconComponent className="h-6 w-6" /> : null;
+    return IconComponent ? (
+      <IconComponent className="h-6 w-6" aria-hidden="true" />
+    ) : null;
   };
 
   const displayedCategories = governmentCategories.categories as Category[];
 
   return (
-    <Section id="government">
-      <Heading level={2}>{title || t('governmentActivity.title')}</Heading>
-      <Text className="text-gray-600 mb-6">
-        {description || t('governmentActivity.description')}
-      </Text>
+    <Section
+      id="government"
+      className="border-t border-gray-200 bg-gray-50 py-12 sm:py-14"
+    >
+      <div className="mb-8 max-w-3xl border-l-4 border-accent-500 pl-4">
+        <Heading level={2} className="leading-tight">
+          {title || t('governmentActivity.title')}
+        </Heading>
+        <p className="max-w-2xl leading-relaxed text-gray-600">
+          {description || t('governmentActivity.description')}
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {displayedCategories.map(category => (
           <Card
             key={category.slug}
@@ -57,15 +66,15 @@ export default function GovernmentActivitySection({
           >
             <Link
               to={`/government/${category.slug}`}
-              className="mt-auto text-primary-600 hover:text-primary-700 font-medium transition-colors inline-flex items-center"
+              className="block h-full text-primary-600 transition-colors hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
             >
-              <CardContent className="flex flex-col h-full p-6">
+              <CardContent className="flex h-full flex-col p-6">
                 <div className="flex gap-2">
-                  <div className="bg-primary-100 text-primary-600 p-3 rounded-md mb-4 self-start">
+                  <div className="mb-4 self-start rounded-md bg-primary-100 p-3 text-primary-600">
                     {getIcon(category.icon)}
                   </div>
 
-                  <h3 className="text-lg font-semibold mb-4 text-gray-900 self-center">
+                  <h3 className="self-center text-lg font-semibold text-gray-900">
                     {category.category}
                   </h3>
                 </div>

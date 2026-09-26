@@ -28,10 +28,12 @@ const highlights = [
 
 export default function PortalHighlights() {
   return (
-    <Section className="bg-primary-50">
-      <div className="mb-6 max-w-2xl">
-        <Heading level={2}>Start with trusted local information</Heading>
-        <p className="text-gray-700 leading-relaxed">
+    <Section className="border-b border-primary-100 bg-primary-50 py-10 sm:py-12">
+      <div className="mb-7 max-w-3xl border-l-4 border-accent-500 pl-4 sm:mb-8">
+        <Heading level={2} className="leading-tight">
+          Start with trusted local information
+        </Heading>
+        <p className="max-w-2xl leading-relaxed text-gray-700">
           BetterLal-lo organizes public records in plain language so residents
           can find the right office, service, or source more quickly.
         </p>
@@ -41,7 +43,7 @@ export default function PortalHighlights() {
           <Link
             key={title}
             to={href}
-            className="group rounded-lg border border-primary-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="group rounded-lg border border-primary-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4"
           >
             <Icon
               className="mb-4 h-7 w-7 text-primary-600"

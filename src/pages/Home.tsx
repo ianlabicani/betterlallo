@@ -18,10 +18,10 @@ const Home: React.FC = () => {
       <main className="flex-grow">
         <Hero />
         <QuickAccessSection />
+        <UpdatesSection />
         <PortalHighlights />
         <ServicesSection />
         <GovernmentActivitySection />
-        <UpdatesSection />
         <WeatherMapSection />
       </main>
     </>
