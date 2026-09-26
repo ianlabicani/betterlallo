@@ -22,7 +22,8 @@ const Government: React.FC = () => {
     layout: 'list',
     pages: [],
   });
-  const [loading, setLoading] = useState(false);
+  const [loadedCategory, setLoadedCategory] = useState<string | null>(null);
+  const [categoryError, setCategoryError] = useState<string | null>(null);
   const subcategories: Subcategory[] = categoryIndex.pages;
 
   const getCategory = () => {
@@ -33,15 +34,35 @@ const Government: React.FC = () => {
   const Icon = LucideIcons[
     categoryData?.icon as keyof typeof LucideIcons
   ] as React.ComponentType<{ className?: string }>;
+  const loading = Boolean(
+    category && categoryData && loadedCategory !== category
+  );
 
   useEffect(() => {
-    if (category && categoryData) {
-      setLoading(true);
-      getCategorySubcategories(category)
-        .then(setCategoryIndex)
-        .catch(console.error)
-        .finally(() => setLoading(false));
-    }
+    if (!category || !categoryData) return;
+
+    let cancelled = false;
+
+    getCategorySubcategories(category)
+      .then(index => {
+        if (cancelled) return;
+        setCategoryIndex(index);
+        setCategoryError(null);
+        setLoadedCategory(category);
+      })
+      .catch(error => {
+        if (cancelled) return;
+        setCategoryError(
+          error instanceof Error
+            ? error.message
+            : 'Failed to load government category'
+        );
+        setLoadedCategory(category);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [category, categoryData]);
 
   if (!category) {
@@ -90,6 +111,13 @@ const Government: React.FC = () => {
           <div className="flex justify-center items-center p-8">
             <Text>Loading services...</Text>
           </div>
+        ) : categoryError ? (
+          <Banner
+            type="error"
+            title="Unable to load government category"
+            description={categoryError}
+            icon
+          />
         ) : (
           <>
             {categoryIndex.title && (

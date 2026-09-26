@@ -96,8 +96,10 @@ export async function loadCategoryIndex(
       pages: indexData.pages || [],
     };
   } catch (parseError) {
-    console.warn(`Failed to parse category ${categorySlug}:`, parseError);
-    return { layout: 'list', pages: [] };
+    const reason = parseError instanceof Error ? `: ${parseError.message}` : '';
+    throw new Error(`Failed to parse category ${categorySlug}${reason}`, {
+      cause: parseError,
+    });
   }
 }
 
