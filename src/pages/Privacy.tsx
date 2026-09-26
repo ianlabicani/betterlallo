@@ -14,7 +14,7 @@ export default function Privacy() {
           Legal and data use
         </p>
         <h1 className="text-3xl font-bold text-gray-900">Privacy notice</h1>
-        <p className="mt-3 text-sm text-gray-500">Last updated: 2026-09-21</p>
+        <p className="mt-3 text-sm text-gray-500">Last updated: 2026-09-26</p>
         <div className="prose prose-gray mt-8 max-w-none">
           <h2>What this portal is</h2>
           <p>
@@ -47,6 +47,21 @@ export default function Privacy() {
             Pages link to government sites, maps, and GitHub. Those services
             have their own policies. Review the destination before sharing
             documents or personal details.
+          </p>
+          <p>
+            The home page includes an embedded feed from the LGU Lal-lo Facebook
+            page. When the feed loads, your browser connects to Meta, which may
+            receive technical request data and use cookies under its own
+            policies. See{' '}
+            <a
+              href="https://www.facebook.com/privacy/policy/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-primary-700"
+            >
+              Meta’s privacy policy
+            </a>
+            .
           </p>
           <h2>Questions and corrections</h2>
           <p>

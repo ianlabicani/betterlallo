@@ -1,6 +1,8 @@
 import type { NavigationItem } from '../types';
 import { governmentCategories, serviceCategories } from './yamlLoader';
 
+export const facebookPageUrl = 'https://www.facebook.com/LguLalloCagayan';
+
 export const mainNavigation: NavigationItem[] = [
   {
     label: 'Services',
@@ -116,5 +118,5 @@ export const footerNavigation = {
       ],
     },
   ],
-  socialLinks: [] as Array<{ label: string; href: string }>,
+  socialLinks: [{ label: 'Facebook', href: facebookPageUrl }],
 };
