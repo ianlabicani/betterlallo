@@ -8,6 +8,17 @@ export interface MunicipalityLocation {
   source: SourceRecord;
 }
 
+export function buildGoogleMapsSearchUrl(
+  location: Pick<MunicipalityLocation, 'latitude' | 'longitude'> | null
+): string | null {
+  if (!location) {
+    return null;
+  }
+
+  const query = `${location.latitude},${location.longitude}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
 export const lalloLocationSource: SourceRecord = {
   label: 'OpenStreetMap municipal hall feature',
   url: 'https://www.openstreetmap.org/way/315700644',
@@ -46,3 +57,5 @@ export const lalloLocation: MunicipalityLocation | null =
         source: lalloLocationSource,
       }
     : null;
+
+export const lalloGoogleMapsUrl = buildGoogleMapsSearchUrl(lalloLocation);

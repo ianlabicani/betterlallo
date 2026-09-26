@@ -1,6 +1,7 @@
 import {
   CircleAlert,
   CloudRain,
+  ExternalLink,
   MapPinned,
   RefreshCw,
   Wind,
@@ -17,6 +18,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import {
   lalloBoundarySource,
+  lalloGoogleMapsUrl,
   lalloLocation,
   lalloLocationSource,
 } from '../../data/location';
@@ -222,14 +224,28 @@ export default function WeatherMapSection() {
               )}
               <SourceMeta source={lalloBoundarySource} compact />
               {lalloLocation && (
-                <a
-                  href={lalloLocationSource.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-2 inline-block font-semibold text-primary-700 underline underline-offset-2"
-                >
-                  View Municipal Hall source
-                </a>
+                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                  {lalloGoogleMapsUrl && (
+                    <a
+                      href={lalloGoogleMapsUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Open Lal-lo Municipal Hall location in Google Maps"
+                      className="inline-flex items-center gap-1.5 rounded-md bg-primary-700 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                    >
+                      Open in Google Maps
+                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                  )}
+                  <a
+                    href={lalloLocationSource.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                  >
+                    View Municipal Hall source
+                  </a>
+                </div>
               )}
             </div>
           </div>
