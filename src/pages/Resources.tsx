@@ -71,7 +71,7 @@ function ResourceAction({
 
 function CollectionLink({ link }: { link: ResourceCollectionLink }) {
   return (
-    <li className="min-w-0">
+    <li className="flex min-h-full min-w-0 flex-col rounded-lg border border-gray-200 bg-gray-50/60 p-4 transition-colors hover:border-primary-300 hover:bg-white">
       {link.linkType === 'internal' ? (
         <Link
           to={link.href}
@@ -79,7 +79,7 @@ function CollectionLink({ link }: { link: ResourceCollectionLink }) {
         >
           {link.label}
           <ArrowRight
-            className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+            className="mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"
           />
         </Link>
@@ -92,7 +92,7 @@ function CollectionLink({ link }: { link: ResourceCollectionLink }) {
         >
           {link.label}
           <ExternalLink
-            className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+            className="mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"
           />
         </a>
@@ -211,8 +211,8 @@ export default function Resources() {
                   className="scroll-mt-36"
                   aria-labelledby={`${group.id}-heading`}
                 >
-                  <div className="grid gap-6 border-b border-gray-200 pb-6 lg:grid-cols-[minmax(0,1fr)_minmax(24rem,31rem)] lg:items-start lg:gap-12">
-                    <div className="max-w-2xl">
+                  <div className="border-b border-gray-200 pb-6">
+                    <div className="max-w-3xl">
                       <div className="flex flex-wrap items-center gap-3">
                         <h2
                           id={`${group.id}-heading`}
@@ -228,7 +228,7 @@ export default function Resources() {
                     </div>
 
                     {group.collectionLinks.length > 0 && (
-                      <ul className="grid gap-x-6 gap-y-4 lg:grid-cols-2 lg:border-l lg:border-gray-200 lg:pl-7">
+                      <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {group.collectionLinks.map(link => (
                           <CollectionLink key={link.id} link={link} />
                         ))}
