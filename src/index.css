@@ -142,3 +142,49 @@
 .sticky-table tbody tr:hover td:first-child {
   background-color: #f3f4f6;
 }
+
+/* Map marker styling: use a distinct civic pin so the configured hall location
+ * reads separately from the blue municipality boundary. */
+.lallo-hall-marker {
+  background: transparent;
+  border: 0;
+}
+
+.lallo-hall-marker__body {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #fff;
+  background: #f58900;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 4px 10px rgb(0 41 94 / 35%);
+  transform: rotate(-45deg);
+}
+
+.lallo-hall-marker__body::after {
+  position: absolute;
+  right: -1px;
+  bottom: -7px;
+  left: -1px;
+  height: 9px;
+  content: '';
+  background: #f58900;
+  clip-path: polygon(50% 100%, 38% 0, 62% 0);
+}
+
+.lallo-hall-marker__body svg {
+  position: relative;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(45deg);
+}

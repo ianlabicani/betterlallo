@@ -112,7 +112,7 @@ The portal currently links to the Provincial Government of Cagayan, PSA’s Lal-
 
 Run `npm run source-drafts` after adding an import candidate. The check validates source scope and review fields but does not publish or modify app data.
 
-Map and weather coordinates are public configuration values for the Lal-lo Municipal Hall OpenStreetMap feature. Open-Meteo is fetched client-side without an API key. The BetterLGU directory contribution remains separate and no registration pull request is opened by this repository.
+The map uses a bundled Lal-lo boundary GeoJSON feature from [OSSPhilippines/geoph](https://github.com/OSSPhilippines/geoph) over OpenStreetMap tiles. The source labels Lal-Lo as a city-level feature; this portal uses it for municipality-level map orientation. The Municipal Hall pin and weather coordinates remain public configuration values for the verified OpenStreetMap feature. Open-Meteo is fetched client-side without an API key. The BetterLGU directory contribution remains separate and no registration pull request is opened by this repository.
 
 ## Repository setup
 

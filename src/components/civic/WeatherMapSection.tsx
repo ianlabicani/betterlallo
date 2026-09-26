@@ -5,9 +5,22 @@ import {
   RefreshCw,
   Wind,
 } from 'lucide-react';
-import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet';
+import { divIcon } from 'leaflet';
+import {
+  GeoJSON,
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  Tooltip,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { lalloLocation, lalloLocationSource } from '../../data/location';
+import {
+  lalloBoundarySource,
+  lalloLocation,
+  lalloLocationSource,
+} from '../../data/location';
+import { lalloBoundary, lalloBoundaryBounds } from '../../data/lalloBoundary';
 import { SourceMeta } from './SourceMeta';
 import {
   formatForecastDay,
@@ -16,6 +29,21 @@ import {
   weatherSource,
   weatherStateMessage,
 } from '../../lib/weather';
+
+const municipalHallIcon = divIcon({
+  className: 'lallo-hall-marker',
+  html: `
+    <span class="lallo-hall-marker__body">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 21h18M5 21V9l7-4 7 4v12M8 21v-8h8v8M9 10h.01M12 10h.01M15 10h.01" />
+      </svg>
+    </span>
+  `,
+  iconSize: [40, 48],
+  iconAnchor: [20, 43],
+  popupAnchor: [0, -40],
+  tooltipAnchor: [0, -36],
+});
 
 function WeatherPanel() {
   const { weather, state, reload } = useWeather();
@@ -127,64 +155,85 @@ export default function WeatherMapSection() {
               Lal-lo now
             </h2>
             <p className="mt-2 max-w-3xl text-gray-600">
-              A municipality-level forecast and map using public, no-key
-              services. Weather is live; all civic records remain
+              Live weather for Lal-lo with the municipality boundary shown over
+              public OpenStreetMap tiles. Weather is live; civic records remain
               repository-managed.
             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <WeatherPanel />
-          {lalloLocation ? (
-            <div
-              className="relative isolate z-0 overflow-hidden rounded-lg border border-gray-200 bg-white"
-              role="region"
-              aria-label="Map of Lal-lo Municipal Hall"
+          <div
+            className="relative isolate z-0 overflow-hidden rounded-lg border border-gray-200 bg-white"
+            role="region"
+            aria-label="Map of Lal-lo municipality"
+          >
+            <MapContainer
+              bounds={lalloBoundaryBounds}
+              boundsOptions={{ padding: [20, 20] }}
+              scrollWheelZoom={false}
+              className="h-80 w-full"
             >
-              <MapContainer
-                center={[lalloLocation.latitude, lalloLocation.longitude]}
-                zoom={13}
-                scrollWheelZoom={false}
-                className="h-80 w-full"
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <CircleMarker
-                  center={[lalloLocation.latitude, lalloLocation.longitude]}
-                  radius={10}
-                  pathOptions={{
-                    color: '#0052bc',
-                    fillColor: '#0066eb',
-                    fillOpacity: 0.85,
-                  }}
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <GeoJSON
+                data={lalloBoundary}
+                pathOptions={{
+                  color: '#0052bc',
+                  fillColor: '#0066eb',
+                  fillOpacity: 0.16,
+                  weight: 2,
+                }}
+              />
+              {lalloLocation && (
+                <Marker
+                  position={[lalloLocation.latitude, lalloLocation.longitude]}
+                  icon={municipalHallIcon}
+                  alt={lalloLocation.label}
+                  title={lalloLocation.label}
+                  riseOnHover
                 >
+                  <Tooltip direction="top" offset={[0, -24]}>
+                    {lalloLocation.label}
+                  </Tooltip>
                   <Popup>{lalloLocation.label}</Popup>
-                </CircleMarker>
-              </MapContainer>
-              <div className="p-4 text-sm text-gray-600">
-                <p className="font-semibold text-gray-900">
-                  {lalloLocation.label}
+                </Marker>
+              )}
+            </MapContainer>
+            <div className="p-4 text-sm text-gray-600">
+              <p className="font-semibold text-gray-900">
+                Lal-lo municipal boundary
+              </p>
+              <p className="mt-1">
+                Base map data © OpenStreetMap contributors. The shaded outline
+                shows the municipality boundary.
+              </p>
+              {lalloLocation ? (
+                <p className="mt-1">
+                  The Municipal Hall pin is an orientation reference.
                 </p>
-                <p className="mt-1">Map data © OpenStreetMap contributors.</p>
+              ) : (
+                <p className="mt-1">
+                  The Municipal Hall pin is unavailable until verified
+                  coordinates are configured.
+                </p>
+              )}
+              <SourceMeta source={lalloBoundarySource} compact />
+              {lalloLocation && (
                 <a
                   href={lalloLocationSource.url}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-2 inline-block font-semibold text-primary-700 underline underline-offset-2"
                 >
-                  View location source
+                  View Municipal Hall source
                 </a>
-              </div>
+              )}
             </div>
-          ) : (
-            <div className="flex min-h-80 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-white p-6 text-center text-sm text-gray-600">
-              Map unavailable until verified Lal-lo coordinates are configured.
-            </div>
-          )}
+          </div>
         </div>
-        {!lalloLocation && <SourceMeta source={lalloLocationSource} />}
       </div>
     </section>
   );
