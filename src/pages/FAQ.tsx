@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import SEO from '../components/SEO';
-import { publicChatFaqs } from '../data/publicChatKnowledge';
+import { faqItems } from '../data/faq';
 
 export default function FAQ() {
   return (
@@ -24,7 +24,7 @@ export default function FAQ() {
           </p>
         </div>
         <div className="space-y-3">
-          {publicChatFaqs.map(item => (
+          {faqItems.map(item => (
             <details
               key={item.question}
               className="group rounded-lg border border-gray-200 bg-white p-5 shadow-sm"

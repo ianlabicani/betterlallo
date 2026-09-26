@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test:chat": "vitest run --environment node src/server/publicChat.test.ts src/server/publicChatAdapters.test.ts",
+    "test": "vitest run",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

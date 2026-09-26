@@ -13,7 +13,7 @@ export interface LocalContentIndexEntry {
 
 /**
  * Server-safe metadata for the markdown content index. Keep this projection
- * bounded: the chat may summarize it, but it must not receive raw documents.
+ * bounded so consumers can use concise search results without raw documents.
  */
 export const localContentIndex: LocalContentIndexEntry[] = [
   {

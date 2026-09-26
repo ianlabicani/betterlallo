@@ -80,13 +80,6 @@ Jev improves where attention goes; it does not prove correctness. BetterLal-lo's
 
 Only send Jev the focused repository context needed for the judgment. Do not send `.env` files, credentials, dependencies, build output, or unrelated source files.
 
-## Public chat
-
-This deployment variant intentionally omits the public chat interface and the
-`/api/chat` Vercel Function. The source-backed Jev chat implementation is kept
-on the `feature/betterlallo-chat` branch when the chat-enabled deployment is
-needed.
-
 ## Content locations
 
 - `content/government/` — overview, departments, barangays, and transparency pages
