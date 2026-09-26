@@ -96,7 +96,7 @@ function WeatherPanel() {
     <div className="rounded-lg border border-gray-200 bg-white p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-primary-700">
+          <p className="text-sm font-semibold tracking-wide text-primary-700">
             Current conditions
           </p>
           <p className="mt-2 text-4xl font-bold text-gray-900">
@@ -138,7 +138,7 @@ function WeatherPanel() {
 export default function WeatherMapSection() {
   return (
     <section
-      className="border-t border-gray-200 bg-gray-50 py-12"
+      className="border-t-4 border-primary-100 bg-gray-50 py-12 sm:py-14"
       aria-labelledby="weather-map-heading"
     >
       <div className="container mx-auto px-4">
